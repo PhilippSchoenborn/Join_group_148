@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+body {
+  height: 100vh;
+}
+
+header {
+  height: 96px;
+  background-color: #4589ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 39px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+header img {
+  height: 56px;
+}
+
+.headerDiv1 {
+  display: flex;
+  align-items: center;
+  width: 433px;
+  height: 56px;
+}
+
+.headerDiv1 span {
+  font-size: 19px;
+  font-weight: 400;
+  margin-right: 26.03px;
+  color: white;
+}
+
+.headerDiv2 {
+  display: flex;
+  align-items: center;
+  gap: 17.97px;
+}
+
+#helpButton {
+  width: 32px;
+  height: 32px;
+}
+
+#profileImage {
+  width: 56px;
+  height: 56px;
+}
+
+#menuTemplate {
+  width: 232px;  
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16); 
+  padding-top: 42px;
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 136px;
+  left: 0;  
+  bottom: 0;
+  
+}
+
+#legal {
+  height: 384px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 66px;
+}
+
+#menu {
+  width: 186px;
+  height: 205px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  gap: 15px;
+}
+
+.menuBtn {
+  height: 40px;
+  width: 186px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  padding: 8px 30px;
+  border-radius: 8px;
+  font-weight: 400;
+  line-height: 19.2px;
+  font-size: 16px;
+  color: #42526e;
+  cursor: pointer;
+}
+
+.menuBtn:hover {
+  background-color: #d2e3ff;
+}
+
+#privacyBtn {
+  width: 116px;
+  height: 35px;
+  padding: 8px;
+  gap: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #42526e;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+}
+
+#legalBtn {
+  width: 110px;
+  height: 33px;
+  padding: 8px;
+  gap: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #42526e;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+}
