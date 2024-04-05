@@ -1,0 +1,63 @@
+.boardSearchHeader {
+  position: absolute;
+  right: 0;
+  left: 232px;
+  display: flex;
+  align-items: center;
+  padding-left: 65px;
+  padding-top: 72px;
+  gap: 35px;
+  width: 485px;
+  height: 51px;
+}
+.searchbar {
+  border-radius: 10px;
+  border: 1px solid #a8a8a8;
+  width: 312px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.searchbar input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+#boardSearchBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 48px;
+  height: 31px;
+  padding-left: 16px;
+  gap: 16px;
+  border-left: 1px solid #d1d1d1;
+}
+#addTaskBtn {
+  width: 138px;
+  height: 51px;
+  border-radius: 10px;
+  border: 1px solid #4589ff;
+  background-color: #4589ff;
+  gap: 10px;
+  padding: 16px 10px;
+  font-size: 23px;    
+  font-weight: 400px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#addTaskBtn img{
+    height: 15px;
+}
+#addTaskBtn:hover{
+    background-color: #0037ff;
+}
