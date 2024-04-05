@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
 
-    <link rel="stylesheet" href="css/template.css">
-
+    <link rel="stylesheet" href="css/template.css" />
+    <link rel="stylesheet" href="/css/board.css" />
     <script src="js/template.js"></script>
-
   </head>
   <body onload="init()">
     <div w3-include-html="templates/header.html"></div>
 
     <div w3-include-html="templates/menu.html"></div>
+    <div>
+      <div class="boardSearchHeader">
+        <div class="searchbar">
+          <input type="search" placeholder="Suche..." />
+          <button type="submit" id="boardSearchBtn"><img src="/img/search.png" /></button>
+        </div>
 
-    
+        <button id="addTaskBtn">Add task<img src="/img/plusIcon.png" alt="" /></button>
+      </div>
+    </div>
+    <div></div>
   </body>
 </html>
