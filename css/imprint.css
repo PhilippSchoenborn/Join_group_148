@@ -1,0 +1,63 @@
+.imprintHeadlineContainer{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 320px !important;
+    margin-top: 72px !important;
+    margin-bottom: 48px !important;
+    width: 1083px;
+}
+
+.imprintHeadline{
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.imprintBack{
+    width: 37px;
+    height: 37px;
+}
+
+.imprintBack:hover{
+    opacity: 0.8;
+    border-radius: 50%;
+    background-color: rgba(69,137,255,0.2);
+}
+
+.imprintMain{
+    margin-left: 320px !important;
+    width: 1032px;
+}
+
+.imprintSubHeadline{
+    color: rgb(69,137,255);
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 33px;
+}
+
+.imprintContent{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.imprintHeader{
+    color: rgb(69,137,255);
+    display: flex;
+    text-align: start;
+    font-weight: 700;
+    font-size: 19px;
+    
+}
+
+td {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+mark {
+    background-color: transparent;
+    color: rgb(69,137,255);
+}
