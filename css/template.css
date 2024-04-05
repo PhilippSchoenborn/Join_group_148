@@ -98,7 +98,12 @@ header img {
   line-height: 19.2px;
   font-size: 16px;
   color: #42526e;
-  cursor: pointer;
+  cursor: pointer;  
+}
+
+
+a{
+  text-decoration: none;
 }
 
 .menuBtn:hover {

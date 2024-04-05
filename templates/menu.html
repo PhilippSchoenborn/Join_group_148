@@ -1,17 +1,31 @@
 <div id="menuTemplate">
   <div id="menu">
-    <button class="menuBtn p-summary">
-      <img src="/img/summaryIcon.png" alt="" />Summary
-    </button>
-    <button class="menuBtn gap20">
-      <img src="/img/addTaskIcon.png" alt="" />Add Task
-    </button>
-    <button class="menuBtn gap20">
-      <img src="/img/boardIcon.png" alt="" />Board
-    </button>
-    <button class="menuBtn gap20">
-      <img src="/img/contactIcon.png" alt="" />Contacts
-    </button>
+
+    <a href="/summary.html">
+      <button class="menuBtn" id="summaryBtn">
+        <img src="/img/summaryIcon.png" alt="" />Summary
+      </button>
+    </a>
+
+    <a href="/addTask.html">
+      <button class="menuBtn " onclick="activeColorBtn()">
+        <img src="/img/addTaskIcon.png" alt="" />Add Task
+      </button>
+    </a>
+
+
+    <a href="/board.html">
+      <button class="menuBtn" id="boardBtn">
+        <img src="/img/boardIcon.png" alt="" />Board
+      </button>
+    </a>
+
+    <a href="/contacts.html">
+      <button class="menuBtn" id="contactBtn">
+        <img src="/img/contactIcon.png" alt="" />Contacts
+      </button>
+    </a>
+
   </div>
 
   <div id="legal">
