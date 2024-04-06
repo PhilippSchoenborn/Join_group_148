@@ -1,9 +1,10 @@
-.boardSearchHeader {
+.boardSubHeader {
   position: absolute;
   right: 0;
   left: 232px;
   display: flex;
   align-items: center;
+  flex-direction: column;
   padding-left: 65px;
   padding-top: 72px;
   gap: 35px;
@@ -20,6 +21,12 @@
   justify-content: space-between;
   gap: 10px;
   padding: 0 16px;
+}
+
+.searchAddTaskBtn {
+  display: flex;
+  gap: 35px;
+  padding-left: 64px;
 }
 
 .searchbar input {
@@ -46,7 +53,7 @@
   background-color: #4589ff;
   gap: 10px;
   padding: 16px 10px;
-  font-size: 23px;    
+  font-size: 23px;
   font-weight: 400px;
   color: #ffffff;
   display: flex;
@@ -55,9 +62,70 @@
   white-space: nowrap;
   cursor: pointer;
 }
-#addTaskBtn img{
-    height: 15px;
+#addTaskBtn img {
+  height: 15px;
 }
-#addTaskBtn:hover{
-    background-color: #0037ff;
+#addTaskBtn:hover {
+  background-color: #0037ff;
+}
+
+.boardPlusBtn {
+  position: relative;
+  border: 2px solid #4589ff;
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.boardPlusBtn:hover {
+  border-color: #0037ff;
+}
+
+.boardPlusBtn:hover .vertikal,
+.boardPlusBtn:hover .horizontal {
+  border-color: #0037ff;
+}
+.vertikal {
+  position: absolute;
+  width: 12px;
+  border-top: 2px solid #4589ff;
+}
+
+.horizontal {
+  position: absolute;
+  height: 12px;
+  border-left: 2px solid #4589ff;
+}
+
+.boardCoulumnTitle {
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 27.6px;
+}
+
+.boardTitlesBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 244px;
+  height: 28px;
+  padding-right: 34.67px;
+}
+
+.progressTitles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  padding-top: 48px;
+  padding-left: 64px;
+  position: relative;
+  left: 188px;
+  height: 28px;
 }

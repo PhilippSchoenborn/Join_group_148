@@ -14,15 +14,49 @@
 
     <div w3-include-html="templates/menu.html"></div>
     <div>
-      <div class="boardSearchHeader">
-        <div class="searchbar">
-          <input type="search" placeholder="Suche..." />
-          <button type="submit" id="boardSearchBtn"><img src="/img/search.png" /></button>
+      <div class="boardSubHeader">
+        <div class="searchAddTaskBtn">
+          <div class="searchbar">
+            <input type="search" placeholder="Suche..." />
+            <button type="submit" id="boardSearchBtn">
+              <img src="/img/search.png" />
+            </button>
+          </div>
+          <button id="addTaskBtn">
+            Add task<img src="/img/plusIcon.png" alt="" />
+          </button>
         </div>
 
-        <button id="addTaskBtn">Add task<img src="/img/plusIcon.png" alt="" /></button>
+        <div class="progressTitles">
+          <div class="boardTitlesBtn">
+            <div class="boardCoulumnTitle">To Do</div>
+            <div class="boardPlusBtn">
+              <div class="vertikal"></div>
+              <div class="horizontal"></div>
+            </div>
+
+          </div>
+          <div class="boardTitlesBtn">
+            <div class="boardCoulumnTitle">In Progress</div>
+            <div class="boardPlusBtn">
+              <div class="vertikal"></div>
+              <div class="horizontal"></div>
+            </div>
+          </div>
+
+          <div class="boardTitlesBtn">
+            <div class="boardCoulumnTitle">Await feedback</div>
+            <div class="boardPlusBtn">
+              <div class="vertikal"></div>
+              <div class="horizontal"></div>
+            </div>
+          </div>
+
+          <div class="boardCoulumnTitle">Done</div>
+        </div>
       </div>
     </div>
-    <div></div>
+    
+    
   </body>
 </html>
