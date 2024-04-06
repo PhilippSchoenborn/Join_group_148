@@ -29,15 +29,14 @@
 
         <div class="progressTitles">
           <div class="boardTitlesBtn">
-            <div class="boardCoulumnTitle">To Do</div>
+            <div class="boardColumnTitle">To Do</div>
             <div class="boardPlusBtn">
               <div class="vertikal"></div>
               <div class="horizontal"></div>
             </div>
-
           </div>
           <div class="boardTitlesBtn">
-            <div class="boardCoulumnTitle">In Progress</div>
+            <div class="boardColumnTitle">In Progress</div>
             <div class="boardPlusBtn">
               <div class="vertikal"></div>
               <div class="horizontal"></div>
@@ -45,18 +44,25 @@
           </div>
 
           <div class="boardTitlesBtn">
-            <div class="boardCoulumnTitle">Await feedback</div>
+            <div class="boardColumnTitle">Await feedback</div>
             <div class="boardPlusBtn">
               <div class="vertikal"></div>
               <div class="horizontal"></div>
             </div>
           </div>
 
-          <div class="boardCoulumnTitle">Done</div>
+          <div class="boardColumnTitle">Done</div>
         </div>
       </div>
     </div>
-    
-    
+
+    <div id="tasksContainer">
+      <div id="toDoContainer" class="subTaskContainer">
+        <div class="noTaskCard">No task To do</div>
+      </div>
+      <div id="ProgressContainer" class="subTaskContainer"></div>
+      <div id="feedbackContainer" class="subTaskContainer"></div>
+      <div id="doneContainer" class="subTaskContainer"></div>
+    </div>
   </body>
 </html>

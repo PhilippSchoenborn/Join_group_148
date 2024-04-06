@@ -72,15 +72,15 @@
 .boardPlusBtn {
   position: relative;
   border: 2px solid #4589ff;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   padding: 3px;
-  border-radius: 8px;
-  display: flex;
+  border-radius: 8px;  
   gap: 10px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer;  
 }
 
 .boardPlusBtn:hover {
@@ -103,7 +103,7 @@
   border-left: 2px solid #4589ff;
 }
 
-.boardCoulumnTitle {
+.boardColumnTitle {
   font-weight: 700;
   font-size: 23px;
   line-height: 27.6px;
@@ -124,8 +124,43 @@
   align-items: center;
   padding-bottom: 16px;
   padding-top: 48px;
-  padding-left: 64px;
   position: relative;
-  left: 188px;
+  left: 212px;
   height: 28px;
+}
+
+#tasksContainer {
+  margin-top: 13px;
+  height: 700px;
+  position: relative;
+  top: 252px;
+  left: 232px;
+  padding: 0px 64px;
+  gap: 24px;
+  
+  display: flex;
+  align-items: center;
+  overflow: auto;
+}
+
+.subTaskContainer {
+  
+  height: 700px;
+  width: 252px;
+  display: flex;
+  flex-direction: column;
+}
+
+.noTaskCard{
+  width: 252px;
+  height: 48px;
+  border: 1px dashed #A8A8A8;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;  
+  align-items: center;
+  justify-content: center;
+  background-color: #E7E7E7;
+  
 }
