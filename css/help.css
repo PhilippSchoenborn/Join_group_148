@@ -51,3 +51,16 @@
   font-size: 19px;
   font-weight: 700;
 }
+
+.imprintBack {
+    width: 37px;
+    height: 37px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  
+  .imprintBack:hover {
+    opacity: 0.7;
+    border-radius: 50%;
+    background-color: rgba(69, 137, 255, 0.2);
+  }
