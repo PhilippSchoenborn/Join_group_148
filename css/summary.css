@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+.content {
+    position:absolute;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    left: 232px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 168.5px 148px;
+    gap: 72px;
+}
+
+.content h1 {
+    font-size: 48px;
+    font-weight: 400;
+}
+
+#greet {
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 57,6px;
+}
+
+#name {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 76,8px;
+    color: rgba(69, 137, 255, 1);
+}
+
+#greetingBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    gap: 22px;
+}
+
+#buttonBox {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+#buttonsTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+}
+
+#dates {
+    width: 672px;
+    height: 191px;
+    background-color: rgba(69, 137, 255, 1);
+    border-radius: 30px;
+    color: white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    transition: transform .2s;
+    padding: 28px, 48px;
+}
+
+#dates:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.taskButton {
+    width: 208px;
+    height: 191px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 30px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+    border: none;
+    justify-content: center;
+    align-items: center;
+    transition: transform .2s;
+    padding: 40px;
+}
+
+.taskButton:hover {
+    transform: scale(1.15);
+    cursor: pointer;
+    background-color:  rgba(0, 93, 255, 1);
+}
+
+#datesDivLeftUp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+#taskNumber {
+    font-size: 48px;
+    line-height: 57,6px;
+    font-weight: 700;
+}
+
+#datesDivLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+}
+
+#tasksUrgent {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 27,6px;
+}
+
+#line {
+    height: 145px;
+    border: solid 1.5px white;
+    border-radius: 50px;;
+}
+
+#upcomingEvents {
+    width: 274px;
+    height: 81px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+}
+
+#date {
+    font-size: 33px;
+    font-weight: 700;
+    line-height: 39,6px;
+    color: white;
+}
+
+#event {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 27,6px;
+    color: white;
+}
+
+#tasksDivRightUp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#taskNumberBlack {
+    font-size: 48px;
+    line-height: 57,6px;
+    font-weight: 700;
+    color: black;
+}
+
+#taskDescription {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 27,6px;
+    color: rgba(69, 137, 255, 1);
+}
+
+#boardTasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+#buttonsBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+}
+
+#tasksDivRight {
+    font-display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightBlue {
+    background-color: rgba(210, 227, 255, 1);
+}
+
+.lightBlue:hover {
+    background-color: white !important;
+}
+
+.higher {
+    width: 204px !important;
+    height: 219px !important;
+}
+
+.tasksIcon {
+    width: 76px !important;
+    height: 76px !important;
+}
+

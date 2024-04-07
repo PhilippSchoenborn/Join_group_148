@@ -130,3 +130,13 @@ header img {
   line-height: 19.2px;
   font-weight: 400;
 }
+
+#legalBtn:hover {
+  color: #4589ff;
+  cursor: pointer;
+}
+
+#privacyBtn:hover {
+  color: #4589ff;
+  cursor: pointer;
+}
