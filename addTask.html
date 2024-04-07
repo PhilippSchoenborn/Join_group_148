@@ -6,12 +6,77 @@
     <title>Join</title>
 
     <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/addTask.css">
 
     <script src="js/template.js"></script>
 
   </head>
   <body onload="init()">
     <div w3-include-html="templates/header.html"></div>
+
+    <div class="addTaskMain">
+      <div class="addTastMainContent">
+        <form action="" required>
+          <input type="text" placeholder="Enter a title" class="addTaskInputFields">
+        </form>
+
+        <h2>Description (optonal)</h2>
+        <textarea placeholder="Enter a description" class="addTaskInputFields"></textarea>
+
+        <form action="" required>
+          <h2>Due date</h2>
+          <input type="date" placeholder="dd/mm/yyyy" class="addTaskInputFields">
+        </form>
+
+        <div>
+          <h2>Priority</h2>
+          <div>
+            <button>Urgent <img src="" alt=""></button>
+            <button>Medium <img src="" alt=""></button>
+            <button>Low <img src="" alt=""></button>
+          </div>
+        </div>
+
+        <h2>Assigned to (optional)</h2>
+        <form action="#">
+          <input list="contacts" class="addTaskInputFields">
+          <datalist id="contacts" placeholer="Select contacts to assign">
+            <option value="Sofia Müller">
+            <option value="Anton Mayer">
+            <option value="Anja Schulz">
+            <option value="Benedikt Ziegler">
+          </datalist>
+        </form>
+
+        <h2>Category</h2>
+        <form action="#" required>
+          <input list="category" class="addTaskInputFields">
+          <datalist id="category" placeholer="Select task category">
+            <option value="Accounting">
+            <option value="Marketing">
+            <option value="Development">
+            <option value="Other">
+          </datalist>
+        </form>
+
+        <h2>Subtasks (optonal)</h2>
+        <form action="#">
+          <input list="subtask" class="addTaskInputFields">
+          <datalist id="subtask" placeholer="Add new subtask">
+            <option value="Booking invoices">
+            <option value="Pay loan">
+            <option value="Create Menu Bar">
+            <option value="Start the marketing campaign">
+            <option value="Cleaning kitchen">
+          </datalist>
+        </form>
+      </div>
+
+      <div class="addTastMainButton">
+        <button>Clear</button>
+        <button>Create Task</button>
+      </div>
+    </div>
 
     <div w3-include-html="templates/menu.html"></div>
   </body>
