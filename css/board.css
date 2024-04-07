@@ -25,10 +25,9 @@ body {
 
 .searchAddTaskBtn {
   display: flex;
-  gap: 35px;  
+  gap: 35px;
   position: relative;
   left: 64px;
-  
 }
 
 .searchbar input {
@@ -130,24 +129,24 @@ body {
   gap: 35px;
 }
 
-#tasksContainer {
-  margin-top: 13px;
-  height: 700px;
+#tasksContainer {  
   position: relative;
-  top: 252px;
-  left: 232px;
+  top: 216px;
+  left: 230px;
   padding: 0px 64px;
   gap: 24px;
   display: flex;
-  align-items: center;
-  overflow: auto;
+  align-items: center;  
 }
 
 .subTaskContainer {
+  position: relative;
   height: 700px;
   width: 252px;
   display: flex;
   flex-direction: column;
+  border: 1px solid black;
+  padding-top: 13px;
 }
 
 .noTaskCard {
@@ -200,7 +199,6 @@ body {
 }
 
 .taskCard {
-  margin-top: 8px;
   display: flex;
   flex-direction: column;
   width: 220px;
@@ -215,7 +213,6 @@ body {
   width: 128px;
   height: 8px;
   border-radius: 8px;
-
   gap: 10px;
   display: flex;
   background-color: #f4f4f4;

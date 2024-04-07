@@ -11,8 +11,8 @@
   </head>
   <body onload="init()">
     <div w3-include-html="templates/header.html"></div>
-
     <div w3-include-html="templates/menu.html"></div>
+
     <div>
       <div class="boardSubHeader">
         <div class="searchAddTaskBtn">
@@ -78,16 +78,21 @@
                 <img src="/img/Profile badge.png">
                 <img src="/img/Profile badge (1).png">
                 <img src="/img/Profile badge (2).png">
-              </div class="taskCardPriority" >
+              </div class="taskCardPriority">
               <div><img src="/img/Priority symbols.png" alt=""></div>
             </div>
           </div>
         </div>
       </div>
-      <div id="feedbackContainer" class="subTaskContainer"></div>
-      <div id="doneContainer" class="subTaskContainer">
-        
       </div>
+      <div id="feedbackContainer" class="subTaskContainer">
+        <div class="noTaskCard">No task To do</div>
+      </div>
+      <div id="doneContainer" class="subTaskContainer">
+        <div class="noTaskCard">No task To do</div>
+      </div> 
+           
     </div>
+    
   </body>
 </html>
