@@ -1,14 +1,13 @@
-
+body {
+  overflow: hidden;
+}
 .boardSubHeader {
   position: absolute;
-  right: 0;
-  left: 232px;
+  left: 248px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-left: 65px;
   padding-top: 72px;
-  gap: 35px;
   width: 485px;
   height: 51px;
 }
@@ -27,7 +26,10 @@
 .searchAddTaskBtn {
   display: flex;
   gap: 35px;
-  padding-left: 64px;
+  padding-left: 65px;
+  position: relative;
+  left: 8px;
+  margin-left: 62px;
 }
 
 .searchbar input {
@@ -76,12 +78,12 @@
   width: 14px;
   height: 14px;
   padding: 3px;
-  border-radius: 8px;  
+  border-radius: 8px;
   gap: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 .boardPlusBtn:hover {
@@ -115,8 +117,6 @@
   justify-content: space-between;
   align-items: center;
   width: 244px;
-  height: 28px;
-  padding-right: 34.67px;
 }
 
 .progressTitles {
@@ -124,10 +124,11 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 16px;
+  padding-left: 64px;
   padding-top: 48px;
   position: relative;
-  left: 212px;
-  height: 28px;
+  left: 222px;
+  gap: 35px;
 }
 
 #tasksContainer {
@@ -137,33 +138,116 @@
   top: 252px;
   left: 232px;
   padding: 0px 64px;
-  gap: 24px;  
+  gap: 24px;
   display: flex;
   align-items: center;
   overflow: auto;
 }
 
-.subTaskContainer {  
+.subTaskContainer {
   height: 700px;
   width: 252px;
   display: flex;
   flex-direction: column;
 }
 
-.noTaskCard{
+.noTaskCard {
   width: 252px;
   height: 48px;
-  border: 1px dashed #A8A8A8;
+  border: 1px dashed #a8a8a8;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
   border-radius: 10px;
   display: flex;
-  gap: 10px;  
+  gap: 10px;
   align-items: center;
   justify-content: center;
-  background-color: #E7E7E7;
-  color: #A8A8A8;
+  background-color: #e7e7e7;
+  color: #a8a8a8;
   font-size: 16px;
   font-weight: 400;
-  
-  
+}
+
+.taskCardLabel {
+  border-radius: 8px;
+  padding: 4px 16px;
+  gap: 10px;
+  display: flex;
+  background-color: #ff7a00;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  width: fit-content;
+}
+
+.taskCardbody {
+  border-radius: 10px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskCardHeadline {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4589ff;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.taskCardDescription {
+  font-weight: 400;
+  font-size: 16px;
+  color: #a8a8a8;
+}
+
+.taskCard {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  border-radius: 24px;
+  padding: 16px;
+  gap: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+}
+
+.taskCardProgressbar {
+  width: 128px;
+  height: 8px;
+  border-radius: 8px;
+
+  gap: 10px;
+  display: flex;
+  background-color: #f4f4f4;
+}
+
+.taskCardProgress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.taskCardProgressbarLabel {
+  font-weight: 400;
+  font-size: 13px;
+  color: #000;
+}
+
+.taskCardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.taskCardUser img {
+  height: 32px;
+  border-radius: 45px;
+  margin-right: -10px;
+}
+.taskCardUser {
+  display: flex;
+  align-items: center;
 }
