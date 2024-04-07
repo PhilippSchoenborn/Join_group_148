@@ -14,9 +14,9 @@
   cursor: pointer;
 }
 
-.blueBtn:hover{
-    background-color: #005eff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+.blueBtn:hover {
+  background-color: #005eff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .signUpContainer {
@@ -25,10 +25,32 @@
   align-items: center;
   font-weight: 400;
   font-size: 23px;
-  margin-top: 67px;
-  margin-right: 86px;
+  position: absolute;
+  top: 67px;
+  right: 86px;
 }
 
 .signUpContainer span {
-    margin-right: 35px;
+  margin-right: 35px;
+}
+
+.logo {
+  position: absolute;
+  top: 80px;
+  left: 77px;
+}
+.loginHeadline {
+  font-weight: 700;
+  font-size: 48px;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: #4589ff;
+  text-underline-offset: 16px;
+  text-decoration-thickness: 3px;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
