@@ -5,7 +5,7 @@
 }
 
 .content {
-    position:absolute;
+    position: absolute;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     left: 232px;
@@ -26,13 +26,13 @@
 #greet {
     font-size: 48px;
     font-weight: 400;
-    line-height: 57,6px;
+    line-height: 57, 6px;
 }
 
 #name {
     font-size: 64px;
     font-weight: 700;
-    line-height: 76,8px;
+    line-height: 76, 8px;
     color: rgba(69, 137, 255, 1);
 }
 
@@ -45,17 +45,25 @@
 }
 
 #buttonBox {
+    width: 912px;
+    height: 442px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    align-self: space-between;
+    justify-content: space-between;
 }
 
 #buttonsTop {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    gap: 36px;
+    justify-content: space-between;
+    position: relative;
+}
+
+#buttonsTop .taskButton:hover {
+    gap: 0px !important;
+
 }
 
 #dates {
@@ -71,14 +79,36 @@
     align-items: center;
     justify-content: center;
     gap: 35px;
-    transition: transform .2s;
     padding: 28px, 48px;
+    overflow: hidden !important;
+    transition: transform .1s;
+    z-index: -999;
 }
 
-#dates:hover {
-    transform: scale(1.05);
-    cursor: pointer;
+
+
+.zoomDiv {
+    overflow: hidden !important;
+    border-radius: 30px;
+    transition: transform .1s;
 }
+
+.zoomDiv:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 0px 30px 30px 30px;
+}
+
+
+#dates:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: white;
+    color: rgba(69, 137, 255, 1) !important;
+    padding: 0px !important;
+
+}
+
 
 .taskButton {
     width: 208px;
@@ -89,26 +119,43 @@
     border: none;
     justify-content: center;
     align-items: center;
-    transition: transform .2s;
+    transition: transform .1s;
     padding: 40px;
 }
 
+.taskButtonRightUp:hover {
+    position: absolute;
+    left: 640px;
+    width: 271px;
+    top: 5px;
+    z-index: 999;
+}
+
 .taskButton:hover {
-    transform: scale(1.15);
+    width: 271px;
+    transform: scale(1.06);
     cursor: pointer;
-    background-color:  rgba(0, 93, 255, 1);
+    background-color: rgba(0, 93, 255, 1);
+    color: white !important;
+    border-radius: 0px 30px 30px 30px;
+}
+
+
+.taskButton:hover #taskDescription {
+    color: white;
 }
 
 #datesDivLeftUp {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 20px;
 }
 
 #taskNumber {
     font-size: 48px;
-    line-height: 57,6px;
+    line-height: 57, 6px;
     font-weight: 700;
 }
 
@@ -122,13 +169,14 @@
 #tasksUrgent {
     font-size: 23px;
     font-weight: 400;
-    line-height: 27,6px;
+    line-height: 27, 6px;
 }
 
 #line {
     height: 145px;
-    border: solid 1.5px white;
-    border-radius: 50px;;
+    border: solid 1.5px;
+    border-radius: 50px;
+    ;
 }
 
 #upcomingEvents {
@@ -136,7 +184,7 @@
     height: 81px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     gap: 13px;
 }
@@ -144,15 +192,13 @@
 #date {
     font-size: 33px;
     font-weight: 700;
-    line-height: 39,6px;
-    color: white;
+    line-height: 39, 6px;
 }
 
 #event {
     font-size: 23px;
     font-weight: 400;
-    line-height: 27,6px;
-    color: white;
+    line-height: 27, 6px;
 }
 
 #tasksDivRightUp {
@@ -165,16 +211,15 @@
 
 #taskNumberBlack {
     font-size: 48px;
-    line-height: 57,6px;
+    line-height: 57, 6px;
     font-weight: 700;
-    color: black;
 }
 
 #taskDescription {
     text-align: center;
     font-size: 23px;
     font-weight: 400;
-    line-height: 27,6px;
+    line-height: 27, 6px;
     color: rgba(69, 137, 255, 1);
 }
 
@@ -189,9 +234,9 @@
 #buttonsBottom {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    gap: 32px;
+    justify-content: space-between;
+    position: relative;
 }
 
 #tasksDivRight {
@@ -206,6 +251,18 @@
 
 .lightBlue:hover {
     background-color: white !important;
+    color: rgba(0, 93, 255, 1) !important;
+    position: absolute;
+    z-index: 999 !important;
+}
+
+.zIndex {
+    z-index: -999 !important;
+}
+
+
+.lightBlue:hover #taskDescription {
+    color: rgba(0, 93, 255, 1) !important;
 }
 
 .higher {
@@ -216,5 +273,18 @@
 .tasksIcon {
     width: 76px !important;
     height: 76px !important;
+
 }
 
+
+.border {
+    border: 3px solid white;
+    border-radius: 80px;
+    box-sizing: border-box;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1px;
+}
