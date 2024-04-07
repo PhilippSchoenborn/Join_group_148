@@ -5,14 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
 
-    <link rel="stylesheet" href="css/template.css">
-
+    <link rel="stylesheet" href="css/template.css" />
+    <link rel="stylesheet" href="/css/board.css" />
     <script src="js/template.js"></script>
-
   </head>
   <body onload="init()">
-    <header w3-include-html="templates/header.html"></header>
-
+    <div w3-include-html="templates/header.html"></div>
     <div w3-include-html="templates/menu.html"></div>
+
+    <div>
+      <div class="boardSubHeader">
+        <div class="searchAddTaskBtn">
+          <div class="searchbar">
+            <input type="search" placeholder="Suche..." />
+            <button type="submit" id="boardSearchBtn">
+              <img src="/img/search.png" />
+            </button>
+          </div>
+          <button id="addTaskBtn">
+            Add task<img src="/img/plusIcon.png" alt="" />
+          </button>
+        </div>
+
+        <div class="progressTitles">
+          <div class="boardTitlesBtn">
+            <div class="boardColumnTitle">To Do</div>
+            <div class="boardPlusBtn">
+              <div class="vertikal"></div>
+              <div class="horizontal"></div>
+            </div>
+          </div>
+          <div class="boardTitlesBtn">
+            <div class="boardColumnTitle">In Progress</div>
+            <div class="boardPlusBtn">
+              <div class="vertikal"></div>
+              <div class="horizontal"></div>
+            </div>
+          </div>
+
+          <div class="boardTitlesBtn">
+            <div class="boardColumnTitle">Await feedback</div>
+            <div class="boardPlusBtn">
+              <div class="vertikal"></div>
+              <div class="horizontal"></div>
+            </div>
+          </div>
+
+          <div class="boardColumnTitle">Done</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tasksContainer">
+      <div id="toDoContainer" class="subTaskContainer">
+        <div class="noTaskCard">No task To do</div>
+      </div>
+      <div id="ProgressContainer" class="subTaskContainer">
+        <div class="taskCard">
+          <div class="taskCardLabel">User Story</div>
+          <div class="taskCardbody">
+            <div class="taskCardHeadline">Kochwelt Page & Recipe Recommender</div>
+            <div class="taskCardDescription">
+              Build start page with recipe recommendation...
+            </div>
+            <div class="taskCardProgress">
+              <div class="taskCardProgressbar fill50" ></div>
+              <div class="taskCardProgressbarLabel">1/2 Subtasks</div>
+              
+            </div>
+            <div class="taskCardFooter">
+              <div class="taskCardUser">
+                <img src="/img/Profile badge.png">
+                <img src="/img/Profile badge (1).png">
+                <img src="/img/Profile badge (2).png">
+              </div class="taskCardPriority">
+              <div><img src="/img/Priority symbols.png" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div id="feedbackContainer" class="subTaskContainer">
+        <div class="noTaskCard">No task To do</div>
+      </div>
+      <div id="doneContainer" class="subTaskContainer">
+        <div class="noTaskCard">No task To do</div>
+      </div> 
+           
+    </div>
+    
   </body>
 </html>

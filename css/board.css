@@ -1,0 +1,249 @@
+body {
+  overflow: hidden;
+}
+.boardSubHeader {
+  position: absolute;
+  left: 248px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 72px;
+  width: 485px;
+  height: 51px;
+}
+.searchbar {
+  border-radius: 10px;
+  border: 1px solid #a8a8a8;
+  width: 312px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.searchAddTaskBtn {
+  display: flex;
+  gap: 35px;
+  position: relative;
+  left: 64px;
+}
+
+.searchbar input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+#boardSearchBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 48px;
+  height: 31px;
+  padding-left: 16px;
+  gap: 16px;
+  border-left: 1px solid #d1d1d1;
+}
+#addTaskBtn {
+  width: 138px;
+  height: 51px;
+  border-radius: 10px;
+  border: 1px solid #4589ff;
+  background-color: #4589ff;
+  gap: 10px;
+  padding: 16px 10px;
+  font-size: 23px;
+  font-weight: 400px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#addTaskBtn img {
+  height: 15px;
+}
+#addTaskBtn:hover {
+  background-color: #0037ff;
+}
+
+.boardPlusBtn {
+  position: relative;
+  border: 2px solid #4589ff;
+  width: 14px;
+  height: 14px;
+  padding: 3px;
+  border-radius: 8px;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.boardPlusBtn:hover {
+  border-color: #0037ff;
+}
+
+.boardPlusBtn:hover .vertikal,
+.boardPlusBtn:hover .horizontal {
+  border-color: #0037ff;
+}
+.vertikal {
+  position: absolute;
+  width: 12px;
+  border-top: 2px solid #4589ff;
+}
+
+.horizontal {
+  position: absolute;
+  height: 12px;
+  border-left: 2px solid #4589ff;
+}
+
+.boardColumnTitle {
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 27.6px;
+}
+
+.boardTitlesBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 244px;
+}
+
+.progressTitles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  padding-left: 64px;
+  padding-top: 48px;
+  position: relative;
+  left: 222px;
+  gap: 35px;
+}
+
+#tasksContainer {  
+  position: relative;
+  top: 216px;
+  left: 230px;
+  padding: 0px 64px;
+  gap: 24px;
+  display: flex;
+  align-items: center;  
+}
+
+.subTaskContainer {
+  position: relative;
+  height: 700px;
+  width: 252px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding-top: 13px;
+}
+
+.noTaskCard {
+  width: 252px;
+  height: 48px;
+  border: 1px dashed #a8a8a8;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: #e7e7e7;
+  color: #a8a8a8;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.taskCardLabel {
+  border-radius: 8px;
+  padding: 4px 16px;
+  gap: 10px;
+  display: flex;
+  background-color: #ff7a00;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  width: fit-content;
+}
+
+.taskCardbody {
+  border-radius: 10px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskCardHeadline {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4589ff;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.taskCardDescription {
+  font-weight: 400;
+  font-size: 16px;
+  color: #a8a8a8;
+}
+
+.taskCard {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  border-radius: 24px;
+  padding: 16px;
+  gap: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+}
+
+.taskCardProgressbar {
+  width: 128px;
+  height: 8px;
+  border-radius: 8px;
+  gap: 10px;
+  display: flex;
+  background-color: #f4f4f4;
+}
+
+.taskCardProgress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.taskCardProgressbarLabel {
+  font-weight: 400;
+  font-size: 13px;
+  color: #000;
+}
+
+.taskCardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.taskCardUser img {
+  height: 32px;
+  border-radius: 45px;
+  margin-right: -10px;
+}
+.taskCardUser {
+  display: flex;
+  align-items: center;
+}

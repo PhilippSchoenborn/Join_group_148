@@ -3,21 +3,22 @@
   padding: 0;
   font-family: "Open Sans", sans-serif;
 }
-body {
-  height: 100vh;
+body{
+  overflow: hidden;
+  height: 100vh; 
 }
 
-header {
+.header {
   height: 96px;
   background-color: #4589ff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 39px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);   
 }
 
-header img {
+.header img {
   height: 56px;
 }
 
@@ -98,7 +99,12 @@ header img {
   line-height: 19.2px;
   font-size: 16px;
   color: #42526e;
-  cursor: pointer;
+  cursor: pointer;  
+}
+
+
+a{
+  text-decoration: none;
 }
 
 .menuBtn:hover {
@@ -116,6 +122,7 @@ header img {
   font-size: 16px;
   line-height: 19.2px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 #legalBtn {
@@ -129,6 +136,7 @@ header img {
   font-size: 16px;
   line-height: 19.2px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 #legalBtn:hover {
