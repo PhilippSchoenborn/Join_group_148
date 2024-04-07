@@ -18,11 +18,64 @@
     align-items: end;
 }
 
-.addTaskInputFields{
+.addTaskInputFieldsMain{
     width: 440px !important;
     height: 84px !important;
     gap: 4px;
-    border: 0px ,0px ,1px ,0px;
+    border: none;
+    font-size: 32px;
+    padding: 16px 13px 0 13px;
+}
+
+.addTaskInputFieldsSub{
+    width: 440px !important;
+    height: 84px !important;
+    gap: 4px;
+    border: none;
+    font-size: 19px;
+    padding: 16px 12.5px 0 12.5px;
+}
+
+.addTaskTextArea{
+    width: 440px !important;
+    height: 84px !important;
+    gap: 4px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgb(209, 209, 209);
+}
+
+.addTaskTextArea::placeholder{
+    color: rgb(209, 209, 209);
+    font-size: 19px;
+    font-weight: 400;
+    padding: 16px 13px 0 13px;
+    line-height: 22.8px;
+}
+
+.addTaskInputFieldsMain::placeholder {
+    color: rgb(209, 209, 209);
+    font-size: 32px;
+    font-weight: 400;
+    padding: 16px 13px 0 13px;
+    line-height: 38.4px;
+    width: 440px !important;
+    border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.addTaskInputFieldsSub::placeholder {
+    color: rgb(209, 209, 209);
+    font-size: 19px;
+    font-weight: 400;
+    padding: 16px 12.5px 0 12.5px;
+    line-height: 22.8px;
+    width: 440px !important;
+    border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.changeTextColor::placeholder{
+    color: black
 }
 
 .dropdown {
@@ -50,4 +103,19 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.input-container {
+    position: relative;
+    display: inline-block;
+}
+  
+.plus-symbol {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 32px;
+    color: rgb(69.137.255)
 }
