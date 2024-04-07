@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/addTask.css">
 
     <script src="js/template.js"></script>
+    <script src="js/addTask.js" defer></script>
 
   </head>
   <body onload="init()">
@@ -38,20 +39,22 @@
         </div>
 
         <h2>Assigned to (optional)</h2>
-        <form action="#">
-          <input list="contacts" class="addTaskInputFields">
-          <datalist id="contacts" placeholer="Select contacts to assign">
-            <option value="Sofia Müller">
-            <option value="Anton Mayer">
-            <option value="Anja Schulz">
-            <option value="Benedikt Ziegler">
-          </datalist>
+        <form>
+          <div class="dropdown" id="dropdown">
+            <input type="text" id="selectedOptions" onclick="toggleDropdown()" readonly placeholder="Wähle Optionen" class="addTaskInputFields">
+            <div class="dropdown-content">
+              <label><input type="checkbox" value="Sofia Müller"> Sofia Müller</label>
+              <label><input type="checkbox" value="Anton Mayer"> Anton Mayer</label>
+              <label><input type="checkbox" value="Anja Schutz"> Anja Schulz</label>
+              <label><input type="checkbox" value="Benedikt Ziegler"> Benedikt Ziegler</label>
+            </div>
+          </div>
         </form>
 
         <h2>Category</h2>
         <form action="#" required>
-          <input list="category" class="addTaskInputFields">
-          <datalist id="category" placeholer="Select task category">
+          <input list="category" class="addTaskInputFields" placeholder="Select task category">
+          <datalist id="category">
             <option value="Accounting">
             <option value="Marketing">
             <option value="Development">
@@ -61,8 +64,8 @@
 
         <h2>Subtasks (optonal)</h2>
         <form action="#">
-          <input list="subtask" class="addTaskInputFields">
-          <datalist id="subtask" placeholer="Add new subtask">
+          <input list="subtask" class="addTaskInputFields" placeholder="Add new subtask">
+          <datalist id="subtask">
             <option value="Booking invoices">
             <option value="Pay loan">
             <option value="Create Menu Bar">
@@ -77,6 +80,7 @@
         <button>Create Task</button>
       </div>
     </div>
+
 
     <div w3-include-html="templates/menu.html"></div>
   </body>
