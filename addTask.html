@@ -18,15 +18,15 @@
     <div class="addTaskMain">
       <div class="addTastMainContent">
         <form action="" required>
-          <input type="text" placeholder="Enter a title" class="addTaskInputFields">
+          <input type="text" placeholder="Enter a title" class="addTaskInputFieldsMain ">
         </form>
 
         <h2>Description (optonal)</h2>
-        <textarea placeholder="Enter a description" class="addTaskInputFields"></textarea>
+        <textarea placeholder="Enter a description" class="addTaskTextArea"></textarea>
 
         <form action="" required>
           <h2>Due date</h2>
-          <input type="date" placeholder="dd/mm/yyyy" class="addTaskInputFields">
+          <input type="date" placeholder="dd/mm/yyyy" class="addTaskInputFieldsSub">
         </form>
 
         <div>
@@ -41,7 +41,8 @@
         <h2>Assigned to (optional)</h2>
         <form>
           <div class="dropdown" id="dropdown">
-            <input type="text" id="selectedOptions" onclick="toggleDropdown()" readonly placeholder="Wähle Optionen" class="addTaskInputFields">
+            <input type="text" id="selectedOptions" onclick="toggleDropdown()" readonly placeholder="Select contacts to assign" class="addTaskInputFieldsSub changeTextColor">
+            <span class="plus-symbol">+</span>
             <div class="dropdown-content">
               <label><input type="checkbox" value="Sofia Müller"> Sofia Müller</label>
               <label><input type="checkbox" value="Anton Mayer"> Anton Mayer</label>
@@ -53,7 +54,7 @@
 
         <h2>Category</h2>
         <form action="#" required>
-          <input list="category" class="addTaskInputFields" placeholder="Select task category">
+          <input list="category" class="addTaskInputFieldsSub changeTextColor" placeholder="Select task category">
           <datalist id="category">
             <option value="Accounting">
             <option value="Marketing">
@@ -64,7 +65,7 @@
 
         <h2>Subtasks (optonal)</h2>
         <form action="#">
-          <input list="subtask" class="addTaskInputFields" placeholder="Add new subtask">
+          <input list="subtask" class="addTaskInputFieldsSub" placeholder="Add new subtask">
           <datalist id="subtask">
             <option value="Booking invoices">
             <option value="Pay loan">
