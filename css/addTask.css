@@ -4,6 +4,8 @@
     flex-direction: row;
     justify-content: space-between;
     width: 1105px;
+    overflow: auto;
+    max-height: calc(100vh - 180px);
 }
 
 .addTastMainContent{
@@ -17,8 +19,35 @@
 }
 
 .addTaskInputFields{
-    width: 440px;
-    height: 84px;
+    width: 440px !important;
+    height: 84px !important;
     gap: 4px;
     border: 0px ,0px ,1px ,0px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    z-index: 1;
+}
+
+.dropdown-content label {
+    display: block;
+}
+
+.dropdown-content label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
