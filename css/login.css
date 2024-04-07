@@ -1,0 +1,34 @@
+.blueBtn {
+  border-radius: 8px;
+  padding: 10px 16px;
+  background-color: #4589ff;
+  color: #fff;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  font-weight: 400;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.blueBtn:hover{
+    background-color: #005eff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.signUpContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: 400;
+  font-size: 23px;
+  margin-top: 67px;
+  margin-right: 86px;
+}
+
+.signUpContainer span {
+    margin-right: 35px;
+}
