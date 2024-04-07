@@ -24,6 +24,11 @@
   font-size: 16px;
   flex-direction: column;
   padding-bottom: 16px;
+  -webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  overflow-y: scroll;
 }
 
 .marker {
@@ -64,3 +69,7 @@
     border-radius: 50%;
     background-color: rgba(69, 137, 255, 0.2);
   }
+
+  /* scrollbar */
+
+
