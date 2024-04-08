@@ -16,6 +16,9 @@ async function includeHTML() {
     } 
 }
 
+function back(){
+    window.history.back();
+}
 
   
   
