@@ -1,3 +1,7 @@
+body {
+  height: 100vh;
+}
+
 .blueBtn {
   border-radius: 8px;
   padding: 10px 16px;
@@ -29,10 +33,10 @@
   font-size: 23px;
   cursor: pointer;
 }
-.whiteBtn:hover{
-  border: 2px solid #4589FF;
+.whiteBtn:hover {
+  border: 2px solid #4589ff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  color: #4589FF;
+  color: #4589ff;
 }
 
 .blueBtn:hover {
@@ -93,14 +97,6 @@ form {
   align-items: center;
   flex-direction: column;
 }
-.inputField {
-  width: 422px;
-  height: 48px;
-  border-bottom: 1px solid #d1d1d1;
-
-  display: flex;
-  align-items: center;
-}
 
 .logInBtnConatiner {
   display: flex;
@@ -108,5 +104,49 @@ form {
   gap: 35px;
   padding: 0 27.5px;
   margin-top: 39px;
-  
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d1d1d1;
+  margin-bottom: 32px;
+  padding: 12px 21px;
+  width: 422px;
+  height: 48px;
+}
+
+.inputContainer:focus {
+  border-bottom: 1px solid #005dff;
+}
+
+.inputField:focus {
+  outline: none;
+}
+
+.inputField {
+  border: none;
+  font-size: 19px;
+  font-weight: 400;
+  color: #d1d1d1;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 43px;
+  gap: 16px;
+  padding: 8px;
+}
+footer a {
+  font-weight: 400;
+  font-size: 16px;
+  color: #42526e;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #005dff;
 }
