@@ -14,6 +14,27 @@
   cursor: pointer;
 }
 
+.whiteBtn {
+  border-radius: 8px;
+  padding: 10px 16px;
+  background-color: #ffffff;
+  color: #647188;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #647188;
+  font-weight: 400;
+  font-size: 23px;
+  cursor: pointer;
+}
+.whiteBtn:hover{
+  border: 2px solid #4589FF;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  color: #4589FF;
+}
+
 .blueBtn:hover {
   background-color: #005eff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -47,10 +68,45 @@
   text-decoration-color: #4589ff;
   text-underline-offset: 16px;
   text-decoration-thickness: 3px;
+  margin-bottom: 39px;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  padding: 48px 115px;
+  gap: 39px;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+}
+
+form {
+  color: #d1d1d1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.inputField {
+  width: 422px;
+  height: 48px;
+  border-bottom: 1px solid #d1d1d1;
+
+  display: flex;
+  align-items: center;
+}
+
+.logInBtnConatiner {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 0 27.5px;
+  margin-top: 39px;
+  
 }
