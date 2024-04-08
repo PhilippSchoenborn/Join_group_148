@@ -22,15 +22,26 @@
     <div class="loginForm">
       <h1 class="loginHeadline">Log in</h1>
       <form>
-        <label class="inputField" for="email" name="email"><input type="email"  class="inputField"   placeholder="Email" /><img src="/img/login/mail.svg"></label>
+        <div class="inputContainer">
+          <input type="email" placeholder="Email" class="inputField">
+          <img src="/img/login/mail.svg">
+        </div>
 
-        <input type="password" placeholder="Password" required/>
-        <label for=""><input type="checkbox">Remember me</label>
+        <div class="inputContainer">
+          <input type="password" placeholder="Password" class="inputField">
+          <img src="/img/login/lock.svg">
+        </div>
+
         <div class="logInBtnConatiner">
           <button class="blueBtn">Log In</button>
           <button class="whiteBtn">Guest log in</button>
         </div>
       </form>
+      
     </div>
+    <footer>
+      <a href="/dataProtection.html">Privacy Police</a>
+      <a href="/imprint.html">Legal Notice</a>
+    </footer>
   </body>
 </html>
