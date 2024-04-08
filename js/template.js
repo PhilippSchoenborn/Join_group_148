@@ -20,6 +20,9 @@ function back(){
     window.history.back();
 }
 
-  
+function setActiveLegal(){
+    let legalBtn = document.getElementById('legalBtn');
+    legalBtn.classList.add('active');
+}
   
   
