@@ -4,7 +4,7 @@ body {
 
 .blueBtn {
   border-radius: 8px;
-  padding: 10px 16px;
+  padding: 0 16px;
   background-color: #4589ff;
   color: #fff;
   height: 48px;
@@ -20,7 +20,7 @@ body {
 
 .whiteBtn {
   border-radius: 8px;
-  padding: 10px 16px;
+  padding: 0 16px;
   background-color: #ffffff;
   color: #647188;
   height: 48px;
@@ -89,6 +89,17 @@ body {
   padding: 48px 115px;
   gap: 39px;
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  position: relative;
+}
+.singUpForm {
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  padding: 48px 88px;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  position: relative;
 }
 
 form {
@@ -113,13 +124,9 @@ form {
   align-items: center;
   border-bottom: 1px solid #d1d1d1;
   margin-bottom: 32px;
-  padding: 12px 21px;
+  padding: 0 21px;
   width: 422px;
   height: 48px;
-}
-
-.inputContainer:focus {
-  border-bottom: 1px solid #005dff;
 }
 
 .inputField:focus {
@@ -150,4 +157,59 @@ footer a {
 
 footer a:hover {
   color: #005dff;
+}
+
+.signUpBackground {
+  background-color: #4589ff;
+}
+
+.marker {
+  color: #005dff;
+}
+
+.checkboxContainer {
+  color: #42526e;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.arrowLeft {
+  height: 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 66.5px;
+  margin-left: 50.5px;
+}
+
+.customCheckbox {
+  appearance: none;
+  content: url(/img/login/checkbox/checkbox.svg);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.customCheckbox:hover,
+.customCheckbox:checked {
+  content: url(/img/login/checkbox/checkboxCheckedHover.svg);
+  background-color: #edf2fa;
+  
+}
+
+.mt-35 {
+  margin-top: 35px;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.mbtm-48 {
+  margin-bottom: 48px;
 }
