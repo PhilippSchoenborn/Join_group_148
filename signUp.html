@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+
+    <link
+      rel="shortcut icon"
+      href="/img/joinLogoFavicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="css/template.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <script src="js/template.js"></script>
+  </head>
+
+  <body class="signUpBackground">
+    <img src="/img/login/joinLogoWhite.svg" class="logo" />
+    <div class="singUpForm">
+      <img src="img/arrow-left-line.svg" class="arrowLeft" />
+      <h1 class="loginHeadline">Sign up</h1>
+      <form>
+        <div class="inputContainer">
+          <input type="test" placeholder="Name" class="inputField" />
+          <img src="/img/login/person.svg" />
+        </div>
+        <div class="inputContainer">
+          <input type="email" placeholder="Email"
+          class="inputField" required/>
+          <img src="/img/login/mail.svg" />
+        </div>
+        <div class="inputContainer">
+          <input type="password" placeholder="Password" class="inputField" required/>
+          <img src="/img/login/lock.svg" />
+        </div>
+        <div class="inputContainer">
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            class="inputField" required
+          />
+          <img src="/img/login/lock.svg" />
+        </div>
+        <label for="customCheckbox" class="checkboxContainer">
+          <input type="checkbox"  required id="customCheckbox" class="customCheckbox"/>          
+          I accept the <span class="marker">Privacy policy</span>          
+        </label>
+        <button type="submit" class="blueBtn mt-35">Sign up</button>
+      </form>
+    </div>
+    <footer>
+      <a href="/loginDataProtection.html" class="color-white">Privacy Police</a>
+      <a href="/loginImprint.html" class="color-white">Legal Notice</a>
+    </footer>
+  </body>
+</html>
