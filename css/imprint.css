@@ -18,6 +18,7 @@
   width: 37px;
   height: 37px;
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .imprintBack:hover {
