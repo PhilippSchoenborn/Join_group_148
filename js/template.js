@@ -20,6 +20,7 @@ function back() {
     window.history.back();
 }
 
+/* öffnet LogOut Container */
 function showLogOut() {
     let logOutContainer = document.getElementById('logOutContainer');
     if (logOutContainer.style.display === 'flex') {
