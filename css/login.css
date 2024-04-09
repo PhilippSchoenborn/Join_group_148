@@ -185,6 +185,13 @@ footer a:hover {
   left: 0;
   margin-top: 66.5px;
   margin-left: 50.5px;
+  cursor: pointer;
+}
+
+.arrowLeft:hover {
+  opacity: 0.7;
+  border-radius: 50%;
+  background-color: rgba(69, 137, 255, 0.2);
 }
 
 .customCheckbox {
@@ -199,7 +206,6 @@ footer a:hover {
 .customCheckbox:checked {
   content: url(/img/login/checkbox/checkboxCheckedHover.svg);
   background-color: #edf2fa;
-  
 }
 
 .mt-35 {
