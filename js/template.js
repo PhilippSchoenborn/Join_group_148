@@ -1,5 +1,5 @@
 async function init() {
-    includeHTML();       
+   await includeHTML();       
 }
 
 async function includeHTML() {
@@ -30,6 +30,3 @@ function showLogOut() {
         logOutContainer.style.display = 'flex';
     }
 }
-
-
-
