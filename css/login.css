@@ -196,7 +196,7 @@ footer a:hover {
 
 .customCheckbox {
   appearance: none;
-  content: url(/img/login/checkbox/checkbox.svg);
+  content: url(img/login/checkbox/checkbox.svg);
   width: 16px;
   height: 16px;
   cursor: pointer;
@@ -204,7 +204,7 @@ footer a:hover {
 
 .customCheckbox:hover,
 .customCheckbox:checked {
-  content: url(/img/login/checkbox/checkboxCheckedHover.svg);
+  content: url(img/login/checkbox/checkboxCheckedHover.svg);
   background-color: #edf2fa;
 }
 
