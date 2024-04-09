@@ -34,6 +34,19 @@ max-height: calc(100vh - 180px);
     align-items: center
 }
 
+.imprintBack {
+    width: 37px;
+    height: 37px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.imprintBack:hover {
+    opacity: 0.7;
+    border-radius: 50%;
+    background-color: rgba(69, 137, 255, 0.2);
+}
+
 .privacyPolicyText {
     display: flex;
     flex-direction: column;
