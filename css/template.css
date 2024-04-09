@@ -145,6 +145,9 @@ a {
 .menuBtn:hover {
   background-color: #e3eeff;
 }
+.active{
+  background-color: #e3eeff;
+}
 
 #privacyBtn {
   width: 116px;
