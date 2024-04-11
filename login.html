@@ -21,7 +21,7 @@
     </div>
     <div class="loginForm">
       <h1 class="loginHeadline">Log in</h1>
-      <form onsubmit="login()">
+      <form onsubmit="login(); return false;">
         <div class="inputContainer">
           <input type="email" placeholder="Email" class="inputField" id="email">
           <img src="img/login/mail.svg">
@@ -49,7 +49,7 @@
       <a href="loginDataProtection.html" >Privacy Police</a>
       <a href="loginImprint.html">Legal Notice</a>
     </footer>
-
+    <script src="js/storage.js"></script>
     <script src="js/login.js"></script>
   </body>
 </html>
