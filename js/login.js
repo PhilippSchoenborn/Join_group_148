@@ -68,6 +68,7 @@ function register() {
     console.log(users); // For debugging, to see the contents of the users array
     alert("Registration successful!");
 
-    
-    
+
+
+
 }
