@@ -2,7 +2,7 @@ let users = [];
 
 async function init() {
     loadUsers();
-    matchPassword()    
+      
 }
 
 async function loadUsers() {
@@ -14,7 +14,7 @@ async function loadUsers() {
 }
 
 
-async function register() {
+/* async function register() {
     document.getElementById('registerBtn').disabled = true;
     
     users.push({
@@ -25,7 +25,7 @@ async function register() {
 
     await setItem('users', JSON.stringify(users));
     resetForm();
-}
+} */
 
 function resetForm() {
     document.getElementById('name').value = '';
@@ -35,14 +35,37 @@ function resetForm() {
     document.getElementById('registerBtn').disabled = false;
 }
 
-function matchPassword(){
-  let password = document.getElementById('password').value;
-  let confirmPassword =  document.getElementById('confirmPassword').value;
-  let registerBtn =  document.getElementById('registerBtn');
 
-  if (password === confirmPassword) {
-    registerBtn.style.disabled = 'none';
-  } else {
-    registerBtn.disabled = true;
-  }
-};
+
+function register() {
+    // Retrieve values from form inputs
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const isTermsAccepted = document.getElementById('customCheckbox').checked;
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false; // Prevent form submission
+    }
+
+    // Check if terms are accepted
+    if (!isTermsAccepted) {
+        alert("You must accept the privacy policy to continue.");
+        return false; // Prevent form submission
+    }
+
+    // Add user data to the array
+    users.push({
+        name: name,
+        email: email,
+        password: password
+    });
+
+    console.log(users); // For debugging, to see the contents of the users array
+    alert("Registration successful!");
+
+    return false; // Prevent form submission and page reload
+}
