@@ -64,8 +64,10 @@ function register() {
         password: password
     });
 
+    resetForm();
     console.log(users); // For debugging, to see the contents of the users array
     alert("Registration successful!");
 
-    return false; // Prevent form submission and page reload
+    
+    
 }
