@@ -86,14 +86,14 @@ async function register() {
     try {
         await setItem('users', JSON.stringify(users));
         alert("Registrierung erfolgreich!");
+        // Weiterleitung zur Login-Seite
+        window.location.href = 'login.html'; // Passen Sie den Pfad an die tatsächliche Lage Ihrer Login-Seite an
     } catch (e) {
         console.error('Fehler beim Speichern der Benutzerdaten:', e);
         alert("Fehler beim Speichern der Benutzerdaten.");
         return false;
     }
 
-    console.log(users); // Zum Debuggen
     resetForm();
-    console.log(users); // For debugging, to see the contents of the users array
-    alert("Registration successful!");    
+    return false; // Verhindert das Absenden des Formulars
 }
