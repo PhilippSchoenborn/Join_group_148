@@ -2,7 +2,7 @@ let users = [];
 
 async function init() {
     loadUsers();
-      
+
 }
 
 async function loadUsers() {
@@ -16,7 +16,7 @@ async function loadUsers() {
 
 /* async function register() {
     document.getElementById('registerBtn').disabled = true;
-    
+
     users.push({
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -32,42 +32,67 @@ function resetForm() {
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
     document.getElementById('confirmPassword').value = '';
-    document.getElementById('registerBtn').disabled = false;
+    document.getElementById('customCheckbox').checked = '';
+    
 }
 
 
 
-function register() {
-    // Retrieve values from form inputs
+async function register() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     const isTermsAccepted = document.getElementById('customCheckbox').checked;
 
-    // Check if passwords match
+    // Überprüfen, ob die Passwörter übereinstimmen
     if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return false; // Prevent form submission
+        alert("Die Passwörter stimmen nicht überein.");
+        return false;
     }
 
-    // Check if terms are accepted
+    // Überprüfen der Mindestlänge des Passworts
+    if (password.length < 8) {
+        alert("Das Passwort muss mindestens 8 Zeichen lang sein.");
+        return false;
+    }
+
+    // Überprüfen, ob das Passwort mindestens eine Zahl enthält
+    if (!/\d/.test(password)) {
+        alert("Das Passwort muss mindestens eine Zahl enthalten.");
+        return false;
+    }
+
+    // Überprüfen, ob das Passwort mindestens ein Sonderzeichen enthält
+    if (!/[!@#$%^&*]/.test(password)) {
+        alert("Das Passwort muss mindestens ein Sonderzeichen enthalten.");
+        return false;
+    }
+
+    // Überprüfen, ob die Nutzungsbedingungen akzeptiert wurden
     if (!isTermsAccepted) {
-        alert("You must accept the privacy policy to continue.");
-        return false; // Prevent form submission
+        alert("Sie müssen die Datenschutzrichtlinie akzeptieren, um fortzufahren.");
+        return false;
     }
 
-    // Add user data to the array
+    // Benutzer zum Array hinzufügen
     users.push({
         name: name,
         email: email,
         password: password
     });
 
-    resetForm();
-    console.log(users); // For debugging, to see the contents of the users array
-    alert("Registration successful!");
+    // Speichern der aktualisierten Benutzerliste
+    try {
+        await setItem('users', JSON.stringify(users));
+        alert("Registrierung erfolgreich!");
+    } catch (e) {
+        console.error('Fehler beim Speichern der Benutzerdaten:', e);
+        alert("Fehler beim Speichern der Benutzerdaten.");
+        return false;
+    }
 
-    
-    
+    console.log(users); // Zum Debuggen
+    resetForm();
+    return false; // Verhindert das Absenden des Formulars
 }
