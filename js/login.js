@@ -2,7 +2,6 @@ let users = [];
 
 async function init() {
     loadUsers();
-
 }
 
 async function loadUsers() {
@@ -12,20 +11,6 @@ async function loadUsers() {
         console.warn('could not load users');
     }
 }
-
-
-/* async function register() {
-    document.getElementById('registerBtn').disabled = true;
-
-    users.push({
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-    })
-
-    await setItem('users', JSON.stringify(users));
-    resetForm();
-} */
 
 function resetForm() {
     document.getElementById('name').value = '';
@@ -97,3 +82,14 @@ async function register() {
     resetForm();
     return false; // Verhindert das Absenden des Formulars
 }
+
+function login() {
+    let email = document.getElementById( 'email');
+    let password = document.getElementById('password');
+    let user = users.find(u => u.email == email.value && u.password == password-value);
+    console. log(user);
+    if(user) {
+        console.log('User gefunden');
+    }
+    
+    }
