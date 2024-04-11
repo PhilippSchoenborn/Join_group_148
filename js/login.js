@@ -94,5 +94,6 @@ async function register() {
 
     console.log(users); // Zum Debuggen
     resetForm();
-    return false; // Verhindert das Absenden des Formulars
+    console.log(users); // For debugging, to see the contents of the users array
+    alert("Registration successful!");    
 }
