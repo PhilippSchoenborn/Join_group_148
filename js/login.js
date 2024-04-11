@@ -2,6 +2,7 @@ let users = [];
 
 async function init() {
     loadUsers();
+    matchPassword()    
 }
 
 async function loadUsers() {
@@ -15,6 +16,7 @@ async function loadUsers() {
 
 async function register() {
     document.getElementById('registerBtn').disabled = true;
+    
     users.push({
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -29,5 +31,18 @@ function resetForm() {
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
+    document.getElementById('confirmPassword').value = '';
     document.getElementById('registerBtn').disabled = false;
 }
+
+function matchPassword(){
+  let password = document.getElementById('password').value;
+  let confirmPassword =  document.getElementById('confirmPassword').value;
+  let registerBtn =  document.getElementById('registerBtn');
+
+  if (password === confirmPassword) {
+    registerBtn.style.disabled = 'none';
+  } else {
+    registerBtn.disabled = true;
+  }
+};
