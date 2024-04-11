@@ -2,6 +2,7 @@ let users = [];
 
 async function init() {
     loadUsers();
+    checkFormFields();
 }
 
 async function loadUsers() {
@@ -93,3 +94,21 @@ function login() {
     }
     
     }
+
+    function checkFormFields() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const isTermsAccepted = document.getElementById('customCheckbox').checked;
+        const registerBtn = document.getElementById('registerBtn');
+    
+        // Überprüfen, ob alle Felder ausgefüllt sind und die Checkbox markiert ist
+        if (name && email && password && confirmPassword && isTermsAccepted) {
+            registerBtn.disabled = false;
+        } else {
+            registerBtn.style.
+            registerBtn.disabled = true;
+        }
+    }
+    
