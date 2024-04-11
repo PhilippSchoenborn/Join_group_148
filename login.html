@@ -21,15 +21,20 @@
     </div>
     <div class="loginForm">
       <h1 class="loginHeadline">Log in</h1>
-      <form>
+      <form onsubmit="login()">
         <div class="inputContainer">
-          <input type="email" placeholder="Email" class="inputField">
+          <input type="email" placeholder="Email" class="inputField" id="email">
           <img src="img/login/mail.svg">
         </div>
 
         <div class="inputContainer">
-          <input type="password" placeholder="Password" class="inputField">
+          <input type="password" placeholder="Password" class="inputField" id="password">
           <img src="img/login/lock.svg">
+        </div>
+
+        <div for="customCheckbox" class="checkboxContainer">
+          <input type="checkbox"  required id="customCheckbox" class="customCheckbox"/>          
+          Remember me          
         </div>
 
         <div class="logInBtnConatiner">
