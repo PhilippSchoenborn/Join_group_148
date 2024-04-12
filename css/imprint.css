@@ -6,7 +6,8 @@
   align-items: center;
   margin-top: 72px !important;
   margin-bottom: 48px !important;
-  width: 1032px;
+  width: -webkit-fill-available;
+  padding-right: 120px;
 }
 
 .imprintHeadline {
@@ -49,7 +50,8 @@
   flex-direction: column;
   margin-bottom: 24px;
   margin-left: 8px;
-  width: 1032px;
+  width: -webkit-fill-available;
+  padding-right: 120px;
 }
 
 .imprintHeader {
@@ -70,3 +72,12 @@ mark {
   color: rgb(69, 137, 255);
 }
 
+.backgroundColorLegal {
+  background-color: rgba(69, 137, 255, 1);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  width:fit-content;
+  justify-content: start;
+  align-items: center;
+}
