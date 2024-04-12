@@ -1,11 +1,10 @@
 .helpHeadlineContainer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-left: 232px;
-  padding: 0 64px;
-  margin-top: 72px;
-  padding-right: 88px;
+  align-items: center; 
+  margin-bottom: 48px;
+  
+  
 }
 
 .helpHeadlineContainer h1 {
@@ -17,7 +16,7 @@
 .helpMainContainer {
   display: flex;
   overflow: auto;
-  max-height: calc(100vh - 360px);
+  max-height: calc(100vh - 240px);
   margin-left: 232px;
   padding: 0 64px;
   margin-top: 48px;
