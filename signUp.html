@@ -12,27 +12,40 @@
     />
     <link rel="stylesheet" href="css/template.css" />
     <link rel="stylesheet" href="css/login.css" />
-    <script src="js/template.js"></script>    
+    <script src="js/template.js"></script>
     <script src="js/storage.js"></script>
   </head>
 
   <body class="signUpBackground" onload="init()">
     <img src="img/login/joinLogoWhite.svg" class="logo" />
     <div class="singUpForm">
-      <a href="login.html"><img src="img/arrow-left-line.svg" class="arrowLeft"/></a>
+      <a href="login.html"
+        ><img src="img/arrow-left-line.svg" class="arrowLeft"
+      /></a>
       <h1 class="loginHeadline">Sign up</h1>
       <form onsubmit="register(); return false;">
         <div class="inputContainer">
-          <input id="name" type="text" placeholder="Name" class="inputField" onkeyup="checkFormFields()"/>
+          <input id="name" type="text" placeholder="Name" class="inputField" />
           <img src="img/login/person.svg" />
         </div>
         <div class="inputContainer">
-          <input id="email" type="email" placeholder="Email"
-          class="inputField" onkeyup="checkFormFields()" required/>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            class="inputField"
+            required
+          />
           <img src="img/login/mail.svg" />
         </div>
         <div class="inputContainer">
-          <input id="password" type="password" placeholder="Password" class="inputField" onkeyup="checkFormFields()"  required/>
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            class="inputField"
+            required
+          />
           <img src="img/login/lock.svg" />
         </div>
         <div class="inputContainer">
@@ -40,16 +53,35 @@
             id="confirmPassword"
             type="password"
             placeholder="Confirm Password"
-            class="inputField" onkeyup="checkFormFields()" required
+            class="inputField"
+            required
           />
           <img src="img/login/lock.svg" />
         </div>
-        <div for="customCheckbox" class="checkboxContainer">
-          <input type="checkbox"  required id="customCheckbox" class="customCheckbox"/>          
-          I accept the <span class="marker">Privacy policy</span>          
+
+        <div class="wrapCheckboxButton">
+          <div for="customCheckbox" class="checkboxContainer">
+            <input
+              type="checkbox"
+              required
+              id="customCheckbox"
+              class="customCheckbox"
+            />
+            I accept the <span class="marker">Privacy policy</span>
+          </div>
+          <button id="registerBtn" type="submit" class="blueBtn mt-35">
+            Sign up
+          </button>
         </div>
-        <button id="registerBtn" type="submit" class="blueBtn mt-35">Sign up</button>
       </form>
+    </div>
+    <div id="successfullyContainer">
+      <div id="successfully">You Signed Up successfully</div>
+    </div>
+    <div id="pwWarningContainer"> 
+      <span id="signUpWarning"
+    >The password must be at least 8 characters long and must contain a number.</span>     
+      <button class="blueBtn" id="closeBtn" onclick="closeWarning()">ok</button>
     </div>
     <footer>
       <a href="loginDataProtection.html" class="color-white">Privacy Police</a>

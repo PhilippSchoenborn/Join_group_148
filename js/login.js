@@ -2,7 +2,7 @@ let users = [];
 
 async function init() {
     loadUsers();
-    checkFormFields();
+
 }
 
 async function loadUsers() {
@@ -19,7 +19,7 @@ function resetForm() {
     document.getElementById('password').value = '';
     document.getElementById('confirmPassword').value = '';
     document.getElementById('customCheckbox').checked = '';
-    
+
 }
 
 
@@ -30,30 +30,25 @@ async function register() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     const isTermsAccepted = document.getElementById('customCheckbox').checked;
+    let warningContainer = document.getElementById('pwWarningContainer');
 
     // Überprüfen, ob die Passwörter übereinstimmen
     if (password !== confirmPassword) {
-        alert("Die Passwörter stimmen nicht überein.");
+        warningContainer.style.display = 'flex';
         return false;
     }
 
     // Überprüfen der Mindestlänge des Passworts
     if (password.length < 8) {
-        alert("Das Passwort muss mindestens 8 Zeichen lang sein.");
+        warningContainer.style.display = 'flex';
         return false;
     }
 
     // Überprüfen, ob das Passwort mindestens eine Zahl enthält
     if (!/\d/.test(password)) {
-        alert("Das Passwort muss mindestens eine Zahl enthalten.");
+        warningContainer.style.display = 'flex';
         return false;
-    }
-
-    // Überprüfen, ob das Passwort mindestens ein Sonderzeichen enthält
-    if (!/[!@#$%^&*]/.test(password)) {
-        alert("Das Passwort muss mindestens ein Sonderzeichen enthalten.");
-        return false;
-    }
+    }   
 
     // Überprüfen, ob die Nutzungsbedingungen akzeptiert wurden
     if (!isTermsAccepted) {
@@ -71,44 +66,72 @@ async function register() {
     // Speichern der aktualisierten Benutzerliste
     try {
         await setItem('users', JSON.stringify(users));
-        alert("Registrierung erfolgreich!");
-        // Weiterleitung zur Login-Seite
-        window.location.href = 'login.html'; // Passen Sie den Pfad an die tatsächliche Lage Ihrer Login-Seite an
+        slideSuccessfully();        
     } catch (e) {
         console.error('Fehler beim Speichern der Benutzerdaten:', e);
         alert("Fehler beim Speichern der Benutzerdaten.");
         return false;
     }
 
-    resetForm();
+    resetForm();    
     return false; // Verhindert das Absenden des Formulars
 }
 
 function login() {
-    let email = document.getElementById( 'email');
+    let email = document.getElementById('email');
     let password = document.getElementById('password');
-    let user = users.find(u => u.email == email.value && u.password == password-value);
-    console. log(user);
-    if(user) {
+    let user = users.find(u => u.email == email.value && u.password == password.value);
+    console.log(user);
+    if (user) {
         console.log('User gefunden');
-    }
-    
+        window.location.href = 'summary.html'       
+
+    } else {
+        console.log('User not found')
     }
 
-    function checkFormFields() {
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-        const isTermsAccepted = document.getElementById('customCheckbox').checked;
-        const registerBtn = document.getElementById('registerBtn');
-    
-        // Überprüfen, ob alle Felder ausgefüllt sind und die Checkbox markiert ist
-        if (name && email && password && confirmPassword && isTermsAccepted) {
-            registerBtn.disabled = false;
-        } else {
-            registerBtn.style.
-            registerBtn.disabled = true;
-        }
+}
+
+function checkFormFields() {    
+    const isTermsAccepted = document.getElementById('customCheckbox');
+    const registerBtn = document.getElementById('registerBtn');
+
+    // Überprüfen, ob alle Felder ausgefüllt sind und die Checkbox markiert ist
+    if (isTermsAccepted = isTermsAccepted.checked) {
+        registerBtn.disabled = false;
+    } else {
+        registerBtn.disabled = true;
     }
-    
+}
+
+function slideSuccessfully() {
+    let container = document.getElementById('successfullyContainer');
+    let successfully = document.getElementById('successfully');
+
+    // Stellen Sie sicher, dass der Container sichtbar ist, um die Animation zu zeigen
+    container.style.display = 'flex';
+
+    // Fügen Sie die Klasse für die Animation hinzu
+    successfully.classList.add('slide-in-bottom');
+
+    // Setzen Sie eine Verzögerung, um der Animation Zeit zum Abspielen zu geben
+    setTimeout(() => {
+        // Entfernen Sie die Animation, nachdem sie abgespielt wurde
+        successfully.classList.remove('slide-in-bottom');
+
+        // Verstecken Sie den Container wieder
+        container.style.display = 'none';
+
+        // Wechseln Sie die Seite nach der Animation
+        window.location.href = 'login.html';
+    }, 2000); // Warten Sie z.B. 1000 Millisekunden (1 Sekunde)
+}
+
+function pwWarningHTML(){
+    return `<span id="signUpWarning"
+    >The password must be at least 8 characters long and must contain a number.</span>`
+}
+
+function closeWarning(){
+    document.getElementById('pwWarningContainer').style.display = 'none';
+}
