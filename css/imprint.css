@@ -18,6 +18,7 @@
   width: 37px;
   height: 37px;
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .imprintBack:hover {
@@ -68,3 +69,4 @@ mark {
   background-color: transparent;
   color: rgb(69, 137, 255);
 }
+

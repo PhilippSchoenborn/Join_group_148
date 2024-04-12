@@ -4,17 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-
-    <link rel="stylesheet" href="css/template.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link
+      rel="shortcut icon"
+      href="img/joinLogoFavicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="css/template.css" />
+    <link rel="stylesheet" href="css/login.css" />
     <script src="js/template.js"></script>
-
   </head>
-  <body onload="init()">    
-
+  <body onload="init()">
+    <img src="img/joinLogo.png" class="logo" />
     <div class="signUpContainer">
       <span>Not a Join user?</span>
-      <button class="blueBtn">Sign Up</button>
+      <a class="blueBtn" href="signUp.html">Sign Up</a>
     </div>
+    <div class="loginForm">
+      <h1 class="loginHeadline">Log in</h1>
+      <form onsubmit="login(); return false;">
+        <div class="inputContainer">
+          <input type="email" placeholder="Email" class="inputField" id="email">
+          <img src="img/login/mail.svg">
+        </div>
+
+        <div class="inputContainer">
+          <input type="password" placeholder="Password" class="inputField" id="password">
+          <img src="img/login/lock.svg">
+        </div>
+
+        <div for="customCheckbox" class="checkboxContainer">
+          <input type="checkbox"  required id="customCheckbox" class="customCheckbox"/>          
+          Remember me          
+        </div>
+
+        <div class="logInBtnConatiner">
+          <a class="blueBtn" href="summary.html">Log In</a>
+          <a class="whiteBtn" id="guestLogin" href="summary.html"
+          >Guest log in</a>
+        </div>
+      </form>
+      
+    </div>
+    <footer>
+      <a href="loginDataProtection.html" >Privacy Police</a>
+      <a href="loginImprint.html">Legal Notice</a>
+    </footer>
+    <script src="js/storage.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

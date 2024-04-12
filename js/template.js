@@ -1,5 +1,5 @@
-async function init(){
-    includeHTML();
+async function init() {
+   await includeHTML();       
 }
 
 async function includeHTML() {
@@ -10,13 +10,23 @@ async function includeHTML() {
         let resp = await fetch(file);
         if (resp.ok) {
             element.innerHTML = await resp.text()
-        } else { 
-            element.innerHTML = 'Page not found'; 
-        } 
-    } 
+        } else {
+            element.innerHTML = 'Page not found';
+        }
+    }
 }
 
+function back() {
+    window.history.back();
+}
 
-  
-  
-  
+/* öffnet LogOut Container */
+function showLogOut() {
+    let logOutContainer = document.getElementById('logOutContainer');
+    if (logOutContainer.style.display === 'flex') {
+        logOutContainer.style.display = 'none';
+
+    } else {
+        logOutContainer.style.display = 'flex';
+    }
+}

@@ -5,6 +5,7 @@
   margin-left: 232px;
   padding: 0 64px;
   margin-top: 72px;
+  padding-right: 88px;
 }
 
 .helpHeadlineContainer h1 {
@@ -29,6 +30,7 @@
   }
   scrollbar-width: none;
   overflow-y: scroll;
+  padding-right: 88px;
 }
 
 .marker {

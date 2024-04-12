@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./css/summary.css">
+  <link rel="shortcut icon" href="img/joinLogoFavicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="css/summary.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
@@ -26,11 +27,13 @@
     </div>
     <div id="buttonBox">
       <div id="buttonsTop">
-        <button id="dates">
+        <div class="zoomDiv">
+        <button id="dates" class="datesClass">
+
           <div id="datesDivLeft">
             <div id="datesDivLeftUp">
               <div>
-                <img src="./img/icon_circle.png" alt="timericon">
+                <img src="img/icon_circle.png" alt="timericon">
               </div>
               <p id="taskNumber">1</p>
             </div>
@@ -41,11 +44,13 @@
             <p id="date">October 16,2022</p>
             <p id="event">Upcoming Deadline</p>
           </div>
+
         </button>
-        <button class="taskButton">
+        </div>
+        <button class="taskButton taskButtonRightUp">
           <div id="tasksDivRight">
             <div id="tasksDivRightUp">
-              <img class="tasksIcon" src="./img/board.png" alt="boardIcon">
+              <div class="border"><img class="tasksIcon" src="img/board.png" alt="boardIcon"></div>
               <p id="taskNumberBlack">5</p>
             </div>
             <p id="taskDescription"> Task in<br> Board</p>
@@ -53,37 +58,37 @@
         </button>
       </div>
       <div id="buttonsBottom">
-        <button class="taskButton lightBlue higher">
+        <button class="taskButtonLightBlue higher ">
           <div id="tasksDivRight">
             <div id="tasksDivRightUp">
-              <img class="tasksIcon" src="./img/urgent.png" alt="urgentIcon">
+             <img class="tasksIcon" src="img/urgent.png" alt="urgentIcon">
               <p id="taskNumberBlack">5</p>
             </div>
             <p id="taskDescription"> Task To-do</p>
           </div>
         </button>
-        <button class="taskButton higher">
+        <button class="taskButton higher zIndex">
           <div id="tasksDivRight">
             <div id="tasksDivRightUp">
-              <img class="tasksIcon" src="./img/in_Progress.png" alt="boardIcon">
+              <div class="border"><img class="tasksIcon" src="img/in_Progress.png" alt="boardIcon"></div>
               <p id="taskNumberBlack">5</p>
             </div>
             <p id="taskDescription"> Task in<br> Progress</p>
           </div>
         </button>
-        <button class="taskButton higher">
+        <button class="taskButton higher ">
           <div id="tasksDivRight">
             <div id="tasksDivRightUp">
-              <img class="tasksIcon" src="./img/awaiting_feedback.png" alt="boardIcon">
+              <div class="border"> <img class="tasksIcon" src="img/awaiting_feedback.png" alt="boardIcon"> </div>
               <p id="taskNumberBlack">5</p>
             </div>
             <p id="taskDescription"> Await<br> Feedback</p>
           </div>
         </button>
-        <button class="taskButton higher">
+        <button class="taskButton higher ">
           <div id="tasksDivRight">
             <div id="tasksDivRightUp">
-              <img class="tasksIcon" src="./img/done.png" alt="boardIcon">
+              <div class="border"><img class="tasksIcon" src="img/done.png" alt="boardIcon"></div>
               <p id="taskNumberBlack">1</p>
             </div>
             <p id="taskDescription"> Task<br> Done</p>
