@@ -71,3 +71,13 @@ mark {
   background-color: transparent;
   color: rgb(69, 137, 255);
 }
+
+.backgroundColorLegal {
+  background-color: rgba(69, 137, 255, 1);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  width:fit-content;
+  justify-content: start;
+  align-items: center;
+}

@@ -1,5 +1,6 @@
 async function init() {
-   await includeHTML();       
+   await includeHTML();   
+   underlineCurrentPage();    
 }
 
 async function includeHTML() {
@@ -30,3 +31,23 @@ function showLogOut() {
         logOutContainer.style.display = 'flex';
     }
 }
+function underlineCurrentPage() {
+    var currentPage = window.location.href;
+
+    if (currentPage.includes("summary.html")) {
+        document.getElementById('summaryBtn').classList.add('backgroundColorMenü');
+    }
+    else if (currentPage.includes('addTask.html')) {
+        document.getElementById('addTaskButton').classList.add('backgroundColorMenü');
+    }
+    else if (currentPage.includes('board.html')) {
+        document.getElementById('boardBtn').classList.add('backgroundColorMenü');
+    } else if (currentPage.includes('contacts.html')) {
+        document.getElementById('contactBtn').classList.add('backgroundColorMenü');
+    }else if (currentPage.includes('dataProtection.html')) {
+        document.getElementById('dataProtection').classList.add('backgroundColorLegal');
+    } else if (currentPage.includes('imprint.html')) {
+        document.getElementById('imprint').classList.add('backgroundColorLegal');
+    } 
+    }
+

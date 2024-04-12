@@ -159,6 +159,9 @@ a {
   font-size: 16px;  
   font-weight: 400;
   cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   
   
 }
@@ -172,4 +175,8 @@ a {
   background-color: #4589ff;
   border-radius: 10px;
   color: #fff;
+}
+
+.backgroundColorMenü {
+  background-color: rgba(210, 227, 255, 1);
 }
