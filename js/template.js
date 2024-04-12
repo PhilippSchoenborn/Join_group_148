@@ -37,15 +37,15 @@ function underlineCurrentPage() {
     let currentPage = window.location.href;
 
     if (currentPage.includes("summary.html")) {
-        document.getElementById('summaryBtn').classList.add('backgroundColorMenü');
+        document.getElementById('summaryBtn').classList.add('backgroundColorMenu');
     }
     else if (currentPage.includes('addTask.html')) {
-        document.getElementById('addTaskButton').classList.add('backgroundColorMenü');
+        document.getElementById('addTaskButton').classList.add('backgroundColorMenu');
     }
     else if (currentPage.includes('board.html')) {
-        document.getElementById('boardBtn').classList.add('backgroundColorMenü');
+        document.getElementById('boardBtn').classList.add('backgroundColorMenu');
     } else if (currentPage.includes('contacts.html')) {
-        document.getElementById('contactBtn').classList.add('backgroundColorMenü');
+        document.getElementById('contactBtn').classList.add('backgroundColorMenu');
     }else if (currentPage.includes('dataProtection.html')) {
         document.getElementById('dataProtection').classList.add('backgroundColorLegal');
     } else if (currentPage.includes('imprint.html')) {
