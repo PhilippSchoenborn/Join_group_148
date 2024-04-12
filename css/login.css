@@ -102,7 +102,7 @@ body {
   position: relative;
 }
 
-form {
+.formSignUp{
   color: #d1d1d1;
   display: flex;
   justify-content: center;
@@ -113,6 +113,7 @@ form {
 .logInBtnConatiner {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 35px;
   padding: 0 27.5px;
   margin-top: 39px;
@@ -176,6 +177,14 @@ footer a:hover {
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  margin-top: 20px;
+}
+
+.wrapCheckboxButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .arrowLeft {
@@ -218,4 +227,85 @@ footer a:hover {
 
 .mbtm-48 {
   margin-bottom: 48px;
+}
+
+#successfully{
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: #4589ff;
+  border-radius: 20px;
+  width: 326px;
+  height: 74px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 23px;
+  color: #fff;
+  z-index: 101;
+}
+
+
+#successfullyContainer, #pwWarningContainer{
+  z-index: 100;
+  position: absolute;
+  height: 100vh;
+  width: 100%; 
+  box-sizing: border-box;
+  background-color: #ffffff6f;  
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide-in-bottom {
+	-webkit-animation: slide-in-bottom 0.8s linear both;
+	        animation: slide-in-bottom 0.8s linear both;
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#pwWarningContainer{
+  display: none;
+  flex-direction: column;
+  gap: 35px;
+}
+
+#signUpWarning{
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: #4589ff;
+  border-radius: 20px;  
+  padding: 8px 32px;
+  width: 370px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  font-weight: 400;
+  font-size: 23px;
+  color: #fff;
+  z-index: 101;
 }
