@@ -31,8 +31,10 @@ function showLogOut() {
         logOutContainer.style.display = 'flex';
     }
 }
+
+
 function underlineCurrentPage() {
-    var currentPage = window.location.href;
+    let currentPage = window.location.href;
 
     if (currentPage.includes("summary.html")) {
         document.getElementById('summaryBtn').classList.add('backgroundColorMenü');
