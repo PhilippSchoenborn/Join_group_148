@@ -18,6 +18,11 @@
     gap: 48px;
     overflow: auto;
     max-height: calc(100vh - 180px);
+    -webkit-scrollbar {
+        display: none;
+      }
+      scrollbar-width: none;
+      overflow-y: scroll;
 }
 
 .privacyPolicy h1 {
