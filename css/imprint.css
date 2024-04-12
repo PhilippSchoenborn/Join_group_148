@@ -36,6 +36,11 @@
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  -webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  overflow-y: scroll;
 }
 
 .imprintSubHeadline {
