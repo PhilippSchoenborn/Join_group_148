@@ -81,3 +81,7 @@
     justify-content: start;
     align-items: center;
 }
+
+.backgroundColorLegal:hover {
+    color: white !important;
+  }
