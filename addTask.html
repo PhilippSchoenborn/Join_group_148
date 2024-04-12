@@ -31,23 +31,30 @@
 
         <div>
           <h2>Priority</h2>
-          <div>
-            <button>Urgent <img src="" alt=""></button>
-            <button>Medium <img src="" alt=""></button>
-            <button>Low <img src="" alt=""></button>
+          <div class="addTaskPriority">
+            <button class="buttonAddTask">Urgent <img src="./img/addTaskUrgent.svg" alt="urgent" class="buttonAddTaskImg"></button>
+            <button class="buttonAddTask">Medium <img src="./img/addTaskMedium.svg" alt="medium" class="buttonAddTaskImg"></button>
+            <button class="buttonAddTask">Low <img src="./img/addTaskLow.svg" alt="low" class="buttonAddTaskImg"></button>
           </div>
         </div>
 
         <h2>Assigned to (optional)</h2>
         <form>
           <div class="dropdown" id="dropdown">
-            <input type="text" id="selectedOptions" onclick="toggleDropdown()" readonly placeholder="Select contacts to assign" class="addTaskInputFieldsSub changeTextColor">
-            <span class="plus-symbol">+</span>
+            <input type="text" id="selectedOptions" onclick="toggleDropdown()" readonly placeholder="Select contacts to assign" class="addTaskInputFieldsSub noBorder changeTextColor">
             <div class="dropdown-content">
-              <label><input type="checkbox" value="Sofia Müller"> Sofia Müller</label>
-              <label><input type="checkbox" value="Anton Mayer"> Anton Mayer</label>
-              <label><input type="checkbox" value="Anja Schutz"> Anja Schulz</label>
-              <label><input type="checkbox" value="Benedikt Ziegler"> Benedikt Ziegler</label>
+              <label >
+                <input type="checkbox" value="Emmanuel Maurer" class="checkboxContent">
+                  <img src="img/Profile badge (1).png" alt="profileAddTask"> Emmanuel Maurer
+              </label>
+              <label class="checkboxContent">
+                <input type="checkbox" value="Anton Mayer"> 
+                  <img src="img/Profile badge (2).png" alt="profileAddTask"> Anton Mayer
+              </label>
+              <label class="checkboxContent">
+                <input type="checkbox" value="Marcel Bauer"> 
+                  <img src="img/Profile badge.png" alt="profileAddTask"> Marcel Bauer
+              </label>
             </div>
           </div>
         </form>
@@ -63,18 +70,21 @@
           </datalist>
         </form>
 
-        <h2>Subtasks (optonal)</h2>
-        <form action="#">
-          <input list="subtask" class="addTaskInputFieldsSub" placeholder="Add new subtask">
-          <datalist id="subtask">
-            <option value="Booking invoices">
-            <option value="Pay loan">
-            <option value="Create Menu Bar">
-            <option value="Start the marketing campaign">
-            <option value="Cleaning kitchen">
-          </datalist>
-        </form>
-      </div>
+        <h2>Subtasks (optional)</h2>
+        <div style="position: relative;">
+          <form action="#">
+            <input list="subtask" class="addTaskInputFieldsSub" placeholder="Add new subtask">
+            <datalist id="subtask">
+              <option value="Booking invoices">
+              <option value="Pay loan">
+              <option value="Create Menu Bar">
+              <option value="Start the marketing campaign">
+              <option value="Cleaning kitchen">
+            </datalist>
+          </form>
+          <div style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">
+          </div>
+        </div>
 
       <div class="addTastMainButton">
         <button>Clear</button>
