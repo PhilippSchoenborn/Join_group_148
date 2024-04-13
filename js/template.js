@@ -1,6 +1,6 @@
 async function init() {
-   await includeHTML();   
-   underlineCurrentPage();    
+    await includeHTML();
+    underlineCurrentPage();
 }
 
 async function includeHTML() {
@@ -32,7 +32,7 @@ function showLogOut() {
     }
 }
 
-
+// aktiviert den button für die Seite auf der man sich befindet
 function underlineCurrentPage() {
     let currentPage = window.location.href;
 
@@ -46,12 +46,12 @@ function underlineCurrentPage() {
         document.getElementById('boardBtn').classList.add('backgroundColorMenu');
     } else if (currentPage.includes('contacts.html')) {
         document.getElementById('contactBtn').classList.add('backgroundColorMenu');
-    }else if (currentPage.includes('dataProtection.html')) {
+    } else if (currentPage.includes('dataProtection.html')) {
         document.getElementById('dataProtection').classList.add('backgroundColorLegal');
     } else if (currentPage.includes('imprint.html')) {
         document.getElementById('imprint').classList.add('backgroundColorLegal');
-    } 
     }
+}
 
     function logout() {
         // Entfernen der Benutzerdaten aus dem lokalen Speicher

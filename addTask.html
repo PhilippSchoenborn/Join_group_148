@@ -43,19 +43,20 @@
           <div class="dropdown" id="dropdown">
             <input type="text" id="selectedOptions" onclick="toggleDropdown()" readonly placeholder="Select contacts to assign" class="addTaskInputFieldsSub noBorder changeTextColor">
             <div class="dropdown-content">
-              <label >
+              <label>
                 <input type="checkbox" value="Emmanuel Maurer" class="checkboxContent">
-                  <img src="img/Profile badge (1).png" alt="profileAddTask"> Emmanuel Maurer
+                <img src="img/ProfileBadgeTestOne.png" alt="profileAddTask"> Emmanuel Maurer
               </label>
               <label class="checkboxContent">
-                <input type="checkbox" value="Anton Mayer"> 
-                  <img src="img/Profile badge (2).png" alt="profileAddTask"> Anton Mayer
+                <input type="checkbox" value="Anton Mayer">
+                <img src="img/ProfileBadgeTestTwo.png" alt="profileAddTask"> Anton Mayer
               </label>
               <label class="checkboxContent">
-                <input type="checkbox" value="Marcel Bauer"> 
-                  <img src="img/Profile badge.png" alt="profileAddTask"> Marcel Bauer
+                <input type="checkbox" value="Marcel Bauer">
+                <img src="img/ProfileBadge.png" alt="profileAddTask"> Marcel Bauer
               </label>
             </div>
+            <span class="dropdown-arrow">&#9660;</span>
           </div>
         </form>
 
@@ -68,6 +69,7 @@
             <option value="Development">
             <option value="Other">
           </datalist>
+          <span class="dropdown-arrow">&#9660;</span>
         </form>
 
         <h2>Subtasks (optional)</h2>
@@ -82,7 +84,8 @@
               <option value="Cleaning kitchen">
             </datalist>
           </form>
-          <div style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">
+          <div>
+            <span class="dropdown-arrow">+</span>
           </div>
         </div>
 

@@ -9,7 +9,9 @@
 }
 
 h2{
-    margin-top: 12px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 15px;
 }
 
 .addTastMainContent{
@@ -38,7 +40,10 @@ h2{
     border: none;
     font-size: 19px;
     padding: 16px 12.5px 0 12.5px;
-    
+}
+
+.addTaskInputFieldsSub:hover{
+    cursor: pointer;
 }
 
 .addTaskTextArea{
@@ -91,13 +96,13 @@ h2{
 .dropdown {
     position: relative;
     display: inline-block;
-  }
-
+}
+  
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: white;
-    width: 440px !important;
+    width: 460px !important;
     border-top: 1px solid #4589FF;
     padding: 5px;
     margin-left: 13px;
@@ -105,32 +110,44 @@ h2{
     z-index: 1;
     right: 0;
 }
-
+  
 .dropdown-content label {
     display: block;
 }
-
+  
 .dropdown-content label input[type="checkbox"] {
     margin-right: 5px;
 }
-
+  
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
+  
 .input-container {
     position: relative;
     display: inline-block;
 }
   
-.plus-symbol {
+.dropdown-arrow {
     position: absolute;
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
+    font-size: 16px;
+    color: #4589FF;
+    margin-right: 10px;
+    transform: translateY(-50%) scaleY(0.7);
+    cursor: pointer;
+}
+  
+.plus-symbol {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
     cursor: pointer;
     font-size: 32px;
-    color: rgb(69.137.255)
+    color: rgb(69.137.255);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -171,3 +188,4 @@ input::-webkit-calendar-picker-indicator {
     height: 14.5px;
     margin-left: 10px;
 }
+
