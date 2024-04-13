@@ -53,17 +53,11 @@ function underlineCurrentPage() {
     }
 }
 
-    function logout() {
-        // Entfernen der Benutzerdaten aus dem lokalen Speicher
-        localStorage.removeItem('user');
-    
-        // Optional: Weitere Bereinigung, z.B. Cookies löschen, wenn verwendet
-        document.cookie = 'session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    
-        // Weiterleitung zur Login-Seite
-        window.location.href = 'login.html';
-    }
+function logout() {
+    // Weiterleitung zur Login-Seite
+    window.location.href = 'login.html';
+}
 
-    function addTask(){
-        
-    }
+function addTask() {
+    
+}
