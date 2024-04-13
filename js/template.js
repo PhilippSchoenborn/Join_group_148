@@ -63,3 +63,7 @@ function underlineCurrentPage() {
         // Weiterleitung zur Login-Seite
         window.location.href = 'login.html';
     }
+
+    function addTask(){
+        
+    }
