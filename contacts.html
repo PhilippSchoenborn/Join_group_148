@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
-    <link rel="shortcut icon" href="img/joinLogoFavicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="css/template.css">
-    <link rel="stylesheet" href="css/contacts.css">
 
-    <script src="js/template.js"></script>
-    <script src="js/contacts.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
+  <link rel="shortcut icon" href="img/joinLogoFavicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="css/template.css">
+  <link rel="stylesheet" href="css/contacts.css">
+  <script src="https://kit.fontawesome.com/bb6760f882.js" crossorigin="anonymous"></script>
+  <script src="js/template.js"></script>
+  <script src="js/contacts.js"></script>
 
-  </head>
-  <body onload="init()">
-    <div w3-include-html="templates/header.html"></div>
-    <div w3-include-html="templates/menu.html"></div>
-    <div id="content">
-      <div id="contactDiv">
-        <div id="contactButton">
-          <button id="button">Add new contact <img src="img/person_add.png" alt=""></button>
-        </div>
-        <div id="contactContent">
-          
-        </div>
+</head>
+
+<body onload="init()">
+  <div w3-include-html="templates/header.html"></div>
+  <div w3-include-html="templates/menu.html"></div>
+  <div id="content">
+    <div id="contactDiv">
+      <div id="contactButton">
+        <button id="button">Add new contact <img src="img/person_add.png" alt=""></button>
       </div>
-      <div id="scrollLine">
-        <img src="img/uo.png" alt="">
-        <img src="img/line.png" alt="">
-        <img src="img/down.png" alt="">
+      <div id="contactContent">
+
       </div>
     </div>
-  </body>
+    <div id="scrollLine">
+      <img src="img/uo.png" alt="">
+      <img src="img/line.png" alt="">
+      <img src="img/down.png" alt="">
+    </div>
+  </div>
+  <div id="addNewContact">
+    <div id="addNewContactFirstSection">
+      <img id="addNewContactCloseButton" src="img/close.png" alt="close">
+      <div>
+        <img src="img/header_logo.png" alt="logo">
+        <h1>Add contact</h1>
+        <h3>Tasks are better with a team!</h3>
+      </div>
+    </div>
+    <div id="addNewContactSecondSection">
+      <div id="contactInput">
+        <img src="img/Frame 79.png" alt="profilpicture">
+        <div id="inputDiv">
+          <div class="inputBox"><input type="text" placeholder="Name"> <img src="img/person.png" alt=""></div>
+          <div class="inputBox"><input type="text" placeholder="Email"> <img src="img/mail.png" alt=""></div>
+          <div class="inputBox"><input type="text" placeholder="Phone"> <img src="img/call.png" alt=""></div>
+        </div>
+        <div id="btnDiv">
+          <button>Cancel <i class="fa-regular fa-xmark icon"></i> </button>
+          <button></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
