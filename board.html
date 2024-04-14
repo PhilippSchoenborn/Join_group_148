@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="shortcut icon" href="img/joinLogoFavicon.svg" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="img/joinLogoFavicon.svg"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="css/template.css" />
     <link rel="stylesheet" href="css/board.css" />
-    
+
     <script src="js/template.js"></script>
-    <script src="js/board.js"></script>
+    
   </head>
   <body onload="init()">
     <div w3-include-html="templates/header.html"></div>
@@ -66,42 +70,95 @@
         <div class="taskCard">
           <div class="taskCardLabel">User Story</div>
           <div class="taskCardbody">
-            <div class="taskCardHeadline">Kochwelt Page & Recipe Recommender</div>
+            <div class="taskCardHeadline">
+              Kochwelt Page & Recipe Recommender
+            </div>
             <div class="taskCardDescription">
               Build start page with recipe recommendation...
             </div>
             <div class="taskCardProgress">
-              <div class="taskCardProgressbar fill50" ></div>
+              <div class="taskCardProgressbar fill50"></div>
               <div class="taskCardProgressbarLabel">1/2 Subtasks</div>
-              
             </div>
             <div class="taskCardFooter">
               <div class="taskCardUser">
-                <img src="img/ProfileBadge.png">
-                <img src="img/ProfileBadgeTestOne.png">
-                <img src="img/ProfileBadgeTestTwo.png">
-              </div class="taskCardPriority">
-              <div><img src="img/Priority symbols.png" alt=""></div>
+                <img src="img/ProfileBadge.png" />
+                <img src="img/ProfileBadgeTestOne.png" />
+                <img src="img/ProfileBadgeTestTwo.png" />
+              </div>
+              <div class="taskCardPriority">
+                <img src="img/Prioritysymbols.png" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="feedbackContainer" class="subTaskContainer">
-      </div>
+      <div id="feedbackContainer" class="subTaskContainer"></div>
       <div id="doneContainer" class="subTaskContainer">
         <div id="toDoContainer" class="subTaskContainer">
           <div class="noTaskCard">No task Done</div>
         </div>
-      </div> 
       </div>
-      
-           
     </div>
+
     <div class="addTaskFloating">
+      <form>
         <h2 class="addTaskSubHeadline">Add Task</h2>
-        <form>
-          <input type="text" placeholder="Enter a title" class="inputTitle">
-        </form>
+        <div>
+          <input type="text" placeholder="Enter a title" class="inputTitle" />
+          <label for="description" id="descriptionLabel">
+            <div class="label">
+              <span class="f-weight-700">Description</span> (optional)
+            </div>
+            <textarea
+              name="description"
+              id="descriptionTextArea"
+              cols="10"
+              rows="3"
+              placeholder="Enter a Description"
+            ></textarea>
+          </label>
+          <label for="date" class="labeDate">
+            Due Date
+            <input type="date" name="date" id="date" class="inputDate" />
+          </label>
+        </div>
+        <div class="formBottomWrapper">
+          <div class="priorityWrapper">
+            <span class="labelPrio">Priority</span>
+            <div class="btnPrioWrapper">
+              <button class="btnPrio btnPrioHigh">
+                Urgent <img src="/img/prioHigh.svg" />
+              </button>
+              <button class="btnPrio btnPriomedium">
+                Medium <img src="/img/prioMedium.svg" />
+              </button>
+              <button class="btnPrio btnPrioLow">
+                Low <img src="/img/priolow.svg" />
+              </button>
+            </div>
+          </div>
+          <div class="dropdown">
+            <input type="text" placeholder="Suche..." id="searchInput" onkeyup="filterFunction()">
+            <span id="closeIcon"><img src="#"></span> <!-- Schließen Icon -->
+            <div id="dropdownList" class="dropdown-content">
+
+                <label for="sofia-mueller">
+                    <input type="checkbox" id="sofia-mueller" name="user" value="Sofia Müller">
+                    Sofia Müller
+                </label>
+
+                <label for="john-doe">
+                    <input type="checkbox" id="john-doe" name="user" value="John Doe">
+                    John Doe
+                </label>
+                
+            </div>
+        </div>
+        
+        </div>
+      </form>
     </div>
+    <script src="/js/board.js"></script>
   </body>
 </html>
