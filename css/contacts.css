@@ -282,4 +282,8 @@ input:-webkit-autofill:active {
     z-index: 1;
 }
 
+.d-none {
+    display: none;
+}
+
 
