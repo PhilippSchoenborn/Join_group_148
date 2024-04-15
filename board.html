@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/board.css" />
 
     <script src="js/template.js"></script>
-    
   </head>
   <body onload="init()">
     <div w3-include-html="templates/header.html"></div>
@@ -101,64 +100,93 @@
       </div>
     </div>
 
-    <div class="addTaskFloating">
-      <form>
-        <h2 class="addTaskSubHeadline">Add Task</h2>
+    <div class="addTaskFloating" id="addTaskFloating">
+      <div class="headlineContainer">
+        <span class="addTaskHeadline">Add Task</span>
+        <img src="img/close.svg" class="addTaskCloseIcon" id="closeAddTaskFloating"/>
+      </div>
+
+      <form class="addTaskForm" autocomplete="off">
+        <input
+          type="text"
+          class="input inputTitle"
+          placeholder="Enter title"
+          id="titleInput"
+          required
+        />
+        <span id="errorMessageTitle" class="errorMessage"
+          >This field is required</span
+        >
         <div>
-          <input type="text" placeholder="Enter a title" class="inputTitle" />
-          <label for="description" id="descriptionLabel">
-            <div class="label">
-              <span class="f-weight-700">Description</span> (optional)
-            </div>
+          <div class="labelInputContainer mt-8">
+            <label for="description" class="label">Description</label>
             <textarea
               name="description"
-              id="descriptionTextArea"
-              cols="10"
-              rows="3"
+              id="description"
+              class="input inputDescription"
               placeholder="Enter a Description"
             ></textarea>
-          </label>
-          <label for="date" class="labeDate">
-            Due Date
-            <input type="date" name="date" id="date" class="inputDate" />
-          </label>
-        </div>
-        <div class="formBottomWrapper">
-          <div class="priorityWrapper">
-            <span class="labelPrio">Priority</span>
-            <div class="btnPrioWrapper">
-              <button class="btnPrio btnPrioHigh">
-                Urgent <img src="/img/prioHigh.svg" />
+          </div>
+          <div class="labelInputContainer">
+            <label for="date" class="label">Due Date</label>
+            <input type="date" class="input" id="inputDate" />
+            <span id="errorMessageDate" class="errorMessage"
+              >This field is required</span
+            >
+          </div>
+          <div class="labelInputContainer">
+            <span class="label">Priority</span>
+            <div class="btnPrioContainer">
+              <button class="btnPrio" id="btnPrioHigh">
+                Urgent<img src="img/prioHigh.svg" />
               </button>
-              <button class="btnPrio btnPriomedium">
-                Medium <img src="/img/prioMedium.svg" />
+              <button class="btnPrio" id="btnPrioMedium">
+                Medium<img src="img/prioMedium.svg" />
               </button>
-              <button class="btnPrio btnPrioLow">
-                Low <img src="/img/priolow.svg" />
+              <button class="btnPrio" id="btnPrioLow">
+                Low<img src="img/prioLow.svg" />
               </button>
             </div>
           </div>
-          <div class="dropdown">
-            <input type="text" placeholder="Suche..." id="searchInput" onkeyup="filterFunction()">
-            <span id="closeIcon"><img src="#"></span> <!-- Schließen Icon -->
-            <div id="dropdownList" class="dropdown-content">
 
-                <label for="sofia-mueller">
-                    <input type="checkbox" id="sofia-mueller" name="user" value="Sofia Müller">
-                    Sofia Müller
-                </label>
+          <div class="labelInputContainer">
+            <label for="assignedTo" class="label">Assigned to (optional):</label>
+            <div class="custom-dropdown">
+                <input type="text" placeholder="Select contatcs to assign" class="searchInput input" id="searchInput">
+                <span class="toggleIcon rotate-icon"><img src="/img/arrow_drop_down.svg"></span> <!-- Beispiel für ein Dropdown-Icon -->
+                <ul class="dropdown-list" id="dropdownContacts">
+                    <li class="dropdown-item">
+                        
+                        <label for="sofiaMuller">
+                            <img src="/img/ProfileBadge.png" alt="Profile Picture" />
+                            Sofia Müller
+                        </label>
+                        <input type="checkbox" id="sofiaMuller" name="assignedTo[]" value="Sofia Müller" class="checkboxContacts">
+                    </li>
 
-                <label for="john-doe">
-                    <input type="checkbox" id="john-doe" name="user" value="John Doe">
-                    John Doe
-                </label>
-                
+                    <li class="dropdown-item">                        
+                        <label for="johnEgger">
+                            <img src="/img/ProfileBadge.png" alt="Profile Picture" />
+                            John Egger
+                        </label>
+                        <input type="checkbox" id="johnEgger" name="assignedTo[]" value="John Egger" class="checkboxContacts">
+                    </li>
+
+                </ul>
             </div>
+            <div id="profileAssigned"></div>
         </div>
         
+
+          <div class="btnContainer">
+            <button class="btn-createTask" id="createTaskBtn">
+              Create task<img src="/img/plusIcon.png" class="btn-icon" />
+            </button>
+          </div>
         </div>
       </form>
     </div>
+
     <script src="/js/board.js"></script>
   </body>
 </html>
