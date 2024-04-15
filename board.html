@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/board.css" />
 
     <script src="js/template.js"></script>
+        <script src="/js/board.js"></script>
+    
   </head>
   <body onload="init()">
     <div w3-include-html="templates/header.html"></div>
@@ -28,7 +30,7 @@
             </button>
           </div>
           <button id="addTaskBtn">
-            Add task<img src="img/plusIcon.png" alt="" />
+            Add task<img src="img/plusIcon.png"/>
           </button>
         </div>
 
@@ -99,13 +101,16 @@
         </div>
       </div>
     </div>
-
     <div class="addTaskFloating" id="addTaskFloating">
       <div class="headlineContainer">
         <span class="addTaskHeadline">Add Task</span>
-        <img src="img/close.svg" class="addTaskCloseIcon" id="closeAddTaskFloating"/>
+        <img
+          src="img/close.svg"
+          class="addTaskCloseIcon"
+          id="closeAddTaskFloating"
+        />
       </div>
-
+  
       <form class="addTaskForm" autocomplete="off">
         <input
           type="text"
@@ -118,7 +123,7 @@
           >This field is required</span
         >
         <div>
-          <div class="labelInputContainer mt-8">
+          <div class="labelInputContainer">
             <label for="description" class="label">Description</label>
             <textarea
               name="description"
@@ -127,6 +132,7 @@
               placeholder="Enter a Description"
             ></textarea>
           </div>
+  
           <div class="labelInputContainer">
             <label for="date" class="label">Due Date</label>
             <input type="date" class="input" id="inputDate" />
@@ -134,50 +140,109 @@
               >This field is required</span
             >
           </div>
+  
           <div class="labelInputContainer">
-            <span class="label">Priority</span>
+            <span class="label mt-24">Priority</span>
             <div class="btnPrioContainer">
-              <button class="btnPrio" id="btnPrioHigh">
-                Urgent<img src="img/prioHigh.svg" />
-              </button>
-              <button class="btnPrio" id="btnPrioMedium">
-                Medium<img src="img/prioMedium.svg" />
-              </button>
-              <button class="btnPrio" id="btnPrioLow">
-                Low<img src="img/prioLow.svg" />
-              </button>
+                <button class="btnPrio" id="btnPrioHigh" data-value="Urgent">
+                    Urgent<img src="img/buttonIcons/prioHigh.svg" data-active="img/buttonIcons/prioHighActiveIcon.svg" />
+                </button>
+                <button class="btnPrio" id="btnPrioMedium" data-value="Medium">
+                    Medium<img src="img/buttonIcons/prioMedium.svg" data-active="img/buttonIcons/prioMediumActiveIcon.svg" />
+                </button>
+                <button class="btnPrio" id="btnPrioLow" data-value="Low">
+                    Low<img src="img/buttonIcons/prioLow.svg" data-active="img/buttonIcons/prioLowActiveIcon.svg" />
+                </button>
             </div>
-          </div>
-
-          <div class="labelInputContainer">
-            <label for="assignedTo" class="label">Assigned to (optional):</label>
-            <div class="custom-dropdown">
-                <input type="text" placeholder="Select contatcs to assign" class="searchInput input" id="searchInput">
-                <span class="toggleIcon rotate-icon"><img src="/img/arrow_drop_down.svg"></span> <!-- Beispiel für ein Dropdown-Icon -->
-                <ul class="dropdown-list" id="dropdownContacts">
-                    <li class="dropdown-item">
-                        
-                        <label for="sofiaMuller">
-                            <img src="/img/ProfileBadge.png" alt="Profile Picture" />
-                            Sofia Müller
-                        </label>
-                        <input type="checkbox" id="sofiaMuller" name="assignedTo[]" value="Sofia Müller" class="checkboxContacts">
-                    </li>
-
-                    <li class="dropdown-item">                        
-                        <label for="johnEgger">
-                            <img src="/img/ProfileBadge.png" alt="Profile Picture" />
-                            John Egger
-                        </label>
-                        <input type="checkbox" id="johnEgger" name="assignedTo[]" value="John Egger" class="checkboxContacts">
-                    </li>
-
-                </ul>
-            </div>
-            <div id="profileAssigned"></div>
         </div>
         
-
+  
+          <div class="labelInputContainer">
+            <label for="assignedTo" class="label mt-24"
+              >Assigned to (optional):</label
+            >
+            <div class="custom-dropdown">
+              <input
+                type="text"
+                placeholder="Select contatcs to assign"
+                class="searchInput input"
+                id="searchInput"
+              />
+              <span class="toggleIcon rotate-icon"
+                ><img src="/img/arrow_drop_down.svg"
+              /></span>
+              <ul class="dropdown-list" id="dropdownContacts">
+                <li class="dropdown-item">
+                  <label for="sofiaMuller">
+                    <img src="/img/ProfileBadge.png" alt="Profile Picture" />
+                    Sofia Müller
+                  </label>
+                  <input
+                    type="checkbox"
+                    id="sofiaMuller"
+                    name="assignedTo[]"
+                    value="Sofia Müller"
+                    class="checkboxContacts"
+                  />
+                </li>
+  
+                <li class="dropdown-item">
+                  <label for="johnEgger">
+                    <img src="/img/ProfileBadge.png" alt="Profile Picture" />
+                    John Egger
+                  </label>
+                  <input
+                    type="checkbox"
+                    id="johnEgger"
+                    name="assignedTo[]"
+                    value="John Egger"
+                    class="checkboxContacts"
+                  />
+                </li>
+              </ul>
+            </div>
+            <div id="profileAssigned"></div>
+  
+            <div class="labelInputContainer">
+              <label for="categoryInput" class="label mt-24">Category</label>
+              <div class="custom-dropdown">
+                  <input
+                      type="text"
+                      placeholder="Select task category"
+                      id="categoryInput"
+                      class="searchInput input"
+                      readonly
+                  />
+                  <span class="toggleIcon rotate-icon" id="categoryDropdown">
+                      <img src="/img/arrow_drop_down.svg" />
+                  </span>
+                  <ul id="dropdownList" class="dropdown-list">
+                      <li class="dropdown-item" id="itemTechnical">Technical Task</li>
+                      <li class="dropdown-item" id="itemUserStory">User Story</li>
+                  </ul>
+              </div>
+          </div>
+          
+          <div class="labelInputContainer">
+            <label for="subtaskInput" class="label mt-24">Subtask</label>
+            <div class="custom-dropdown">
+                <input
+                    type="text"
+                    placeholder="Add a new subtask"
+                    id="subtaskInput"
+                    class="searchInput input"
+                />
+                <span class="toggleIcon">
+                    <img src="/img/buttonIcons/subtaskPlusIcon.svg" />
+                </span>
+                
+            </div>
+            <ul id="dropdownSubtaskList"></ul> <!-- Diese Liste wird verwendet, um Subtasks anzuzeigen -->
+        </div>
+        
+        
+          
+  
           <div class="btnContainer">
             <button class="btn-createTask" id="createTaskBtn">
               Create task<img src="/img/plusIcon.png" class="btn-icon" />
@@ -186,7 +251,7 @@
         </div>
       </form>
     </div>
-
-    <script src="/js/board.js"></script>
+    
+<script src="/js/board.js"></script>
   </body>
 </html>
