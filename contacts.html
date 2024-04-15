@@ -14,13 +14,13 @@
 
 </head>
 
-<body onload="init()">
+<body onload="init()" onclick="StopPropergation()">
   <div w3-include-html="templates/header.html"></div>
   <div w3-include-html="templates/menu.html"></div>
-  <div id="content">
+  <div id="content" onclick="StopPropergation()">
     <div id="contactDiv">
       <div id="contactButton">
-        <button id="button">Add new contact <img src="img/person_add.png" alt=""></button>
+        <button onclick="showAddContact()" id="button">Add new contact <img src="img/person_add.png" alt=""></button>
       </div>
       <div id="contactContent">
 
@@ -34,7 +34,7 @@
   </div>
   <div id="addNewContact">
     <div id="addNewContactFirstSection">
-      <img id="addNewContactCloseButton" src="img/close.png" alt="close">
+      <img onclick="cancelAddContact()"" id="addNewContactCloseButton" src="img/close.png" alt="close">
       <div>
         <img src="img/header_logo.png" alt="logo">
         <h1>Add contact</h1>
@@ -44,14 +44,14 @@
     <div id="addNewContactSecondSection">
       <div id="contactInput">
         <img src="img/Frame 79.png" alt="profilpicture">
-        <div id="inputDiv">
-          <div class="inputBox"><input type="text" placeholder="Name"> <img src="img/person.png" alt=""></div>
-          <div class="inputBox"><input type="text" placeholder="Email"> <img src="img/mail.png" alt=""></div>
-          <div class="inputBox"><input type="text" placeholder="Phone"> <img src="img/call.png" alt=""></div>
+        <div id="inputDiv" onclick="writeContact(event.stopPropagation())">
+          <div id="inputBox1" class="inputBox inputBox1"><input required type="text" placeholder="Name"> <img src="img/person.png" alt=""></div>
+          <div class="inputBox"><input type="text" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
+          <div class="inputBox"><input type="text" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
         </div>
         <div id="btnDiv">
-          <button>Cancel <i class="fa-regular fa-xmark icon"></i> </button>
-          <button></button>
+          <button onclick="cancelAddContact()" id="cancelButton">Cancel <img id="cancelIcon" src="img/cancel_black.png" alt=""> </button>
+          <button id="createContactButton">Create contact <img src="img/check_whitepng.png" alt=""></button>
         </div>
       </div>
     </div>
