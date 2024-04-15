@@ -158,6 +158,12 @@ window.addEventListener('click', function(e) {
     }
 });
 
+document.getElementById('categoryDropdown').addEventListener('click', function(e){
+    if (!document.getElementById('dropdownList').contains(e.target)) {
+        document.querySelector('.dropdown-list').style.display = 'none';
+    }
+})
+
 document.querySelector('.searchInput').addEventListener('input', function(e) {
     const searchValue = e.target.value.toLowerCase();
     const items = document.querySelectorAll('.dropdown-item');
@@ -186,7 +192,7 @@ function updateAssignedProfiles() {
         const imgAlt = checkbox.parentElement.querySelector('img').alt;
         const profileDiv = document.createElement('div');
         profileDiv.className = 'assigned-profile';
-        profileDiv.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}" style="width:50px; height:50px; border-radius:50%;" />`;
+        profileDiv.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}"/>`;
         assignedContainer.appendChild(profileDiv);
     });
 }
@@ -199,16 +205,51 @@ document.querySelectorAll('.dropdown-item input[type="checkbox"]').forEach(check
 
 function updateInputField() {
     const selectedNames = Array.from(document.querySelectorAll('.dropdown-item input[type="checkbox"]:checked'))
-                               .map(checkbox => checkbox.parentElement.querySelector('label').textContent);
+                               .map(checkbox => checkbox.parentElement.querySelector('label').textContent.trim()); // `.trim()` entfernt überflüssige Leerzeichen
 
     const inputField = document.getElementById('searchInput');
     if (selectedNames.length > 0) {
-        inputField.value = 'An ' + selectedNames.join(', ');
+        inputField.value = 'An: ' + selectedNames.join(', '); // Fügt ein Leerzeichen nach 'An' und ein Leerzeichen vor jedem Komma ein
     } else {
         inputField.value = ''; // Setzen Sie das Feld zurück, wenn keine Kontakte ausgewählt sind
         inputField.placeholder = 'Select contacts to assign'; // Optional: Platzhaltertext wiederherstellen
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputField = document.getElementById('categoryInput');
+    const dropdownList = document.getElementById('dropdownList');
+    const itemTechnical = document.getElementById('itemTechnical');
+    const itemUserStory = document.getElementById('itemUserStory');
+
+    // Öffnet das Dropdown, wenn das Eingabefeld angeklickt wird
+    inputField.addEventListener('click', function() {
+        dropdownList.style.display = 'block';
+    });
+
+    // Funktion zum Setzen des Eingabefeldes und Schließen des Dropdowns
+    function selectItem(item) {
+        inputField.value = item.textContent;
+        dropdownList.style.display = 'none';
+    }
+
+    // Event-Listener für jedes Dropdown-Element
+    itemTechnical.addEventListener('click', function() {
+        selectItem(this);
+    });
+
+    itemUserStory.addEventListener('click', function() {
+        selectItem(this);
+    });
+
+    // Schließt das Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!inputField.contains(e.target) && !dropdownList.contains(e.target)) {
+            dropdownList.style.display = 'none';
+        }
+    });
+});
+
 
 
 

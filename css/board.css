@@ -254,7 +254,6 @@ body {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
   border-radius: 30px;
   width: 518px;
-
   position: absolute;
   right: 0;
   top: 0;
@@ -277,6 +276,8 @@ body {
 
 .addTaskForm {
   padding: 11px 42px 88px 36px;
+  overflow-y: scroll;
+  height: calc(100vh - 30vh);
 }
 
 .input {
@@ -296,6 +297,8 @@ body {
   font-size: 19px;
   font-weight: 700;
   color: #42526e;
+  margin-top: 12px;
+  margin-bottom: 8px;
 }
 
 .inputDescription {
@@ -313,12 +316,6 @@ body {
 .labelInputContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.mt-8 {
-  margin-top: 8px;
 }
 
 .input:focus {
@@ -433,7 +430,6 @@ body {
 
 .custom-dropdown {
   position: relative;
-  
 }
 
 .dropdown-list {
@@ -441,7 +437,11 @@ body {
   border-radius: 0 0 10px 10px;
   border: none;
   overflow-y: scroll;
-  
+  list-style: none;
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  right: 0;
   display: none;
 }
 
@@ -453,22 +453,20 @@ body {
   border-radius: 10px;
 }
 
-.dropdown-list li:hover{
-  background-color: #D2E3FF;
+.dropdown-list li:hover {
+  background-color: #d2e3ff;
 }
 
-.dropdown-list li label{
+.dropdown-list li label {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.checkboxContacts{
+/* .checkboxContacts{
   appearance: none;
   content: url(/img/checkbox.svg);  
-}
-
-
+} */
 
 .toggleIcon {
   position: absolute;
@@ -488,6 +486,28 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
-  
+  row-gap: 8px;
+  margin-top: 8px;
+}
+
+#profileAssigned img {
+  height: 42px;
+}
+
+.categoryDropdown {
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
+}
+
+.btnPrio.red {
+  background-color: #ff3d00;
+  color: #fff;
+}
+.btnPrio.orange {
+  background-color: #ffa800;
+  color: #fff;
+}
+.btnPrio.green {
+  background-color: #7ae229;
+  color: #fff;
 }
