@@ -10,92 +10,155 @@
 
     <script src="js/template.js"></script>
     <script src="js/addTask.js" defer></script>
+    <script src="contactDropdown.js" defer></script>
+    <script src="categoryDropdown.js" defer></script>
 
   </head>
   <body onload="init()">
     <div w3-include-html="templates/header.html"></div>
 
-    <div class="addTaskMain">
-      <div class="addTastMainContent">
-        <form action="" required>
-          <input type="text" placeholder="Enter a title" class="addTaskInputFieldsMain ">
-        </form>
-
-        <h2>Description (optonal)</h2>
-        <textarea placeholder="Enter a description" class="addTaskTextArea"></textarea>
-
-        <form action="" required>
-          <h2>Due date</h2>
-          <input type="date" placeholder="dd/mm/yyyy" class="addTaskInputFieldsSub">
-        </form>
-
-        <div>
-          <h2>Priority</h2>
-          <div class="addTaskPriority">
-            <button class="buttonAddTask">Urgent <img src="./img/addTaskUrgent.svg" alt="urgent" class="buttonAddTaskImg"></button>
-            <button class="buttonAddTask">Medium <img src="./img/addTaskMedium.svg" alt="medium" class="buttonAddTaskImg"></button>
-            <button class="buttonAddTask">Low <img src="./img/addTaskLow.svg" alt="low" class="buttonAddTaskImg"></button>
-          </div>
+    <form class="addTaskForm" autocomplete="off">
+      <input
+        type="text"
+        class="input inputTitle"
+        placeholder="Enter title"
+        id="titleInput"
+        required
+      />
+      <span id="errorMessageTitle" class="errorMessage"
+        >This field is required</span
+      >
+      <div>
+        <div class="labelInputContainer">
+          <label for="description" class="label">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            class="input inputDescription"
+            placeholder="Enter a Description"
+          ></textarea>
         </div>
 
-        <h2>Assigned to (optional)</h2>
-        <form>
-          <div class="dropdown" id="dropdown">
-            <input type="text" id="selectedOptions" onclick="toggleDropdown()" readonly placeholder="Select contacts to assign" class="addTaskInputFieldsSub noBorder changeTextColor">
-            <div class="dropdown-content">
-              <label>
-                <input type="checkbox" value="Emmanuel Maurer" class="checkboxContent">
-                <img src="img/ProfileBadgeTestOne.png" alt="profileAddTask"> Emmanuel Maurer
-              </label>
-              <label class="checkboxContent">
-                <input type="checkbox" value="Anton Mayer">
-                <img src="img/ProfileBadgeTestTwo.png" alt="profileAddTask"> Anton Mayer
-              </label>
-              <label class="checkboxContent">
-                <input type="checkbox" value="Marcel Bauer">
-                <img src="img/ProfileBadge.png" alt="profileAddTask"> Marcel Bauer
-              </label>
-            </div>
-            <span class="dropdown-arrow">&#9660;</span>
-          </div>
-        </form>
-
-        <h2>Category</h2>
-        <form action="#" required>
-          <input list="category" class="addTaskInputFieldsSub changeTextColor" placeholder="Select task category">
-          <datalist id="category">
-            <option value="Accounting">
-            <option value="Marketing">
-            <option value="Development">
-            <option value="Other">
-          </datalist>
-          <span class="dropdown-arrow">&#9660;</span>
-        </form>
-
-        <h2>Subtasks (optional)</h2>
-        <div style="position: relative;">
-          <form action="#">
-            <input list="subtask" class="addTaskInputFieldsSub" placeholder="Add new subtask">
-            <datalist id="subtask">
-              <option value="Booking invoices">
-              <option value="Pay loan">
-              <option value="Create Menu Bar">
-              <option value="Start the marketing campaign">
-              <option value="Cleaning kitchen">
-            </datalist>
-          </form>
-          <div>
-            <span class="dropdown-arrow">+</span>
-          </div>
+        <div class="labelInputContainer">
+          <label for="date" class="label">Due Date</label>
+          <input type="date" class="input" id="inputDate" />
+          <span id="errorMessageDate" class="errorMessage"
+            >This field is required</span
+          >
         </div>
 
-      <div class="addTastMainButton">
-        <button>Clear</button>
-        <button>Create Task</button>
+        <div class="labelInputContainer">
+          <span class="label mt-24">Priority</span>
+          <div class="btnPrioContainer">
+            <button type="button" class="btnPrio" id="btnPrioHigh" data-value="Urgent">
+              Urgent<img src="img/buttonIcons/prioHigh.svg" data-active="img/buttonIcons/prioHighActiveIcon.svg" />
+            </button>
+            <button type="button" class="btnPrio" id="btnPrioMedium" data-value="Medium">
+              Medium<img src="img/buttonIcons/prioMedium.svg" data-active="img/buttonIcons/prioMediumActiveIcon.svg" />
+            </button>
+            <button type="button" class="btnPrio" id="btnPrioLow" data-value="Low">
+              Low<img src="img/buttonIcons/prioLow.svg" data-active="img/buttonIcons/prioLowActiveIcon.svg" />
+            </button>
+          </div>
       </div>
+      
+      
+
+        <div class="labelInputContainer">
+          <label for="assignedTo" class="label mt-24"
+            >Assigned to (optional):</label
+          >
+          <div class="custom-dropdown">
+            <input
+              type="text"
+              placeholder="Select contatcs to assign"
+              class="searchInput input"
+              id="searchInput"
+            />
+            <span class="toggleIcon rotate-icon"
+              ><img src="/img/arrow_drop_down.svg"
+            /></span>
+            <ul class="dropdown-list" id="dropdownContacts">
+              <li class="dropdown-item">
+                <label for="sofiaMuller">
+                  <img src="/img/ProfileBadge.png" alt="Profile Picture" />
+                  Sofia Müller
+                </label>
+                <input
+                  type="checkbox"
+                  id="sofiaMuller"
+                  name="assignedTo[]"
+                  value="Sofia Müller"
+                  class="checkboxContacts"
+                />
+              </li>
+
+              <li class="dropdown-item">
+                <label for="johnEgger">
+                  <img src="/img/ProfileBadge.png" alt="Profile Picture" />
+                  John Egger
+                </label>
+                <input
+                  type="checkbox"
+                  id="johnEgger"
+                  name="assignedTo[]"
+                  value="John Egger"
+                  class="checkboxContacts"
+                />
+              </li>
+            </ul>
+          </div>
+          <div id="profileAssigned"></div>
+
+          <div class="labelInputContainer">
+            <label for="categoryInput" class="label mt-24">Category</label>
+            <div class="custom-dropdown">
+                <input
+                    type="text"
+                    placeholder="Select task category"
+                    id="categoryInput"
+                    class="searchInput input"
+                    readonly
+                />
+                <span class="toggleIcon rotate-icon" id="categoryDropdown">
+                    <img src="/img/arrow_drop_down.svg" />
+                </span>
+                <ul id="dropdownList" class="dropdown-list">
+                    <li class="dropdown-item" id="itemTechnical">Technical Task</li>
+                    <li class="dropdown-item" id="itemUserStory">User Story</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="labelInputContainer">
+          <label for="subtaskInput" class="label mt-24">Subtask</label>
+          <div class="custom-dropdown">
+              <input
+                  type="text"
+                  placeholder="Add a new subtask"
+                  id="subtaskInput"
+                  class="searchInput input"
+              />
+              <span class="toggleIcon">
+                  <img src="/img/buttonIcons/subtaskPlusIcon.svg" />
+              </span>
+              
+          </div>
+          <ul id="dropdownSubtaskList"></ul> <!-- Diese Liste wird verwendet, um Subtasks anzuzeigen -->
+        </div>
+      </div>
+    </form>
+
+    <div class="btnContainer">
+      <button class="btn-clearTask" id="clearTaskBtn" onclick="clearTaskInput()">
+        Clear<img src="/img/cancel_black.png" class="btn-icon" />
+      </button>
+      <button class="btn-createTask" id="createTaskBtn">
+        Create task<img src="/img/plusIcon.png" class="btn-icon" />
+      </button>
     </div>
 
 
     <div w3-include-html="templates/menu.html"></div>
   </body>
-</html>
+  </html>
