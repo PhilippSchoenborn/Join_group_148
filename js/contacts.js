@@ -1,6 +1,8 @@
 function cancelAddContact() {
     document.getElementById('addNewContact').classList.remove('addnewContactActive');
     document.getElementById('blurBackground').classList.add('d-none');
+    document.getElementById('buttonActiveImg').classList.remove('buttonActiveImg');
+    document.getElementById('addContactButton').classList.remove('buttonActive');
 }
 
 function cancelEditContact(){
@@ -16,6 +18,8 @@ function showeditContact() {
 function showAddContact() {
     document.getElementById('addNewContact').classList.add('addnewContactActive');
     document.getElementById('blurBackground').classList.remove('d-none');
+    document.getElementById('buttonActiveImg').classList.add('buttonActiveImg');
+    document.getElementById('addContactButton').classList.add('buttonActive');
 }
 
 function writeContact(event) {

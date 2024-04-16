@@ -20,7 +20,7 @@
   <div id="content" onclick="StopPropergation()">
     <div id="contactDiv">
       <div id="contactButton">
-        <button onclick="showAddContact()" id="button">Add new contact <img src="img/person_add.png" alt=""></button>
+        <button onclick="showAddContact()" id="addContactButton">Add new contact <img id="buttonActiveImg" src="img/person_add.png" alt=""></button>
       </div>
       <div id="contactContent">
 
@@ -32,6 +32,41 @@
       <img src="img/down.png" alt="">
     </div>
   </div>
+
+  <div id="contacts">
+    <div id="contactInfo">
+      <div id="whiteCircle">
+        <div id="initials">
+          <h1>JS</h1>
+        </div>
+      </div>
+      <div id="nameAndEditButton">
+        <h1>Julia Schäffer</h1>
+        <div id="editDiv">
+          <div id="edit" onclick="showeditContact()"><img src="img/edit.png" alt="edit">
+            <p>Edit</p>
+          </div>
+          <div id="delete"> <img src="img/delete.png" alt="delete">
+            <p>Delete</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="contactInformation">
+      <h2>Contact Information</h2>
+    </div>
+    <div id="contactContent">
+      <div id="emailBox">
+        <h3>Email</h3>
+        <a href="mailto:julia.sch@hotmail.de">julia.sch@hotmail.de</a>
+      </div>
+      <div id="phoneBox">
+        <h3>Phone</h3>
+        <p>+491778965144</p>
+      </div>
+    </div>
+  </div>
+
   <div id="addNewContact">
     <div id="addNewContactFirstSection">
       <img onclick="cancelAddContact()"" id="addNewContactCloseButton" src="img/close.png" alt="close">
@@ -60,7 +95,7 @@
   </div>
 
   <div id="editContact">
-    <div id="addNewContactFirstSection">
+    <div id="editContactFirstSection">
       <img onclick="cancelEditContact()" id="addNewContactCloseButton" src="img/close.png" alt="close">
       <div>
         <img src="img/header_logo.png" alt="logo">
@@ -83,7 +118,8 @@
       </div>
     </div>
   </div>
-  <div id="blurBackground" onclick="cancelAddContact()" onclick="cancelEditContact()"class="blurBackground d-none"></div>
+  <div id="blurBackground" onclick="cancelAddContact(), cancelEditContact()" onclick="cancelEditContact()" class="blurBackground d-none">
+  </div>
 </body>
 
 </html>
