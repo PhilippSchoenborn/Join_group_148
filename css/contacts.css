@@ -286,4 +286,17 @@ input:-webkit-autofill:active {
     display: none;
 }
 
+#editContact {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    width: 0px;
+    height: -webkit-fill-available;
+    border-radius: 0px 30px 30px 30px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+    transition: 250ms;
+    z-index: 2;
+}
+
 
