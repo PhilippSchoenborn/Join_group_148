@@ -3,6 +3,15 @@ function cancelAddContact() {
     document.getElementById('blurBackground').classList.add('d-none');
 }
 
+function cancelEditContact(){
+    document.getElementById('editContact').classList.remove('editContactActive');
+    document.getElementById('blurBackground').classList.add('d-none');
+} 
+
+function showeditContact() {
+    document.getElementById('editContact').classList.add('editContactActive');
+    document.getElementById('blurBackground').classList.remove('d-none');
+}
 
 function showAddContact() {
     document.getElementById('addNewContact').classList.add('addnewContactActive');
