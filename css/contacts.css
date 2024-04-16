@@ -111,6 +111,7 @@ body {
 #addNewContactCloseButton:hover {
     background-color: rgba(69, 137, 255, 1);
     border-radius: 53px;
+    cursor: pointer;
 }
 
 #addNewContactFirstSection div {
@@ -290,8 +291,8 @@ input:-webkit-autofill:active {
     position: absolute;
     width: 100%;
     height: 100%;
-    top:0;
-    bottom:0;
+    top: 0;
+    bottom: 0;
     left: 0;
     top: 0;
     background-color: rgba(255, 255, 255, 0.458);
@@ -508,7 +509,8 @@ input:-webkit-autofill:active {
     line-height: 19.2px;
 }
 
-#edit, #delete {
+#edit,
+#delete {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -520,7 +522,8 @@ input:-webkit-autofill:active {
     cursor: pointer;
     color: rgba(0, 93, 255, 1);
     line-height: 19.2px;
-    font-weight: 700;;
+    font-weight: 700;
+    ;
 
 }
 
@@ -533,12 +536,13 @@ input:-webkit-autofill:active {
 }
 
 
-#delete:hover{
+#delete:hover {
     cursor: pointer;
     color: rgba(0, 93, 255, 1);
     line-height: 19.2px;
-    font-weight: 700;;
-} 
+    font-weight: 700;
+    ;
+}
 
 #contactInformation h2 {
     font-size: 23px;
@@ -547,12 +551,13 @@ input:-webkit-autofill:active {
 }
 
 #contactContent {
-    display:flex;
+    display: flex;
     flex-direction: column;
     gap: 22px;
 }
 
-#emailBox, #phoneBox {
+#emailBox,
+#phoneBox {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -569,4 +574,3 @@ input:-webkit-autofill:active {
     font-weight: 700;
     line-height: 19.2px;
 }
-
