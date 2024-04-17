@@ -291,6 +291,28 @@
 }
 
 /* Dropdown-Menü ausblenden */
-.dropdown-list {
+.dropdown-list:not(.show) {
     display: none;
 }
+
+#dropdownSubtaskList {
+    padding: 13px 16px 13px 30px;
+    width: 400px;
+}
+
+.subtask-item {
+    position: relative;
+  }
+  
+  .subtask-item:hover::before {
+    content: url('/img/edit.svg') url('/img/delete.svg');
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+  }
+  
+  .subtask-item:hover::before img {
+    margin-right: 10px; /* Platz zwischen den Bildern */
+  }
+

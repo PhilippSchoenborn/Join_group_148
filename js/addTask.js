@@ -137,20 +137,15 @@ document.querySelectorAll('.dropdown-item input[type="checkbox"]').forEach(check
 
 function updateInputField() {
     const selectedNames = Array.from(document.querySelectorAll('.dropdown-item input[type="checkbox"]:checked'))
-                               .map(checkbox => checkbox.parentElement.querySelector('label').textContent.trim()); // `.trim()` entfernt überflüssige Leerzeichen
-
+                               .map(checkbox => checkbox.parentElement.querySelector('label').textContent.trim());
     const inputField = document.getElementById('searchInput');
     if (selectedNames.length > 0) {
-        inputField.value = 'An: ' + selectedNames.join(', '); // Fügt ein Leerzeichen nach 'An' und ein Leerzeichen vor jedem Komma ein
+        inputField.value = 'An: ' + selectedNames.join(', ');
     } else {
-        inputField.value = ''; // Setzen Sie das Feld zurück, wenn keine Kontakte ausgewählt sind
-        inputField.placeholder = 'Select contacts to assign'; // Optional: Platzhaltertext wiederherstellen
+        inputField.value = '';
+        inputField.placeholder = 'Select contacts to assign';
     }
 }
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
   const buttons = document.querySelectorAll('.btnPrio');
@@ -176,6 +171,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+function addSubTask() {
+    let subtaskInput = document.getElementById('subtaskInput');
+    let subtaskValue = subtaskInput.value.trim();
+    if (subtaskValue !== '') {
+      let listItem = document.createElement('li');
+      listItem.textContent = subtaskValue;
+      listItem.classList.add('subtaskItem'); // Hier wird die Klasse hinzugefügt
+      let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
+      dropdownSubtaskList.appendChild(listItem);
+      subtaskInput.value = '';
+    }
+  }
+
 function saveTask(title, discription, dueDate, assignedTo, category, subTask){
   title = document.getElementById('titleInput');
   discription = document.getElementById('description');
@@ -187,7 +195,6 @@ function saveTask(title, discription, dueDate, assignedTo, category, subTask){
 
 }
 
-
 function clearTaskInput() {
   document.getElementById('titleInput').value = '';
   document.getElementById('description').value = '';
@@ -195,9 +202,26 @@ function clearTaskInput() {
   document.getElementById('searchInput').value = '';
   document.getElementById('categoryInput').value = '';
   document.getElementById('subtaskInput').value = '';
+  let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
+  while (dropdownSubtaskList.firstChild) {
+    dropdownSubtaskList.removeChild(dropdownSubtaskList.firstChild);
+  }
   document.querySelectorAll('.btnPrio').forEach(button => {
-      button.classList.remove('red', 'orange', 'green');
-      const img = button.querySelector('img');
-      img.src = img.getAttribute('data-original') || img.src;
+    button.classList.remove('red', 'orange', 'green');
+    const img = button.querySelector('img');
+    img.src = img.getAttribute('data-original') || img.src;
   });
+}
+
+
+function updateInputField() {
+  const selectedNames = Array.from(document.querySelectorAll('.dropdown-item input[type="checkbox"]:checked'))
+                             .map(checkbox => checkbox.parentElement.querySelector('label').textContent.trim());
+  const inputField = document.getElementById('categoryInput');
+  if (selectedNames.length > 0) {
+      inputField.value = 'Selected categories: ' + selectedNames.join(', ');
+  } else {
+      inputField.value = '';
+      inputField.placeholder = 'Select task category';
+  }
 }
