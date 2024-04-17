@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     let searchInput = document.getElementById("searchInput");
     if (searchInput) {
