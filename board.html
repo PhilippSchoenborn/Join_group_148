@@ -144,13 +144,13 @@
           <div class="labelInputContainer">
             <span class="label mt-24">Priority</span>
             <div class="btnPrioContainer">
-                <button class="btnPrio" id="btnPrioHigh" data-value="Urgent">
+                <button type="button" class="btnPrio" id="btnPrioHigh" data-value="Urgent">
                     Urgent<img src="img/buttonIcons/prioHigh.svg" data-active="img/buttonIcons/prioHighActiveIcon.svg" />
                 </button>
-                <button class="btnPrio" id="btnPrioMedium" data-value="Medium">
+                <button type="button" class="btnPrio" id="btnPrioMedium" data-value="Medium">
                     Medium<img src="img/buttonIcons/prioMedium.svg" data-active="img/buttonIcons/prioMediumActiveIcon.svg" />
                 </button>
-                <button class="btnPrio" id="btnPrioLow" data-value="Low">
+                <button type="button" class="btnPrio" id="btnPrioLow" data-value="Low">
                     Low<img src="img/buttonIcons/prioLow.svg" data-active="img/buttonIcons/prioLowActiveIcon.svg" />
                 </button>
             </div>
@@ -232,13 +232,15 @@
                     placeholder="Add a new subtask"
                     id="subtaskInput"
                     class="searchInput input"
+                    onkeypress="handleKeyPress(event)"
                 />
-                <span class="toggleIcon">
+                <span class="toggleIcon" onclick="addSubtask()">
                     <img src="/img/buttonIcons/subtaskPlusIcon.svg" />
                 </span>
-                
             </div>
             <ul id="dropdownSubtaskList"></ul> <!-- Diese Liste wird verwendet, um Subtasks anzuzeigen -->
+        </div>
+        
         </div>
         
         

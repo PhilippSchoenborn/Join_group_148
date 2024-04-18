@@ -1,7 +1,12 @@
 async function init() {
     await includeHTML();
     underlineCurrentPage();
+    setupDropdowns();  // Setup für alle Dropdown-bezogenen Funktionen
+    setupButtons();
+    setupInputFields();
 }
+
+
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
