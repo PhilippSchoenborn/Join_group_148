@@ -11,10 +11,13 @@ body {
 #content {
     display: flex;
     flex-direction: row-reverse;
-    height: -webkit-fill-available;
+    height: 90%;
     width: 456px;
     margin-left: 235px;
     box-shadow: 2px 7px 3px 0px rgba(0, 0, 0, 0.14);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
 }
 
 #scrollLine {
@@ -30,7 +33,10 @@ body {
 }
 
 #contactButton {
-    padding: 32px 49.5px 16px 49.5px;
+    padding: 32px 29.5px 16px 49.5px;
+    position:fixed;
+    background-color: white;
+
 }
 
 #addContactButton {
@@ -49,6 +55,7 @@ body {
     justify-content: center;
     gap: 10px;
     transition: .1s ease-out;
+  
 
 }
 
@@ -574,3 +581,61 @@ input:-webkit-autofill:active {
     font-weight: 700;
     line-height: 19.2px;
 }
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    margin-right: 10px;
+    color: white;
+    border: 1px solid white;
+  }
+
+  .oneContact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 92%;
+    height: 77px;
+    padding: 15px 24px 15px 24px;
+    gap: 35px;
+
+  }
+
+  .letter-heading {
+    width: -webkit-fill-available;
+    display: flex;
+    align-items: center;
+    padding: 17px 302px 17px 36px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+    border-bottom: solid 1px rgba(209, 209, 209, 1);
+  }
+
+
+
+  .contact-list {
+    padding: 90px 24px 50px 24px;
+    /* overflow-y:scroll; */
+    scrollbar-width: thin;
+
+
+  }
+
+
+  .blueColor {
+    color: rgba(69, 137, 255, 1);
+  }
+
+

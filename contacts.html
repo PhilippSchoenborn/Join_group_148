@@ -15,7 +15,7 @@
 
 </head>
 
-<body onload="init()" onclick="StopPropergation()">
+<body onload="init();createContactList(contacts)" onclick="StopPropergation()">
   <div w3-include-html="templates/header.html"></div>
   <div w3-include-html="templates/menu.html"></div>
   <div id="content" onclick="StopPropergation()">
@@ -23,15 +23,14 @@
       <div id="contactButton">
         <button onclick="showAddContact()" id="addContactButton">Add new contact <img id="buttonActiveImg" src="img/person_add.png" alt=""></button>
       </div>
-      <div id="contactContent">
-
+      <div id="contact-list" class="contact-list">
       </div>
     </div>
-    <div id="scrollLine">
+    <!-- <div id="scrollLine">
       <img src="img/uo.png" alt="">
       <img src="img/line.png" alt="">
       <img src="img/down.png" alt="">
-    </div>
+    </div> -->
   </div>
 
   <div id="contacts">
