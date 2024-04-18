@@ -10,15 +10,21 @@ body {
 
 #content {
     display: flex;
-    flex-direction: row-reverse;
-    height: 90%;
+    flex-direction: column;
     width: 456px;
-    margin-left: 235px;
+    margin-left: 239px;
     box-shadow: 2px 7px 3px 0px rgba(0, 0, 0, 0.14);
-    overflow-y: scroll;
-    overflow-x: hidden;
-    position: relative;
+    overflow-y: scroll !important;
+    scrollbar-width: thin;
+    overflow: hidden;
+    height: 89vh;;
+    padding-bottom: 30px;
 }
+
+#content::-webkit-scrollbar-button:single-button {
+    width: 5px;
+}
+
 
 #scrollLine {
     width: 24px;
@@ -30,13 +36,17 @@ body {
     justify-content: space-between;
     padding-top: 8px;
     padding-bottom: 8px;
+    position:inherit;
 }
 
 #contactButton {
-    padding: 32px 29.5px 16px 49.5px;
     position:fixed;
     background-color: white;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 440px;
+    height: 104px;
 }
 
 #addContactButton {
@@ -589,10 +599,12 @@ input:-webkit-autofill:active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5em;
-    margin-right: 10px;
     color: white;
-    border: 1px solid white;
+    border: 2px solid white;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    font-family: "Inter", sans-serif;
   }
 
   .oneContact {
@@ -600,17 +612,38 @@ input:-webkit-autofill:active {
     flex-direction: column;
     gap: 5px;
   }
+
+  .oneContact h2 {
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25.8px;
+    font-family: "Inter", sans-serif;
+  }
   
   .contact {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 92%;
-    height: 77px;
+    width: 352px;
     padding: 15px 24px 15px 24px;
     gap: 35px;
-
   }
+
+  .contact:hover {
+    cursor:pointer;
+    background-color: rgba(210, 227, 255, 1);
+    border-radius: 10px;
+  }
+
+  .contact:active {
+    background-color: rgba(69, 137, 255, 1);
+    color: white;
+  }
+
+  .contact:active .blueColor {
+    color: white;
+  }
+  
 
   .letter-heading {
     width: -webkit-fill-available;
@@ -621,21 +654,26 @@ input:-webkit-autofill:active {
     font-weight: 400;
     line-height: 21.6px;
     border-bottom: solid 1px rgba(209, 209, 209, 1);
+    margin-bottom: 5px;
   }
-
 
 
   .contact-list {
     padding: 90px 24px 50px 24px;
-    /* overflow-y:scroll; */
-    scrollbar-width: thin;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
   }
 
 
   .blueColor {
     color: rgba(69, 137, 255, 1);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    font-family: "Inter", sans-serif;
   }
 
 
