@@ -431,7 +431,120 @@ function handleKeyPress(event) {
 }
 
 
+async function submitTaskForm(event) {
+    event.preventDefault(); // Verhindere das Standardverhalten der Formularübermittlung
+
+    const titleInput = document.getElementById('titleInput');
+    const dateInput = document.getElementById('inputDate');
+    let isValid = true; // Annahme, dass das Formular gültig ist
+
+    // Validiere das Titelfeld
+    if (!titleInput.value.trim()) {
+        document.getElementById('errorMessageTitle').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('errorMessageTitle').style.display = 'none';
+    }
+
+    // Validiere das Datumsfeld
+    if (!dateInput.value.trim()) {
+        document.getElementById('errorMessageDate').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('errorMessageDate').style.display = 'none';
+    }
+
+    // Wenn das Formular nicht gültig ist, beende die Funktion
+    if (!isValid) {
+        return;
+    }
+
+    // Erstelle das Task-Objekt
+    const task = {
+        title: titleInput.value,
+        description: document.getElementById('description').value,
+        dueDate: dateInput.value,
+        priority: getSelectedPriority(),
+        assignedTo: getAssignedProfiles(),
+        category: document.getElementById('categoryInput').value,
+        subtasks: getSubtasks()
+    };
+
+    // Speichere das Task-Objekt im Remote-Speicher
+    try {
+        await setItem('tasks', task);
+        console.log('Task gespeichert:', task);
+        clearForm(); // Leere das Formular nach erfolgreichem Speichern
+    } catch (error) {
+        console.error('Fehler beim Speichern der Aufgabe:', error);
+    }
+}
+
+function clearForm() {
+    document.getElementById('titleInput').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('inputDate').value = '';
+    document.getElementById('categoryInput').value = '';
+    document.querySelectorAll('.input-checkbox').forEach(checkbox => checkbox.checked = false);
+    document.getElementById('dropdownSubtaskList').innerHTML = ''; // Leere die Subtask-Liste
+
+    // Entferne die Farbklassen von den Prioritäts-Buttons
+    const priorityButtons = {
+        btnPrioHigh: 'red',
+        btnPrioMedium: 'orange',
+        btnPrioLow: 'green'
+    };
+
+    for (let id in priorityButtons) {
+        const button = document.getElementById(id);
+        if (button) {
+            button.classList.remove(priorityButtons[id]);
+        }
+    }
+}
 
 
+function getSelectedPriority() {
+    // Zuweisung der Button-IDs zu ihren Farbklassen
+    const priorities = {
+        btnPrioHigh: 'red',
+        btnPrioMedium: 'orange',
+        btnPrioLow: 'green'
+    };
+
+    // Durchgehe alle Buttons und prüfe die aktive Klasse
+    for (let id in priorities) {
+        const button = document.getElementById(id);
+        if (button && button.classList.contains(priorities[id])) { // Prüfe, ob der Button die entsprechende Farbklasse hat
+            return button.dataset.value;
+        }
+    }
+    return null; // Rückgabe von null, wenn keine Priorität ausgewählt ist
+}
+
+
+function getAssignedProfiles() {
+    const checkboxes = document.querySelectorAll('.checkboxContacts:checked');
+    return Array.from(checkboxes).map(checkbox => checkbox.value);
+}
+
+function getSubtasks() {
+    const items = document.querySelectorAll('#dropdownSubtaskList li');
+    return Array.from(items).map(item => item.textContent);
+}
+
+
+async function checkNumberOfTasks() {
+    try {
+        const tasks = await getItem('tasks'); // 'tasks' ist der Schlüssel, unter dem die Tasks gespeichert sind
+        if (tasks) {
+            console.log('Anzahl der gespeicherten Tasks:', tasks.length);
+        } else {
+            console.log('Keine Tasks gefunden.');
+        }
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Tasks:', error);
+    }
+}
 
 

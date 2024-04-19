@@ -111,7 +111,7 @@
         />
       </div>
   
-      <form class="addTaskForm" autocomplete="off">
+      <form class="addTaskForm" autocomplete="off" onsubmit="submitTaskForm(event)">
         <input
           type="text"
           class="input inputTitle"
@@ -254,7 +254,8 @@
         </div>
       </form>
     </div>
-    <script src="js/template.js"></script>    
+    <script src="js/template.js"></script>
+    <script src="js/storage.js"></script>    
     <script src="/js/board.js"></script>
     
   </body>
