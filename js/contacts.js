@@ -95,6 +95,7 @@ function createContactList(contacts) {
    contactDetails.innerHTML = `
      <h2>${contact.name}</h2>
      <p class="blueColor" >${contact.email}</p>
+
    `;
    contactItem.appendChild(contactDetails);
 
