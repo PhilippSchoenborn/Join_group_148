@@ -98,9 +98,32 @@ function createContactList() {
 
         // Füge den Kontakt zur Kontaktliste hinzu
         contactList.appendChild(contactItem);
+
+        // Füge dem Kontakt und den Kontaktinformationen einen Click-Event-Listener hinzu
+        contactItem.addEventListener('click', (event) => {
+            // Stelle sicher, dass nur das geklickte Element behandelt wird
+            if (event.target === contactItem) {
+                // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
+                contactClickHandler(contact);
+            }
+        });
+
+        contactDetails.addEventListener('click', (event) => {
+            // Stelle sicher, dass nur das geklickte Element behandelt wird
+            if (event.target === contactDetails) {
+                // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
+                contactClickHandler(contact);
+            }
+        });
     }
 
 }
+
+// Funktion, die beim Klicken auf den Kontakt oder Kontaktinformationen aufgerufen wird
+function contactClickHandler(contact) {
+    alert(`Kontakt ${contact.name} wurde angeklickt!`);
+}
+
 
 
 
