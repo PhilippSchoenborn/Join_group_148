@@ -276,9 +276,6 @@ function showeditContact(i) {
 }
 
 
-
-
-
 // Öffnet die Box 'Add new Contact'
 function showAddContact() {
     document.getElementById('addNewContactAlert').innerHTML = '';
