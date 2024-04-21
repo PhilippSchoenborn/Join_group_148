@@ -34,85 +34,205 @@ let contacts = [
         "email": "h.lee99@home.com",
         "phone": ""
     },
-
-
 ];
+
 
 const beautifulColors = [
     'rgb(255, 46, 46)', 'rgb(255, 161, 46)', 'rgb(255, 238, 46)', 'rgb(51, 224, 42)', 'rgb(42, 203, 224)',
     'rgb(42, 115, 224)', 'rgb(139, 42, 224)', 'rgb(218, 42, 224)', 'rgb(232, 58, 133)', 'rgb(232, 58, 58)',
-  ];
+];
 
+function renderContacts() {
+    load()
+    createContactList();
+}
 
 // Funktion zum Erstellen der Kontaktliste
-function createContactList(contacts) {
- // Sortiere die Kontakte nach Namen
- contacts.sort((a, b) => a.name.localeCompare(b.name));
+function createContactList() {
+    // Sortiere die Kontakte nach Namen
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
 
- // Element, in dem die Kontaktliste eingefügt wird
- const contactList = document.getElementById('contact-list');
+    // Element, in dem die Kontaktliste eingefügt wird
+    const contactList = document.getElementById('contact-list');
+    contactList.innerHTML = '';
+    let currentLetter = null;
+    extractInitials(name);
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        const initials = extractInitials(contact.name);
+        // Wenn der Anfangsbuchstabe des Kontakts neu ist, füge einen Buchstaben-Header hinzu
+        const firstLetter = initials.charAt(0);
+        if (firstLetter !== currentLetter) {
+            currentLetter = firstLetter;
+            const letterHeading = document.createElement('div');
+            letterHeading.textContent = currentLetter;
+            letterHeading.classList.add('letter-heading');
+            contactList.appendChild(letterHeading);
+        }
 
- // Vorherigen Inhalt löschen
- contactList.innerHTML = '';
+        // Erstelle ein Div-Element für den Kontakt
+        const contactItem = document.createElement('div');
+        contactItem.classList.add('contact');
 
- let currentLetter = null;
+        // Wähle eine Farbe aus der Liste beautifulColors basierend auf der Position des Kontakts
+        const colorIndex = i % beautifulColors.length;
+        const profileColor = beautifulColors[colorIndex];
 
- extractInitials(name);
+        // Erstelle das Profilbild mit den Anfangsbuchstaben des Vor- und Nachnamens
+        const profilePicture = document.createElement('div');
+        profilePicture.classList.add('profile-picture');
+        profilePicture.style.backgroundColor = profileColor;
+        profilePicture.textContent = initials;
+        contactItem.appendChild(profilePicture);
 
- // Iteriere über jeden Kontakt
- for (let i = 0; i < contacts.length; i++) {
-   const contact = contacts[i];
-   const initials = extractInitials(contact.name);
+        // Füge den Namen und die E-Mail-Adresse des Kontakts hinzu
+        const contactDetails = document.createElement('div');
+        contactDetails.classList.add('oneContact');
+        contactDetails.innerHTML = `
+        <h2>${contact.name}</h2>
+        <p class="blueColor" >${contact.email}</p>
 
-   // Wenn der Anfangsbuchstabe des Kontakts neu ist, füge einen Buchstaben-Header hinzu
-   const firstLetter = initials.charAt(0);
-   if (firstLetter !== currentLetter) {
-     currentLetter = firstLetter;
-     const letterHeading = document.createElement('div');
-     letterHeading.textContent = currentLetter;
-     letterHeading.classList.add('letter-heading');
-     contactList.appendChild(letterHeading);
-   }
+        `;
+        contactItem.appendChild(contactDetails);
 
-   // Erstelle ein Div-Element für den Kontakt
-   const contactItem = document.createElement('div');
-   contactItem.classList.add('contact');
+        // Füge den Kontakt zur Kontaktliste hinzu
+        contactList.appendChild(contactItem);
 
-   // Wähle eine Farbe aus der Liste beautifulColors basierend auf der Position des Kontakts
-   const colorIndex = i % beautifulColors.length;
-   const profileColor = beautifulColors[colorIndex];
+        // Füge dem Kontakt und den Kontaktinformationen einen Click-Event-Listener hinzu
+        contactItem.addEventListener('click', handleClick);
+        function handleClick(event) {
+            // Stelle sicher, dass nur das geklickte Element behandelt wird
+            if (event.target === contactItem || event.target.parentElement === contactDetails) {
+                // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
+                contactClickHandler(contact, initials, profileColor, i);
+            }
+        }
+    }
+}
 
-   // Erstelle das Profilbild mit den Anfangsbuchstaben des Vor- und Nachnamens
-   const profilePicture = document.createElement('div');
-   profilePicture.classList.add('profile-picture');
-   profilePicture.style.backgroundColor = profileColor;
-   profilePicture.textContent = initials;
-   contactItem.appendChild(profilePicture);
+// Funktion, die beim Klicken auf den Kontakt oder Kontaktinformationen aufgerufen wird
+function contactClickHandler(contact, initials, profileColor, i) {
+    let contactSection = document.getElementById('contacts');
+    contactSection.innerHTML ='';
+    contactSection.innerHTML = ` <div id="contactInfo">
+    <div id="whiteCircle">
+      <div id="initials" style="background-color: ${profileColor}">
+        <h1>${initials}</h1>
+      </div>
+    </div>
+    <div id="nameAndEditButton">
+      <h1>${contact.name}</h1>
+      <div id="editDiv">
+        <div id="edit" onclick="showeditContact()"><img src="img/edit.png" alt="edit">
+          <p>Edit</p>
+        </div>
+        <div onclick="deleteContact(${i})" id="delete"> <img src="img/delete.png" alt="delete">
+          <p>Delete</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="contactInformation">
+    <h2>Contact Information</h2>
+  </div>
+  <div id="contactContent">
+    <div id="emailBox">
+      <h3>Email</h3>
+      <a href="mailto:julia.sch@hotmail.de">${contact.email}</a>
+    </div>
+    <div id="phoneBox">
+      <h3>Phone</h3>
+      <p>${contact.phone}</p>
+    </div>
+  </div>`;
+}
 
-   // Füge den Namen und die E-Mail-Adresse des Kontakts hinzu
-   const contactDetails = document.createElement('div');
-   contactDetails.classList.add('oneContact');
-   contactDetails.innerHTML = `
-     <h2>${contact.name}</h2>
-     <p class="blueColor" >${contact.email}</p>
+function deleteContact(i){
+        contacts.splice(i, 1);
+        save();
+        renderContacts();
+        document.getElementById('contacts').innerHTML = '';
+}
 
-   `;
-   contactItem.appendChild(contactDetails);
 
-   // Füge den Kontakt zur Kontaktliste hinzu
-   contactList.appendChild(contactItem);
- }
-  }
 
-   // Hilfsfunktion zum Extrahieren des ersten Buchstabens des Vornamens und Nachnamens
- function extractInitials(name) {
+// Hilfsfunktion zum Extrahieren des ersten Buchstabens des Vornamens und Nachnamens
+function extractInitials(name) {
     const names = name.split(' ');
     let initials = '';
     for (let i = 0; i < names.length; i++) {
-      initials += names[i].charAt(0).toUpperCase();
+        initials += names[i].charAt(0).toUpperCase();
     }
     return initials;
-  }
+}
+
+
+function getNewContact() {
+    let name = document.getElementById('fullName');
+    let email = document.getElementById('emailAdress');
+    let phone = document.getElementById('phoneNumber');
+    if (name.value == '' || email.value == '' || phone.value == '') {
+        document.getElementById('addNewContactAlert').innerHTML = '';
+        document.getElementById('addNewContactAlert').innerHTML = '<p>the fields must be filled</p>';
+    } else {
+        const newContact = {
+            name: name.value,
+            email: email.value,
+            phone: phone.value,
+        };
+        contacts.push(newContact);
+        save();
+        createContactList();
+        name.value = '';
+        email.value = '';
+        phone.value = '';
+        cancelAddContact();
+        slideSuccessfully();
+
+        // Rufe contactClickHandler mit den Informationen des neu hinzugefügten Kontakts auf
+        const initials = extractInitials(newContact.name);
+        const colorIndex = (contacts.length - 1) % beautifulColors.length; // Index für die Farbe aus beautifulColors
+        const profileColor = beautifulColors[colorIndex];
+        const newIndex = contacts.length - 1; // Index des neu hinzugefügten Kontakts im Array
+        contactClickHandler(newContact, initials, profileColor, newIndex);
+    }
+}
+
+
+function slideSuccessfully() {
+    let container = document.getElementById('successfullyContainer');
+    let successfully = document.getElementById('successfully');
+
+    // Stellen Sie sicher, dass der Container sichtbar ist, um die Animation zu zeigen
+    container.style.display = 'flex';
+
+    // Fügen Sie die Klasse für die Animation hinzu
+    successfully.classList.add('slide-in-bottom');
+
+    // Setzen Sie eine Verzögerung, um der Animation Zeit zum Abspielen zu geben
+    setTimeout(() => {
+        // Entfernen Sie die Animation, nachdem sie abgespielt wurde
+        successfully.classList.remove('slide-in-bottom');
+
+        // Verstecken Sie den Container wieder
+        container.style.display = 'none';
+    
+    }, 1000); // Warten Sie z.B. 1000 Millisekunden (1 Sekunde)
+}
+
+function save() {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+}
+
+
+function load() {
+    let storageAsText = localStorage.getItem("contacts");
+
+    if (storageAsText) {
+        contacts = JSON.parse(storageAsText);
+    }
+}
+
 
 
 
@@ -125,10 +245,10 @@ function cancelAddContact() {
 }
 
 // Schließt die Box 'Edit Contact'
-function cancelEditContact(){
+function cancelEditContact() {
     document.getElementById('editContact').classList.remove('editContactActive');
     document.getElementById('blurBackground').classList.add('d-none');
-} 
+}
 
 // Öffnet die Box 'Edit Contact'
 function showeditContact() {
@@ -138,6 +258,7 @@ function showeditContact() {
 
 // Öffnet die Box 'Add new Contact'
 function showAddContact() {
+    document.getElementById('addNewContactAlert').innerHTML = '';
     document.getElementById('addNewContact').classList.add('addnewContactActive');
     document.getElementById('blurBackground').classList.remove('d-none');
     document.getElementById('buttonActiveImg').classList.add('buttonActiveImg');

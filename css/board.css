@@ -141,11 +141,11 @@ body {
 
 .subTaskContainer {
   position: relative;
-  height: 700px;
+  height: calc(100vh - 380px);
   width: 252px;
   display: flex;
   flex-direction: column;
-
+  overflow: auto;
   padding-top: 13px;
 }
 
