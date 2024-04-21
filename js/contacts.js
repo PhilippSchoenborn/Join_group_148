@@ -90,40 +90,70 @@ function createContactList() {
         const contactDetails = document.createElement('div');
         contactDetails.classList.add('oneContact');
         contactDetails.innerHTML = `
-     <h2>${contact.name}</h2>
-     <p class="blueColor" >${contact.email}</p>
+        <h2>${contact.name}</h2>
+        <p class="blueColor" >${contact.email}</p>
 
-   `;
+        `;
         contactItem.appendChild(contactDetails);
 
         // Füge den Kontakt zur Kontaktliste hinzu
         contactList.appendChild(contactItem);
 
         // Füge dem Kontakt und den Kontaktinformationen einen Click-Event-Listener hinzu
-        contactItem.addEventListener('click', (event) => {
+        contactItem.addEventListener('click', handleClick);
+        function handleClick(event) {
             // Stelle sicher, dass nur das geklickte Element behandelt wird
-            if (event.target === contactItem) {
+            if (event.target === contactItem || event.target.parentElement === contactDetails) {
                 // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
-                contactClickHandler(contact);
+                contactClickHandler(contact, initials, profileColor, i);
             }
-        });
-
-        contactDetails.addEventListener('click', (event) => {
-            // Stelle sicher, dass nur das geklickte Element behandelt wird
-            if (event.target === contactDetails) {
-                // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
-                contactClickHandler(contact);
-            }
-        });
+        }
     }
-
 }
 
 // Funktion, die beim Klicken auf den Kontakt oder Kontaktinformationen aufgerufen wird
-function contactClickHandler(contact) {
-    alert(`Kontakt ${contact.name} wurde angeklickt!`);
+function contactClickHandler(contact, initials, profileColor, i) {
+    let contactSection = document.getElementById('contacts');
+    contactSection.innerHTML ='';
+    contactSection.innerHTML = ` <div id="contactInfo">
+    <div id="whiteCircle">
+      <div id="initials" style="background-color: ${profileColor}">
+        <h1>${initials}</h1>
+      </div>
+    </div>
+    <div id="nameAndEditButton">
+      <h1>${contact.name}</h1>
+      <div id="editDiv">
+        <div id="edit" onclick="showeditContact()"><img src="img/edit.png" alt="edit">
+          <p>Edit</p>
+        </div>
+        <div onclick="deleteContact(${i})" id="delete"> <img src="img/delete.png" alt="delete">
+          <p>Delete</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="contactInformation">
+    <h2>Contact Information</h2>
+  </div>
+  <div id="contactContent">
+    <div id="emailBox">
+      <h3>Email</h3>
+      <a href="mailto:julia.sch@hotmail.de">${contact.email}</a>
+    </div>
+    <div id="phoneBox">
+      <h3>Phone</h3>
+      <p>${contact.phone}</p>
+    </div>
+  </div>`;
 }
 
+function deleteContact(i){
+        contacts.splice(i, 1);
+        save();
+        renderContacts();
+        document.getElementById('contacts').innerHTML = '';
+}
 
 
 
@@ -148,18 +178,9 @@ function getNewContact() {
     });
     save()
     createContactList();
-}
-
-
-function showContact() {
-
-
-}
-
-
-function deleteContact() {
-
-
+    name.value = '';
+    email.value = '';
+    phone.value = '';
 }
 
 function save() {
