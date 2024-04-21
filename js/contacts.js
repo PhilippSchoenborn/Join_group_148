@@ -34,85 +34,124 @@ let contacts = [
         "email": "h.lee99@home.com",
         "phone": ""
     },
-
-
 ];
+
+
 
 const beautifulColors = [
     'rgb(255, 46, 46)', 'rgb(255, 161, 46)', 'rgb(255, 238, 46)', 'rgb(51, 224, 42)', 'rgb(42, 203, 224)',
     'rgb(42, 115, 224)', 'rgb(139, 42, 224)', 'rgb(218, 42, 224)', 'rgb(232, 58, 133)', 'rgb(232, 58, 58)',
-  ];
+];
 
+function renderContacts() {
+    load()
+    createContactList();
+}
 
 // Funktion zum Erstellen der Kontaktliste
-function createContactList(contacts) {
- // Sortiere die Kontakte nach Namen
- contacts.sort((a, b) => a.name.localeCompare(b.name));
+function createContactList() {
+    // Sortiere die Kontakte nach Namen
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
 
- // Element, in dem die Kontaktliste eingefügt wird
- const contactList = document.getElementById('contact-list');
+    // Element, in dem die Kontaktliste eingefügt wird
+    const contactList = document.getElementById('contact-list');
+    contactList.innerHTML = '';
+    let currentLetter = null;
+    extractInitials(name);
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        const initials = extractInitials(contact.name);
+        // Wenn der Anfangsbuchstabe des Kontakts neu ist, füge einen Buchstaben-Header hinzu
+        const firstLetter = initials.charAt(0);
+        if (firstLetter !== currentLetter) {
+            currentLetter = firstLetter;
+            const letterHeading = document.createElement('div');
+            letterHeading.textContent = currentLetter;
+            letterHeading.classList.add('letter-heading');
+            contactList.appendChild(letterHeading);
+        }
 
- // Vorherigen Inhalt löschen
- contactList.innerHTML = '';
+        // Erstelle ein Div-Element für den Kontakt
+        const contactItem = document.createElement('div');
+        contactItem.classList.add('contact');
 
- let currentLetter = null;
+        // Wähle eine Farbe aus der Liste beautifulColors basierend auf der Position des Kontakts
+        const colorIndex = i % beautifulColors.length;
+        const profileColor = beautifulColors[colorIndex];
 
- extractInitials(name);
+        // Erstelle das Profilbild mit den Anfangsbuchstaben des Vor- und Nachnamens
+        const profilePicture = document.createElement('div');
+        profilePicture.classList.add('profile-picture');
+        profilePicture.style.backgroundColor = profileColor;
+        profilePicture.textContent = initials;
+        contactItem.appendChild(profilePicture);
 
- // Iteriere über jeden Kontakt
- for (let i = 0; i < contacts.length; i++) {
-   const contact = contacts[i];
-   const initials = extractInitials(contact.name);
-
-   // Wenn der Anfangsbuchstabe des Kontakts neu ist, füge einen Buchstaben-Header hinzu
-   const firstLetter = initials.charAt(0);
-   if (firstLetter !== currentLetter) {
-     currentLetter = firstLetter;
-     const letterHeading = document.createElement('div');
-     letterHeading.textContent = currentLetter;
-     letterHeading.classList.add('letter-heading');
-     contactList.appendChild(letterHeading);
-   }
-
-   // Erstelle ein Div-Element für den Kontakt
-   const contactItem = document.createElement('div');
-   contactItem.classList.add('contact');
-
-   // Wähle eine Farbe aus der Liste beautifulColors basierend auf der Position des Kontakts
-   const colorIndex = i % beautifulColors.length;
-   const profileColor = beautifulColors[colorIndex];
-
-   // Erstelle das Profilbild mit den Anfangsbuchstaben des Vor- und Nachnamens
-   const profilePicture = document.createElement('div');
-   profilePicture.classList.add('profile-picture');
-   profilePicture.style.backgroundColor = profileColor;
-   profilePicture.textContent = initials;
-   contactItem.appendChild(profilePicture);
-
-   // Füge den Namen und die E-Mail-Adresse des Kontakts hinzu
-   const contactDetails = document.createElement('div');
-   contactDetails.classList.add('oneContact');
-   contactDetails.innerHTML = `
+        // Füge den Namen und die E-Mail-Adresse des Kontakts hinzu
+        const contactDetails = document.createElement('div');
+        contactDetails.classList.add('oneContact');
+        contactDetails.innerHTML = `
      <h2>${contact.name}</h2>
      <p class="blueColor" >${contact.email}</p>
 
    `;
-   contactItem.appendChild(contactDetails);
+        contactItem.appendChild(contactDetails);
 
-   // Füge den Kontakt zur Kontaktliste hinzu
-   contactList.appendChild(contactItem);
- }
-  }
+        // Füge den Kontakt zur Kontaktliste hinzu
+        contactList.appendChild(contactItem);
+    }
 
-   // Hilfsfunktion zum Extrahieren des ersten Buchstabens des Vornamens und Nachnamens
- function extractInitials(name) {
+}
+
+
+
+// Hilfsfunktion zum Extrahieren des ersten Buchstabens des Vornamens und Nachnamens
+function extractInitials(name) {
     const names = name.split(' ');
     let initials = '';
     for (let i = 0; i < names.length; i++) {
-      initials += names[i].charAt(0).toUpperCase();
+        initials += names[i].charAt(0).toUpperCase();
     }
     return initials;
-  }
+}
+
+function getNewContact() {
+    let name = document.getElementById('fullName');
+    let email = document.getElementById('emailAdress');
+    let phone = document.getElementById('phoneNumber');
+    contacts.push({
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+    });
+    save()
+    createContactList();
+}
+
+
+function showContact() {
+
+
+}
+
+
+function deleteContact() {
+
+
+}
+
+function save() {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+}
+
+
+function load() {
+    let storageAsText = localStorage.getItem("contacts");
+
+    if (storageAsText) {
+        contacts = JSON.parse(storageAsText);
+    }
+}
+
 
 
 
@@ -125,10 +164,10 @@ function cancelAddContact() {
 }
 
 // Schließt die Box 'Edit Contact'
-function cancelEditContact(){
+function cancelEditContact() {
     document.getElementById('editContact').classList.remove('editContactActive');
     document.getElementById('blurBackground').classList.add('d-none');
-} 
+}
 
 // Öffnet die Box 'Edit Contact'
 function showeditContact() {

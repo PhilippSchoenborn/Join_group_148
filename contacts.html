@@ -7,8 +7,8 @@
   <title>Join</title>
   <link rel="shortcut icon" href="img/joinLogoFavicon.svg" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/template.css">
   <link rel="stylesheet" href="css/contacts.css">
   <script src="https://kit.fontawesome.com/bb6760f882.js" crossorigin="anonymous"></script>
@@ -18,22 +18,17 @@
 
 </head>
 
-<body onload="init();createContactList(contacts)" onclick="StopPropergation()">
+<body onload="init();renderContacts()" onclick="StopPropergation()">
   <div w3-include-html="templates/header.html"></div>
   <div w3-include-html="templates/menu.html"></div>
   <div id="content" onclick="StopPropergation()">
     <!-- <div id="contactDiv"> -->
-      <div id="contactButton">
-        <button onclick="showAddContact()" id="addContactButton">Add new contact <img id="buttonActiveImg" src="img/person_add.png" alt=""></button>
-      </div>
-      <div id="contact-list" class="contact-list">
-      </div>
-    <!-- </div> -->
-    <!-- <div id="scrollLine">
-      <img src="img/uo.png" alt="">
-      <img src="img/line.png" alt="">
-      <img src="img/down.png" alt="">
-    </div> -->
+    <div id="contactButton">
+      <button onclick="showAddContact()" id="addContactButton">Add new contact <img id="buttonActiveImg"
+          src="img/person_add.png" alt=""></button>
+    </div>
+    <div id="contact-list" class="contact-list">
+    </div>
   </div>
 
   <div id="contacts">
@@ -49,7 +44,7 @@
           <div id="edit" onclick="showeditContact()"><img src="img/edit.png" alt="edit">
             <p>Edit</p>
           </div>
-          <div id="delete"> <img src="img/delete.png" alt="delete">
+          <div onclick="deleteContact()" id="delete"> <img src="img/delete.png" alt="delete">
             <p>Delete</p>
           </div>
         </div>
@@ -72,7 +67,7 @@
 
   <div id="addNewContact">
     <div id="addNewContactFirstSection">
-      <img onclick="cancelAddContact()"" id="addNewContactCloseButton" src="img/close.png" alt="close">
+      <img onclick="cancelAddContact()" id="addNewContactCloseButton" src="img/close.png" alt="close">
       <div>
         <img src="img/header_logo.png" alt="logo">
         <h1>Add contact</h1>
@@ -83,15 +78,15 @@
       <div id="contactInput">
         <img src="img/Frame 79.png" alt="profilpicture">
         <div id="inputDiv" onclick="writeContact(event.stopPropagation())">
-          <div id="inputBox1" class="inputBox inputBox1"><input required type="text" placeholder="Name"> <img
+          <div id="inputBox1" class="inputBox inputBox1"><input id="fullName" required type="text" placeholder="Name"> <img
               src="img/person.png" alt=""></div>
-          <div class="inputBox"><input type="text" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
-          <div class="inputBox"><input type="text" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
+          <div class="inputBox"><input id="emailAdress" type="text" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
+          <div class="inputBox"><input id="phoneNumber" type="text" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
         </div>
         <div id="btnDiv">
           <button onclick="cancelAddContact()" id="cancelButton">Cancel <img id="cancelIcon" src="img/cancel_black.png"
               alt=""> </button>
-          <button id="createContactButton">Create contact <img src="img/check_whitepng.png" alt=""></button>
+          <button onclick="getNewContact()" id="createContactButton">Create contact <img src="img/check_whitepng.png" alt=""></button>
         </div>
       </div>
     </div>
@@ -121,7 +116,8 @@
       </div>
     </div>
   </div>
-  <div id="blurBackground" onclick="cancelAddContact(), cancelEditContact()" onclick="cancelEditContact()" class="blurBackground d-none">
+  <div id="blurBackground" onclick="cancelAddContact(), cancelEditContact()" onclick="cancelEditContact()"
+    class="blurBackground d-none">
   </div>
 </body>
 
