@@ -37,7 +37,6 @@ let contacts = [
 ];
 
 
-
 const beautifulColors = [
     'rgb(255, 46, 46)', 'rgb(255, 161, 46)', 'rgb(255, 238, 46)', 'rgb(51, 224, 42)', 'rgb(42, 203, 224)',
     'rgb(42, 115, 224)', 'rgb(139, 42, 224)', 'rgb(218, 42, 224)', 'rgb(232, 58, 133)', 'rgb(232, 58, 58)',
@@ -167,20 +166,58 @@ function extractInitials(name) {
     return initials;
 }
 
+
 function getNewContact() {
     let name = document.getElementById('fullName');
     let email = document.getElementById('emailAdress');
     let phone = document.getElementById('phoneNumber');
-    contacts.push({
-        name: name.value,
-        email: email.value,
-        phone: phone.value,
-    });
-    save()
-    createContactList();
-    name.value = '';
-    email.value = '';
-    phone.value = '';
+    if (name.value == '' || email.value == '' || phone.value == '') {
+        document.getElementById('addNewContactAlert').innerHTML = '';
+        document.getElementById('addNewContactAlert').innerHTML = '<p>the fields must be filled</p>';
+    } else {
+        const newContact = {
+            name: name.value,
+            email: email.value,
+            phone: phone.value,
+        };
+        contacts.push(newContact);
+        save();
+        createContactList();
+        name.value = '';
+        email.value = '';
+        phone.value = '';
+        cancelAddContact();
+        slideSuccessfully();
+
+        // Rufe contactClickHandler mit den Informationen des neu hinzugefügten Kontakts auf
+        const initials = extractInitials(newContact.name);
+        const colorIndex = (contacts.length - 1) % beautifulColors.length; // Index für die Farbe aus beautifulColors
+        const profileColor = beautifulColors[colorIndex];
+        const newIndex = contacts.length - 1; // Index des neu hinzugefügten Kontakts im Array
+        contactClickHandler(newContact, initials, profileColor, newIndex);
+    }
+}
+
+
+function slideSuccessfully() {
+    let container = document.getElementById('successfullyContainer');
+    let successfully = document.getElementById('successfully');
+
+    // Stellen Sie sicher, dass der Container sichtbar ist, um die Animation zu zeigen
+    container.style.display = 'flex';
+
+    // Fügen Sie die Klasse für die Animation hinzu
+    successfully.classList.add('slide-in-bottom');
+
+    // Setzen Sie eine Verzögerung, um der Animation Zeit zum Abspielen zu geben
+    setTimeout(() => {
+        // Entfernen Sie die Animation, nachdem sie abgespielt wurde
+        successfully.classList.remove('slide-in-bottom');
+
+        // Verstecken Sie den Container wieder
+        container.style.display = 'none';
+    
+    }, 1000); // Warten Sie z.B. 1000 Millisekunden (1 Sekunde)
 }
 
 function save() {
@@ -221,6 +258,7 @@ function showeditContact() {
 
 // Öffnet die Box 'Add new Contact'
 function showAddContact() {
+    document.getElementById('addNewContactAlert').innerHTML = '';
     document.getElementById('addNewContact').classList.add('addnewContactActive');
     document.getElementById('blurBackground').classList.remove('d-none');
     document.getElementById('buttonActiveImg').classList.add('buttonActiveImg');

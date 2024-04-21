@@ -47,20 +47,24 @@
       <div id="contactInput">
         <img src="img/Frame 79.png" alt="profilpicture">
         <div id="inputDiv" onclick="writeContact(event.stopPropagation())">
-          <div id="inputBox1" class="inputBox inputBox1"><input id="fullName" required type="text" placeholder="Name"> <img
-              src="img/person.png" alt=""></div>
-          <div class="inputBox"><input id="emailAdress" type="text" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
-          <div class="inputBox"><input id="phoneNumber" type="text" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
+          <div id="inputBox1" class="inputBox inputBox1"><input id="fullName" required type="text" placeholder="Name">
+            <img src="img/person.png" alt="">
+          </div>
+          <div class="inputBox"><input id="emailAdress" type="text" required placeholder="Email"> <img
+              src="img/mail.png" alt=""></div>
+          <div class="inputBox"><input id="phoneNumber" type="text" required placeholder="Phone"> <img
+              src="img/call.png" alt=""></div>
+          <div id="addNewContactAlert"></div>
         </div>
         <div id="btnDiv">
           <button onclick="cancelAddContact()" id="cancelButton">Cancel <img id="cancelIcon" src="img/cancel_black.png"
               alt=""> </button>
-          <button onclick="getNewContact()" id="createContactButton">Create contact <img src="img/check_whitepng.png" alt=""></button>
+          <button onclick="getNewContact()" id="createContactButton">Create contact <img src="img/check_whitepng.png"
+              alt=""></button>
         </div>
       </div>
     </div>
   </div>
-
   <div id="editContact">
     <div id="editContactFirstSection">
       <img onclick="cancelEditContact()" id="addNewContactCloseButton" src="img/close.png" alt="close">
@@ -87,6 +91,9 @@
   </div>
   <div id="blurBackground" onclick="cancelAddContact(), cancelEditContact()" onclick="cancelEditContact()"
     class="blurBackground d-none">
+  </div>
+  <div id="successfullyContainer">
+    <div id="successfully">Contact succesfully created</div>
   </div>
 </body>
 
