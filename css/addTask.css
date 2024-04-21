@@ -300,8 +300,55 @@
   width: 400px;
 }
 
+<<<<<<< HEAD
+.subtaskItem {
+    position: relative;
+    list-style: none; /* Listenpunkte entfernen */
+    padding-left: 30px; /* Einrückung für das Pseudo-Element */
+    overflow: hidden; /* Überlauf verhindern */
+    padding: 12px 0px 12px 8px;
+    list-style-type: disc; /* Setzen des Aufzählungstyps auf Kreise */
+}
+
+.subtaskItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* Hintergrundfarbe standardmäßig transparent */
+    z-index: -1; /* Hintergrund hinter den Inhaltselementen */
+    transition: background-color 0.3s ease; /* Übergangseffekt für Hintergrundfarbe */
+    border-radius: 8px; /* Border-Radius von 8px */
+}
+
+.subtaskItem:hover::before {
+    background-color: rgba(69, 137, 255, 0.2); /* Neue Hintergrundfarbe bei Hover */
+}
+
+.subtaskItem::after {
+    content: url('/img/delete.svg') url('/img/buttonIcons/vector.svg') url('/img/edit.svg');
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px; /* Abstand zum rechten Rand */
+    display: none; /* Standardmäßig ausblenden */
+    height: 20px;
+    background-position: right 150px, right;
+}
+
+.subtaskItem:hover::after {
+    display: block; /* Bei Hover einblenden */
+}
+
+.subtaskItem::after img {
+    height: 24px; /* Höhe des Bildes */
+    width: 24px; /* Breite des Bildes */
+=======
 .subtask-item {
   position: relative;
+>>>>>>> 1c036047f73424784905414ea639d2260c4965f0
 }
 
 .subtask-item:hover::before {
