@@ -74,13 +74,19 @@
       </div>
     </div>
     <div id="editSecondSectione" class="backgroundWhite">
-      <div id="contactInput">
-        <img src="img/Frame 79.png" alt="profilpicture">
+      <div id="contactInput" class="contactInput">
+        <div id="profilepicture">
+          <div id="whiteCircle">
+            <div id="initials" style="background-color:orange;">
+              <h1></h1>
+            </div>
+          </div>
+        </div>
         <div id="inputDiv" onclick="writeContact(event.stopPropagation())">
-          <div id="inputBox1" class="inputBox inputBox1"><input required type="text" placeholder="Name"> <img
+          <div id="inputBox1" class="inputBox inputBox1"><input id="editName" required type="text" placeholder="Name"> <img
               src="img/person.png" alt=""></div>
-          <div class="inputBox"><input type="text" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
-          <div class="inputBox"><input type="text" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
+          <div class="inputBox"><input type="text" id="editEmail" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
+          <div class="inputBox"><input type="text" id="editPhone" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
         </div>
         <div id="btnDiv">
           <button onclick="cancelEditContact()" id="deleteButton">Delete</button>

@@ -2,37 +2,51 @@ let contacts = [
     {
         "name": "Julia Schäffer",
         "email": "julia.sch@hotmail.de",
-        "phone": "+491778965144"
+        "phone": "+491778965144",
+        "profileColor": "rgb(255, 161, 46)",
+        "initialien": "JS"
     },
     {
         "name": "Phillip Schönborn",
         "email": "philipp@schoenborn-home.de",
-        "phone": "+49438721221"
+        "phone": "+49438721221",
+        "profileColor": "yellow",
+        "initialien": "PS"
     },
     {
         "name": "Tobias Mueller",
         "email": "webstor21@gmail.com",
-        "phone": "+49152341609"
+        "phone": "+49152341609",
+        "profileColor": "rgb(232, 58, 58)",
+        "initialien": "TM"
     },
     {
         "name": "Nathalie Strauchmann",
         "email": "strauchmann89@yahoo.de",
-        "phone": "+49151338395"
+        "phone": "+49151338395",
+        "profileColor": "rgb(139, 42, 224)",
+        "initialien": "NS"
     },
     {
         "name": "Melanie Müller",
         "email": "m.muellerstreich@gmail.com",
-        "phone": "+491760152757"
+        "phone": "+491760152757",
+        "profileColor": "rgb(255, 46, 46)",
+        "initialien": "MM"
     },
     {
         "name": "Herbert Peter",
         "email": "Petermann@hotmail.de",
-        "phone": "+491723687234"
+        "phone": "+491723687234",
+        "profileColor": "rgb(232, 58, 133)",
+        "initialien": "HP"
     },
     {
         "name": "Heiko Lee",
         "email": "h.lee99@home.com",
-        "phone": ""
+        "phone": "",
+        "profileColor": "rgb(232, 58, 58)",
+        "initialien": "HL"
     },
 ];
 
@@ -84,6 +98,7 @@ function createContactList() {
         profilePicture.style.backgroundColor = profileColor;
         profilePicture.textContent = initials;
         contactItem.appendChild(profilePicture);
+        
 
         // Füge den Namen und die E-Mail-Adresse des Kontakts hinzu
         const contactDetails = document.createElement('div');
@@ -123,7 +138,7 @@ function contactClickHandler(contact, initials, profileColor, i) {
     <div id="nameAndEditButton">
       <h1>${contact.name}</h1>
       <div id="editDiv">
-        <div id="edit" onclick="showeditContact()"><img src="img/edit.png" alt="edit">
+        <div id="edit" onclick="showeditContact(${i})"><img src="img/edit.png" alt="edit">
           <p>Edit</p>
         </div>
         <div onclick="deleteContact(${i})" id="delete"> <img src="img/delete.png" alt="delete">
@@ -251,10 +266,15 @@ function cancelEditContact() {
 }
 
 // Öffnet die Box 'Edit Contact'
-function showeditContact() {
+function showeditContact(i) {
     document.getElementById('editContact').classList.add('editContactActive');
     document.getElementById('blurBackground').classList.remove('d-none');
+    const contact = contacts[i];
+    document.getElementById('editName').value =`${contact.name}`;
+    document.getElementById('editEmail').value =`${contact.email}`;
+    document.getElementById('editPhone').value =`${contact.phone}`;
 }
+
 
 // Öffnet die Box 'Add new Contact'
 function showAddContact() {
