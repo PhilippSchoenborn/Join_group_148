@@ -1,198 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById("searchInput");
-  const dropdownList = document.getElementById("dropdownList");
 
-  searchInput && searchInput.addEventListener('click', function (event) {
-      event.stopPropagation();
-      dropdownList.style.display = (dropdownList.style.display === "block") ? "none" : "block";
-  });
 
-  window.addEventListener('click', function(event) {
-      if (dropdownList && event.target !== searchInput && !dropdownList.contains(event.target)) {
-          dropdownList.style.display = "none";
-      }
-  });
+function saveTask() {
+    const title = document.getElementById('titleInput').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const dueDate = document.getElementById('inputDate').value.trim();
+    const assignedTo = document.getElementById('searchInput').value.trim();
+    const category = document.getElementById('categoryInput').value.trim();
+    const subTask = document.getElementById('subtaskInput').value.trim();
 
-  dropdownList && dropdownList.addEventListener('click', function (event) {
-      event.stopPropagation();
-  });
-});
-
-const btnCreatTask = document.querySelector('.btn-createTask');
-const iconCheck = btnCreatTask.querySelector('.btn-icon');
-btnCreatTask.addEventListener('mousedown', function () {
-    iconCheck.src = 'img/buttonIcons/check-blue.svg';
-});
-
-btnCreatTask.addEventListener('mouseup', function () {
-    iconCheck.src = 'img/buttonIcons/check.svg';
-});
-
-btnCreatTask.addEventListener('touchstart', function () {
-    iconCheck.src = 'img/buttonIcons/check-blue.svg';
-});
-
-btnCreatTask.addEventListener('touchend', function () {
-    iconCheck.src = 'img/buttonIcons/check.svg';
-});
-
-['titleInput', 'description', 'inputDate'].forEach(id => {
-  document.getElementById(id).addEventListener('input', function() {
-      if (this.value) {
-          this.classList.add('hasValue');
-      } else {
-          this.classList.remove('hasValue');
-      }
-  });
-});
-
-document.getElementById('createTaskBtn').addEventListener('click', function(){
-  let inputTitle = document.getElementById('titleInput');
-  let inputDate = document.getElementById('inputDate');
-  let errorMessageTitle = document.getElementById('errorMessageTitle');
-  let errorMessageDate = document.getElementById('errorMessageDate');
-  if(!inputTitle.value){
-      inputTitle.classList.add('required');
-      errorMessageTitle.style.display = 'block';
-  } else {
-      inputTitle.classList.remove('required');
-      errorMessageTitle.style.display = 'none';
-  } if(!inputDate.value){
-      inputDate.classList.add('required');
-      errorMessageDate.style.display = 'block';
-    } else {
-      inputDate.classList.remove('required');
-      errorMessageDate.style.display = 'none';
-    }
-})
-
-document.querySelector('.searchInput').addEventListener('click', function(e) {
-    e.stopPropagation();
-    document.querySelector('.dropdown-list').style.display = 'block';
-});
-
-document.querySelector('.toggleIcon').addEventListener('click', function(e) {
-    e.stopPropagation();
-    const dropdownList = document.querySelector('.dropdown-list');
-    const toggleIcon = document.querySelector('.toggleIcon');
-    if (dropdownList.style.display === 'block') {
-        dropdownList.style.display = 'none';
-        toggleIcon.classList.remove('open');
-    } else {
-        dropdownList.style.display = 'block';
-        toggleIcon.classList.add('open');
-    }
-});
-
-window.addEventListener('click', function(e) {
-    if (!document.querySelector('.custom-dropdown').contains(e.target)) {
-        document.querySelector('.dropdown-list').style.display = 'none';
-    }
-});
-
-document.getElementById('categoryDropdown').addEventListener('click', function(e){
-    if (!document.getElementById('dropdownList').contains(e.target)) {
-        document.querySelector('.dropdown-list').style.display = 'none';
-    }
-})
-
-document.querySelector('.searchInput').addEventListener('input', function(e) {
-    const searchValue = e.target.value.toLowerCase();
-    const items = document.querySelectorAll('.dropdown-item');
-    items.forEach(item => {
-        const name = item.querySelector('label').textContent.toLowerCase();
-        if (name.includes(searchValue)) {
-            item.style.display = '';            
-        } else {
-            item.style.display = 'none';
-        }
-    });
-});
-
-const checkboxes = document.querySelectorAll('.dropdown-item input[type="checkbox"]');
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-        updateAssignedProfiles();
-    });
-});
-
-function updateAssignedProfiles() {
-    const assignedContainer = document.getElementById('profileAssigned');
-    assignedContainer.innerHTML = ''; 
-    Array.from(checkboxes).filter(checkbox => checkbox.checked).forEach(checkbox => {        
-        const imgSrc = checkbox.parentElement.querySelector('img').src;
-        const imgAlt = checkbox.parentElement.querySelector('img').alt;
-        const profileDiv = document.createElement('div');
-        profileDiv.className = 'assigned-profile';
-        profileDiv.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}"/>`;
-        assignedContainer.appendChild(profileDiv);
-    });
-}
-
-document.querySelectorAll('.dropdown-item input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-        updateInputField();
-    });
-});
-
-function updateInputField() {
-    const selectedNames = Array.from(document.querySelectorAll('.dropdown-item input[type="checkbox"]:checked'))
-                               .map(checkbox => checkbox.parentElement.querySelector('label').textContent.trim());
-    const inputField = document.getElementById('searchInput');
-    if (selectedNames.length > 0) {
-        inputField.value = 'An: ' + selectedNames.join(', ');
-    } else {
-        inputField.value = '';
-        inputField.placeholder = 'Select contacts to assign';
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  const buttons = document.querySelectorAll('.btnPrio');
-  let activePriority = null;
-
-  buttons.forEach(button => {
-      button.addEventListener('click', function() {
-          const img = this.querySelector('img');
-          if (activePriority) {
-              activePriority.button.classList.remove('red', 'orange', 'green');
-              activePriority.img.src = activePriority.originalSrc;
-          }
-          activePriority = {
-              button: this,
-              img: img,
-              originalSrc: img.getAttribute('data-original') || img.src,
-              activeSrc: img.getAttribute('data-active')
-          };
-          const priorityClass = this.id === 'btnPrioHigh' ? 'red' : (this.id === 'btnPrioMedium' ? 'orange' : 'green');
-          this.classList.add(priorityClass);
-          img.src = activePriority.activeSrc;
-      });
-  });
-});
-
-function addSubTask() {
-    let subtaskInput = document.getElementById('subtaskInput');
-    let subtaskValue = subtaskInput.value.trim();
-    if (subtaskValue !== '') {
-      let listItem = document.createElement('li');
-      listItem.textContent = subtaskValue;
-      listItem.classList.add('subtaskItem'); // Hier wird die Klasse hinzugefügt
-      let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
-      dropdownSubtaskList.appendChild(listItem);
-      subtaskInput.value = '';
-    }
-  }
-
-function saveTask(title, discription, dueDate, assignedTo, category, subTask){
-  title = document.getElementById('titleInput');
-  discription = document.getElementById('description');
-  dueDate = document.getElementById('inputDate');
-
-  assignedTo = document.getElementById('searchInput');
-  category = document.getElementById('categoryInput');
-  subTask = document.getElementById('subtaskInput');
-
+    // Hier können Sie die gespeicherten Werte weiterverarbeiten, z. B. in einem Objekt speichern oder an eine Datenbank senden
 }
 
 function clearTaskInput() {
@@ -213,15 +29,295 @@ function clearTaskInput() {
   });
 }
 
-
-function updateInputField() {
-  const selectedNames = Array.from(document.querySelectorAll('.dropdown-item input[type="checkbox"]:checked'))
-                             .map(checkbox => checkbox.parentElement.querySelector('label').textContent.trim());
-  const inputField = document.getElementById('categoryInput');
-  if (selectedNames.length > 0) {
-      inputField.value = 'Selected categories: ' + selectedNames.join(', ');
-  } else {
-      inputField.value = '';
-      inputField.placeholder = 'Select task category';
-  }
+function setupDropdowns() {       
+    setupDropdownToggle();
+    setupDropdownBehavior();
+    setupDropdownCloseOnClickOutside();
+    setupCategoryDropdownCloseBehavior();
+    
 }
+
+function setupInputFields(event){
+    setupCheckboxInteraction();
+    setupSearchInputFilter();
+    setupCheckboxInteractionForInputField(); 
+    setupInputListeners(); 
+    setupDateValidation();    
+    handleKeyPress(event);
+    addSubtask();  
+    updateInputField(document.querySelectorAll('.dropdown-item input[type="checkbox"]')); // Hinzugefügt, um die ausgewählten Kontakte beim Laden des Dokuments anzuzeigen
+}
+function setupInputListeners() {
+    // Funktion zur Überprüfung und Anpassung der Klassen basierend auf dem Wert des Eingabefelds
+    function checkValueAndToggleClass(inputElement) {
+        if (inputElement.value) {
+            inputElement.classList.add('hasValue');
+        } else {
+            inputElement.classList.remove('hasValue');
+        }
+    }
+
+    // Event-Listener für das Titel-Eingabefeld
+    document.getElementById('titleInput').addEventListener('input', function () {
+        checkValueAndToggleClass(this);
+    });
+
+    // Event-Listener für das Beschreibungs-Eingabefeld
+    document.getElementById('description').addEventListener('input', function () {
+        checkValueAndToggleClass(this);
+    });
+
+    // Event-Listener für das Datums-Eingabefeld
+    document.getElementById('inputDate').addEventListener('input', function () {
+        checkValueAndToggleClass(this);
+    });
+}
+
+function setupDropdownBehavior() {
+    // Event-Listener für das Sucheingabefeld
+    document.querySelector('.searchInput').addEventListener('click', function (e) {
+        e.stopPropagation(); // Verhindert, dass das Dropdown schließt, wenn man in das Suchfeld klickt
+
+        // Zugriff auf die Dropdown-Liste und Anzeigen dieser Liste
+        document.querySelector('.dropdown-list').style.display = 'block';
+    });
+}
+
+function setupDropdownToggle() {
+    // Event-Listener für das Toggle-Icon
+    document.querySelector('.toggleIcon').addEventListener('click', function (e) {
+        e.stopPropagation(); // Verhindert, dass das Dropdown durch andere Click-Events geschlossen wird
+
+        const dropdownList = document.querySelector('.dropdown-list');
+        const toggleIcon = document.querySelector('.toggleIcon');
+
+        // Prüfen des aktuellen Zustands und Umschalten
+        if (dropdownList.style.display === 'block') {
+            dropdownList.style.display = 'none';
+            toggleIcon.classList.remove('open'); // Icon zurückdrehen
+        } else {
+            dropdownList.style.display = 'block';
+            toggleIcon.classList.add('open'); // Icon drehen
+        }
+    });
+}
+
+function setupDropdownCloseOnClickOutside() {
+    // Globales Klick-Event, das überprüft, ob außerhalb des Dropdowns geklickt wurde
+    window.addEventListener('click', function (e) {
+        // Suche nach dem Container des Dropdowns
+        const customDropdown = document.querySelector('.custom-dropdown');
+        // Suche nach der Dropdown-Liste
+        const dropdownList = document.querySelector('.dropdown-list');
+
+        // Überprüfen, ob das geklickte Element außerhalb des Dropdown-Containers ist
+        if (!customDropdown.contains(e.target)) {
+            // Schließen des Dropdowns, indem die Anzeige auf 'none' gesetzt wird
+            dropdownList.style.display = 'none';
+        }
+    });
+}
+
+function setupCategoryDropdownCloseBehavior() {
+    // Event-Listener für Klicks auf das Dropdown
+    document.getElementById('categoryDropdown').addEventListener('click', function (e) {
+        // Überprüfen, ob das geklickte Ziel nicht innerhalb der Dropdown-Liste ist
+        const dropdownList = document.getElementById('dropdownList');
+        
+        if (!dropdownList.contains(e.target)) {
+            // Zugriff auf die sichtbare Dropdown-Liste und Verstecken dieser
+            document.querySelector('.dropdown-list').style.display = 'none';
+        }
+    });
+}
+
+function setupSearchInputFilter() {
+    // Event-Listener für das Eingabefeld 'searchInput'
+    document.querySelector('.searchInput').addEventListener('input', function (e) {
+        // Eingegebenen Wert aus dem Suchfeld holen und in Kleinbuchstaben umwandeln
+        const searchValue = e.target.value.toLowerCase();
+
+        // Alle Dropdown-Elemente auswählen
+        const items = document.querySelectorAll('.dropdown-item');
+
+        // Durch alle Dropdown-Elemente iterieren
+        items.forEach(item => {
+            // Textinhalt des Labels im Dropdown-Element holen und in Kleinbuchstaben umwandeln
+            const name = item.querySelector('label').textContent.toLowerCase();
+
+            // Überprüfen, ob der Name den Suchtext enthält
+            if (name.includes(searchValue)) {
+                item.style.display = ''; // Element anzeigen
+            } else {
+                item.style.display = 'none'; // Element verbergen
+            }
+        });
+    });
+}
+
+function setupCheckboxInteraction() {
+    // Checkboxen innerhalb der Dropdown-Elemente selektieren
+    const checkboxes = document.querySelectorAll('.dropdown-item input[type="checkbox"]');
+
+    // Event-Listener zu jeder Checkbox hinzufügen
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            updateAssignedProfiles(checkboxes);
+        });
+    });
+}
+
+function updateAssignedProfiles(checkboxes) {
+    // Container für zugewiesene Profile auswählen
+    const assignedContainer = document.getElementById('profileAssigned');
+    assignedContainer.innerHTML = ''; // Container leeren
+
+    // Durch jede ausgewählte Checkbox iterieren
+    Array.from(checkboxes).filter(checkbox => checkbox.checked).forEach(checkbox => {
+        // Bildquelle und Alt-Text aus dem Elternelement der Checkbox holen
+        const imgSrc = checkbox.parentElement.querySelector('img').src;
+        const imgAlt = checkbox.parentElement.querySelector('img').alt;
+
+        // Neues Div-Element für das Profil erstellen
+        const profileDiv = document.createElement('div');
+        profileDiv.className = 'assigned-profile';
+        profileDiv.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}"/>`;
+
+        // Profil-Div zum Container hinzufügen
+        assignedContainer.appendChild(profileDiv);
+    });
+}
+
+function setupCheckboxInteractionForInputField() {
+    // Checkboxen innerhalb der Dropdown-Elemente selektieren
+    const checkboxes = document.querySelectorAll('.dropdown-item input[type="checkbox"]');
+
+    // Event-Listener zu jeder Checkbox hinzufügen
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            // Hier rufen wir die updateInputField-Funktion auf, um das Suchfeld zu aktualisieren
+            updateInputField(checkboxes);
+        });
+    });
+}
+
+function updateInputField(checkboxes) {
+    // Array von Namen der ausgewählten Checkboxen erstellen
+    const selectedNames = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.parentElement.querySelector('label').textContent.trim()); // `.trim()` entfernt überflüssige Leerzeichen
+
+    // Referenz auf das Eingabefeld bekommen
+    const inputField = document.getElementById('searchInput');
+
+    // Überprüfen, ob Namen ausgewählt wurden und das Eingabefeld entsprechend aktualisieren
+    if (selectedNames.length > 0) {
+        inputField.value = 'An: ' + selectedNames.join(', '); // Zusammengeführte Namen ins Feld setzen
+        inputField.placeholder = ''; // Platzhaltertext entfernen, da ein Kontakt ausgewählt wurde
+    } else {
+        inputField.value = ''; // Feld leeren, wenn keine Auswahl besteht
+        inputField.placeholder = 'Select contacts to assign'; // Platzhaltertext wiederherstellen, wenn keine Kontakte ausgewählt sind
+    }
+}
+
+function setupCategoryDropdown() {
+    document.addEventListener('DOMContentLoaded', function () {
+        // Elemente für das Eingabefeld und das Dropdown-Menü
+        const inputField = document.getElementById('categoryInput');
+        const dropdownList = document.getElementById('dropdownList');
+
+        // Elemente für spezifische Dropdown-Optionen
+        const itemTechnical = document.getElementById('itemTechnical');
+        const itemUserStory = document.getElementById('itemUserStory');
+
+        // Öffnet das Dropdown, wenn das Eingabefeld angeklickt wird
+        inputField.addEventListener('click', function () {
+            dropdownList.style.display = 'block';
+        });
+
+        // Funktion zum Setzen des Eingabefeldes und Schließen des Dropdowns
+        function selectItem(item) {
+            inputField.value = item.textContent;
+            dropdownList.style.display = 'none';
+        }
+
+        // Event-Listener für technisches Item
+        itemTechnical.addEventListener('click', function () {
+            selectItem(this);
+        });
+
+        // Event-Listener für User Story Item
+        itemUserStory.addEventListener('click', function () {
+            selectItem(this);
+        });
+
+        // Schließt das Dropdown, wenn außerhalb geklickt wird
+        document.addEventListener('click', function (e) {
+            if (!inputField.contains(e.target) && !dropdownList.contains(e.target)) {
+                dropdownList.style.display = 'none';
+            }
+        });
+    });
+}
+
+setupCategoryDropdown();
+
+function setupPriorityButtons() {
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all priority buttons
+        const buttons = document.querySelectorAll('.btnPrio');
+        let activePriority = null;  // Store the current active priority
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                const img = this.querySelector('img');
+                // Clear the current active priority if one exists
+                if (activePriority) {
+                    activePriority.button.classList.remove('red', 'orange', 'green');
+                    const activeImg = activePriority.button.querySelector('img');
+                    activeImg.src = activeImg.getAttribute('data-original') || activeImg.src;  // Use the original src if previously set
+                }
+
+                // Check if the same button was clicked
+                if (activePriority && activePriority.button === this) {
+                    // Deactivate if the same button is clicked again
+                    activePriority = null;
+                } else {
+                    // Set new active button and add appropriate color
+                    activePriority = { button: this, value: this.getAttribute('data-value') };
+                    switch (this.id) {
+                        case 'btnPrioHigh':
+                            this.classList.add('red');
+                            break;
+                        case 'btnPrioMedium':
+                            this.classList.add('orange');
+                            break;
+                        case 'btnPrioLow':
+                            this.classList.add('green');
+                            break;
+                    }
+                    // Update the image to active and store the original src if not already stored
+                    if (!img.getAttribute('data-original')) {
+                        img.setAttribute('data-original', img.src);  // Store the original src only once
+                    }
+                    img.src = img.getAttribute('data-active');
+                }
+            });
+        });
+    });
+}
+
+function addSubTask() {
+    let subtaskInput = document.getElementById('subtaskInput');
+    let subtaskValue = subtaskInput.value.trim();
+    if (subtaskValue !== '') {
+      let listItem = document.createElement('li');
+      listItem.textContent = subtaskValue;
+      listItem.classList.add('subtaskItem'); // Hier wird die Klasse hinzugefügt
+      let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
+      dropdownSubtaskList.appendChild(listItem);
+      subtaskInput.value = '';
+    }
+  }
+
+setupPriorityButtons();
