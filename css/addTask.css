@@ -300,7 +300,6 @@
   width: 400px;
 }
 
-<<<<<<< HEAD
 .subtaskItem {
     position: relative;
     list-style: none; /* Listenpunkte entfernen */
@@ -345,20 +344,4 @@
 .subtaskItem::after img {
     height: 24px; /* Höhe des Bildes */
     width: 24px; /* Breite des Bildes */
-=======
-.subtask-item {
-  position: relative;
->>>>>>> 1c036047f73424784905414ea639d2260c4965f0
-}
-
-.subtask-item:hover::before {
-  content: url("/img/edit.svg") url("/img/delete.svg");
-  position: absolute;
-  top: 100%;
-  left: 0;
-  display: flex;
-}
-
-.subtask-item:hover::before img {
-  margin-right: 10px; /* Platz zwischen den Bildern */
 }

@@ -42,11 +42,10 @@ function setupInputFields(event){
     setupSearchInputFilter();
     setupCheckboxInteractionForInputField(); 
     setupInputListeners(); 
-    setupDateValidation();    
-    handleKeyPress(event);
-    addSubtask();  
-    updateInputField(document.querySelectorAll('.dropdown-item input[type="checkbox"]')); // Hinzugefügt, um die ausgewählten Kontakte beim Laden des Dokuments anzuzeigen
+    setupDateValidation();
+    addSubTask();  
 }
+
 function setupInputListeners() {
     // Funktion zur Überprüfung und Anpassung der Klassen basierend auf dem Wert des Eingabefelds
     function checkValueAndToggleClass(inputElement) {
@@ -114,6 +113,32 @@ function setupDropdownCloseOnClickOutside() {
         if (!customDropdown.contains(e.target)) {
             // Schließen des Dropdowns, indem die Anzeige auf 'none' gesetzt wird
             dropdownList.style.display = 'none';
+        }
+    });
+}
+
+function setupDateValidation() {
+    // Event-Listener für den Klick auf den 'createTaskBtn' hinzufügen
+    document.getElementById('createTaskBtn').addEventListener('click', function () {
+        // Zugriff auf das Eingabefeld für das Datum
+        let inputDate = document.getElementById('inputDate');
+
+        // Zugriff auf das Element für die Fehlermeldung beim Datum
+        let errorMessage = document.getElementById('errorMessageDate');
+
+        // Überprüfen, ob das Eingabefeld für das Datum leer ist
+        if (!inputDate.value) {
+            // Hinzufügen der Klasse 'required', falls kein Datum eingegeben wurde
+            inputDate.classList.add('required');
+
+            // Anzeigen der Fehlermeldung
+            errorMessage.style.display = 'block';
+        } else {
+            // Entfernen der Klasse 'required', falls ein Datum vorhanden ist
+            inputDate.classList.remove('required');
+
+            // Ausblenden der Fehlermeldung
+            errorMessage.style.display = 'none';
         }
     });
 }
@@ -213,10 +238,9 @@ function updateInputField(checkboxes) {
     // Überprüfen, ob Namen ausgewählt wurden und das Eingabefeld entsprechend aktualisieren
     if (selectedNames.length > 0) {
         inputField.value = 'An: ' + selectedNames.join(', '); // Zusammengeführte Namen ins Feld setzen
-        inputField.placeholder = ''; // Platzhaltertext entfernen, da ein Kontakt ausgewählt wurde
     } else {
         inputField.value = ''; // Feld leeren, wenn keine Auswahl besteht
-        inputField.placeholder = 'Select contacts to assign'; // Platzhaltertext wiederherstellen, wenn keine Kontakte ausgewählt sind
+        inputField.placeholder = 'Select contacts to assign'; // Platzhaltertext wiederherstellen, optional
     }
 }
 
@@ -308,16 +332,22 @@ function setupPriorityButtons() {
 }
 
 function addSubTask() {
-    let subtaskInput = document.getElementById('subtaskInput');
-    let subtaskValue = subtaskInput.value.trim();
-    if (subtaskValue !== '') {
-      let listItem = document.createElement('li');
-      listItem.textContent = subtaskValue;
-      listItem.classList.add('subtaskItem'); // Hier wird die Klasse hinzugefügt
-      let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
-      dropdownSubtaskList.appendChild(listItem);
-      subtaskInput.value = '';
+    // Get the input field and the ul list
+    const input = document.getElementById('subtaskInput');
+    const list = document.getElementById('dropdownSubtaskList');
+
+    // Check if the input field is not empty
+    if (input.value.trim() !== '') {
+        // Create a new li element
+        const newSubtask = document.createElement('li');
+        newSubtask.textContent = input.value.trim();  // Use the trimmed input value
+        newSubtask.classList.add('subtaskItem');
+        // Append the new subtask to the list
+        list.appendChild(newSubtask);
+
+        // Clear the input field after adding the subtask
+        input.value = '';
     }
-  }
+}
 
 setupPriorityButtons();
