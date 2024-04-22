@@ -1,8 +1,7 @@
 async function init() {
     await includeHTML();
     underlineCurrentPage();
-    setupDropdowns();  // Setup für alle Dropdown-bezogenen Funktionen
-    setupButtons();
+    setupDropdowns();  // Setup für alle Dropdown-bezogenen Funktionen    
     setupInputFields();
     await loadTask();
     displayTask(tasks);    

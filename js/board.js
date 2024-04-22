@@ -1,6 +1,3 @@
-
-
-
 function setupDropdowns() {
     setupDropdownToggle();
     setupDropdownBehavior();
@@ -22,10 +19,12 @@ function setupInputFields(event) {
     setupCheckboxInteractionForInputField();
     setupInputListeners();
     setupDateValidation();
-
-    addSubtask();
+    addSubTask();
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    setupButtons();
+});
 
 
 function setupBtnInteraction() {
@@ -403,24 +402,7 @@ function addSubTask() {
 
 setupPriorityButtons();
 
-function addSubtask() {
-    // Get the input field and the ul list
-    const input = document.getElementById('subtaskInput');
-    const list = document.getElementById('dropdownSubtaskList');
 
-    // Check if the input field is not empty
-    if (input.value.trim() !== '') {
-        // Create a new li element
-        const newSubtask = document.createElement('li');
-        newSubtask.textContent = input.value.trim();  // Use the trimmed input value
-
-        // Append the new subtask to the list
-        list.appendChild(newSubtask);
-
-        // Clear the input field after adding the subtask
-        input.value = '';
-    }
-}
 
 /* function handleKeyPress(event) {
     // Check if the key pressed is the Enter key

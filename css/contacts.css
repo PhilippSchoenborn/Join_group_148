@@ -172,6 +172,16 @@ body {
     gap: 32px;
 }
 
+.contactInput {
+    width: 422px;
+    height: 438px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 32px;
+}
+
 .inputBox {
     height: 49px;
     display: flex;
@@ -199,6 +209,10 @@ body {
 }
 
 #inputDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 24px;
 }
 
