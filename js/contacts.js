@@ -201,7 +201,7 @@ function getNewContact() {
             initialien : initial,
         };
         contacts.push(newContact);
-        contactClickHandler(newContact);
+        contactClickHandler(newContact, contacts.length);
         save();
         createContactList();
         name.value = '';
@@ -312,8 +312,9 @@ function editContactToArray(i) {
         "profileColor": contact.profileColor,
         "initialien": initial
     };
+    let contactlength = contacts.length;
     contacts.splice(i, 1, newContact);
-    contactClickHandler(newContact);
+    contactClickHandler(newContact, contactlength);
     cancelEditContact();
     createContactList();
     save();
