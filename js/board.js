@@ -513,7 +513,7 @@ async function saveTask() {
         tasks = []; // Sicherstellen, dass tasks ein Array ist
     }
 
-    tasks.push({
+    tasks.push({        
         title: title,
         description: description,
         date: date,
@@ -569,5 +569,54 @@ function displayTask(tasks) {
 }
 
 
-
+function setupDragAndDrop() {
+    const containers = document.querySelectorAll('.subTaskContainer');
+  
+    let draggedItem = null;  // Dies hält das gezogene Element.
+  
+    // Hinzufügen von Event Listeners für alle Container
+    containers.forEach(container => {
+      container.addEventListener('dragstart', e => {
+        if (e.target.className.includes('taskCard')) {
+          draggedItem = e.target;  // Speichert das gezogene Element.
+          setTimeout(() => {
+            e.target.style.display = 'none';  // Verbirgt das Element während des Ziehens.
+          }, 0);
+        }
+      });
+  
+      container.addEventListener('dragend', e => {
+        setTimeout(() => {
+          e.target.style.display = 'block';  // Stellt das Element nach dem Ziehen wieder dar.
+          draggedItem = null;  // Setzt das gezogene Element zurück.
+        }, 0);
+      });
+  
+      container.addEventListener('dragover', e => {
+        e.preventDefault();  // Erlaubt das Droppen von Elementen.
+      });
+  
+      container.addEventListener('dragenter', e => {
+        e.preventDefault();
+        if (container !== draggedItem.parentNode) {
+          container.style.backgroundColor = 'lightblue';  // Visualisiert das potenzielle Drop-Ziel.
+        }
+      });
+  
+      container.addEventListener('dragleave', e => {
+        container.style.backgroundColor = '';  // Setzt den Hintergrund zurück, wenn das Item das Element verlässt.
+      });
+  
+      container.addEventListener('drop', e => {
+        if (container !== draggedItem.parentNode) {
+          container.style.backgroundColor = '';  // Setzt den Hintergrund zurück.
+          container.appendChild(draggedItem);  // Fügt das gezogene Item zum Container hinzu.
+        }
+      });
+    });
+  }
+  
+  // Event Listener, der die Drag-and-Drop-Funktion beim Laden der Seite aufruft
+  document.addEventListener('DOMContentLoaded', setupDragAndDrop);
+  
   
