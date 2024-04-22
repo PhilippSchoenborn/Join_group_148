@@ -1,5 +1,3 @@
-
-
 function saveTask() {
     const title = document.getElementById('titleInput').value.trim();
     const description = document.getElementById('description').value.trim();
@@ -7,43 +5,41 @@ function saveTask() {
     const assignedTo = document.getElementById('searchInput').value.trim();
     const category = document.getElementById('categoryInput').value.trim();
     const subTask = document.getElementById('subtaskInput').value.trim();
-
-    // Hier können Sie die gespeicherten Werte weiterverarbeiten, z. B. in einem Objekt speichern oder an eine Datenbank senden
 }
 
 function clearTaskInput() {
-  document.getElementById('titleInput').value = '';
-  document.getElementById('description').value = '';
-  document.getElementById('inputDate').value = '';
-  document.getElementById('searchInput').value = '';
-  document.getElementById('categoryInput').value = '';
-  document.getElementById('subtaskInput').value = '';
-  let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
-  while (dropdownSubtaskList.firstChild) {
-    dropdownSubtaskList.removeChild(dropdownSubtaskList.firstChild);
-  }
-  document.querySelectorAll('.btnPrio').forEach(button => {
-    button.classList.remove('red', 'orange', 'green');
-    const img = button.querySelector('img');
-    img.src = img.getAttribute('data-original') || img.src;
-  });
+    document.getElementById('titleInput').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('inputDate').value = '';
+    document.getElementById('searchInput').value = '';
+    document.getElementById('categoryInput').value = '';
+    document.getElementById('subtaskInput').value = '';
+    let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
+    while (dropdownSubtaskList.firstChild) {
+        dropdownSubtaskList.removeChild(dropdownSubtaskList.firstChild);
+    }
+    document.querySelectorAll('.btnPrio').forEach(button => {
+        button.classList.remove('red', 'orange', 'green');
+        const img = button.querySelector('img');
+        img.src = img.getAttribute('data-original') || img.src;
+    });
 }
 
-function setupDropdowns() {       
+function setupDropdowns() {
     setupDropdownToggle();
     setupDropdownBehavior();
     setupDropdownCloseOnClickOutside();
     setupCategoryDropdownCloseBehavior();
-    
+
 }
 
-function setupInputFields(event){
+function setupInputFields(event) {
     setupCheckboxInteraction();
     setupSearchInputFilter();
-    setupCheckboxInteractionForInputField(); 
-    setupInputListeners(); 
+    setupCheckboxInteractionForInputField();
+    setupInputListeners();
     setupDateValidation();
-    addSubTask();  
+    addSubTask();
 }
 
 function setupInputListeners() {
@@ -148,7 +144,7 @@ function setupCategoryDropdownCloseBehavior() {
     document.getElementById('categoryDropdown').addEventListener('click', function (e) {
         // Überprüfen, ob das geklickte Ziel nicht innerhalb der Dropdown-Liste ist
         const dropdownList = document.getElementById('dropdownList');
-        
+
         if (!dropdownList.contains(e.target)) {
             // Zugriff auf die sichtbare Dropdown-Liste und Verstecken dieser
             document.querySelector('.dropdown-list').style.display = 'none';
@@ -332,22 +328,122 @@ function setupPriorityButtons() {
 }
 
 function addSubTask() {
-    // Get the input field and the ul list
     const input = document.getElementById('subtaskInput');
     const list = document.getElementById('dropdownSubtaskList');
 
-    // Check if the input field is not empty
+    // Überprüfen, ob das Eingabefeld nicht leer ist
     if (input.value.trim() !== '') {
-        // Create a new li element
+        // Neues li-Element erstellen
         const newSubtask = document.createElement('li');
-        newSubtask.textContent = input.value.trim();  // Use the trimmed input value
+        newSubtask.textContent = input.value.trim();
         newSubtask.classList.add('subtaskItem');
-        // Append the new subtask to the list
+
+        // Neue Elemente für die Bilder erstellen und entsprechende Klassen hinzufügen
+        const deleteIcon = document.createElement('div');
+        deleteIcon.classList.add('deleteIcon');
+        newSubtask.appendChild(deleteIcon);
+
+        const vectorIcon = document.createElement('div');
+        vectorIcon.classList.add('vectorIcon');
+        newSubtask.appendChild(vectorIcon);
+
+        const editIcon = document.createElement('div');
+        editIcon.classList.add('editIcon');
+        newSubtask.appendChild(editIcon);
+
+        // Den neuen Subtask der Liste hinzufügen
         list.appendChild(newSubtask);
 
-        // Clear the input field after adding the subtask
+        // Das Eingabefeld nach dem Hinzufügen des Subtasks leeren
         input.value = '';
+
+        // Verstecke die Icons, nachdem der Subtask hinzugefügt wurde
+        hideIcons();
+
+        // Füge den Hover-Effekt für den Cursor hinzu
+        addHoverEffect();
+    }
+}
+
+function addHoverEffect() {
+    const deleteIcon = document.querySelector('.deleteIcon');
+    if (deleteIcon) {
+        deleteIcon.addEventListener('mouseover', function () {
+            deleteIcon.style.cursor = 'pointer';
+        });
+    }
+
+    const editIcon = document.querySelector('.editIcon');
+    if (editIcon) {
+        editIcon.addEventListener('mouseover', function () {
+            editIcon.style.cursor = 'pointer';
+        });
     }
 }
 
 setupPriorityButtons();
+
+function hideIcons() {
+    document.getElementById('closeIcon').style.display = 'none';
+    document.getElementById('vectorIcon').style.display = 'none';
+    document.getElementById('checkIcon').style.display = 'none';
+    document.getElementById('subtaskIcon').style.display = 'inline';
+}
+
+function showIcons() {
+    document.getElementById('closeIcon').style.display = 'inline';
+    document.getElementById('vectorIcon').style.display = 'inline';
+    document.getElementById('checkIcon').style.display = 'inline';
+    document.getElementById('subtaskIcon').style.display = 'none';
+}
+
+// Funktion zum Löschen des Inhalts des Subtask-Eingabefeldes
+function deleteSubTask() {
+    const subtaskInput = document.getElementById('subtaskInput');
+    subtaskInput.value = ''; // Setze den Wert des Eingabefeldes auf eine leere Zeichenkette
+    hideIcons(); // Verstecke die Icons, nachdem der Subtask gelöscht wurde
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Event-Listener für das Bild closeIcon
+    const closeIcon = document.getElementById('closeIcon');
+    if (closeIcon) {
+        closeIcon.addEventListener('click', function () {
+            // Rufe die deleteSubTask-Funktion auf, wenn das closeIcon-Bild angeklickt wird
+            deleteSubTask();
+        });
+    } else {
+        console.error("Element mit der ID 'closeIcon' nicht gefunden.");
+    }
+
+    // Event-Listener für das Bild checkIcon
+    const checkIcon = document.getElementById('checkIcon');
+    if (checkIcon) {
+        checkIcon.addEventListener('click', function () {
+            // Füge den Subtask hinzu
+            addSubTask();
+        });
+    } else {
+        console.error("Element mit der ID 'checkIcon' nicht gefunden.");
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Event-Listener für das Bild subtaskIcon
+    document.getElementById('subtaskIcon').addEventListener('click', function () {
+        // Füge den Subtask hinzu
+        addSubTask();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Event-Listener für das Bild subtaskIcon
+    document.getElementById('subtaskIcon').addEventListener('click', function () {
+        // Füge den Subtask hinzu, wenn das Eingabefeld nicht leer ist
+        if (document.getElementById('subtaskInput').value.trim() !== '') {
+            addSubTask(); // Poste den Subtask
+            hideIcons(); // Verstecke die Icons, nachdem der Subtask gepostet wurde
+        }
+    });
+});
+
