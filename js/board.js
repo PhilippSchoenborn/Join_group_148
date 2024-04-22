@@ -1,6 +1,3 @@
-
-
-
 function setupDropdowns() {
     setupDropdownToggle();
     setupDropdownBehavior();
@@ -22,10 +19,12 @@ function setupInputFields(event) {
     setupCheckboxInteractionForInputField();
     setupInputListeners();
     setupDateValidation();
-
-    addSubtask();
+    addSubTask();
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    setupButtons();
+});
 
 
 function setupBtnInteraction() {
@@ -403,24 +402,7 @@ function addSubTask() {
 
 setupPriorityButtons();
 
-function addSubtask() {
-    // Get the input field and the ul list
-    const input = document.getElementById('subtaskInput');
-    const list = document.getElementById('dropdownSubtaskList');
 
-    // Check if the input field is not empty
-    if (input.value.trim() !== '') {
-        // Create a new li element
-        const newSubtask = document.createElement('li');
-        newSubtask.textContent = input.value.trim();  // Use the trimmed input value
-
-        // Append the new subtask to the list
-        list.appendChild(newSubtask);
-
-        // Clear the input field after adding the subtask
-        input.value = '';
-    }
-}
 
 /* function handleKeyPress(event) {
     // Check if the key pressed is the Enter key
@@ -473,9 +455,221 @@ function clearSubtasks() {
     }
 }
 
+function getSelectedPriority() {
+    // Zuweisung der Button-IDs zu ihren Farbklassen
+    const priorities = {
+        btnPrioHigh: 'red',
+        btnPrioMedium: 'orange',
+        btnPrioLow: 'green'
+    };
+
+    // Durchgehe alle Buttons und prüfe die aktive Klasse
+    for (let id in priorities) {
+        const button = document.getElementById(id);
+        if (button && button.classList.contains(priorities[id])) { // Prüfe, ob der Button die entsprechende Farbklasse hat
+            return button.dataset.value;
+        }
+    }
+    return null; // Rückgabe von null, wenn keine Priorität ausgewählt ist
+}
+
+function getSelectedContactNames() {
+    const checkboxes = document.querySelectorAll('.checkboxContacts:checked');
+    const selectedNames = Array.from(checkboxes).map(checkbox => checkbox.value);
+    console.log(selectedNames);
+    return selectedNames;
+}
+
+function getSelectedContactImages() {
+    const checkboxes = document.querySelectorAll('.checkboxContacts:checked');
+    const selectedImages = Array.from(checkboxes).map(checkbox => {
+        const label = checkbox.closest('.dropdown-item').querySelector('label');
+        const img = label.querySelector('img');
+        return img.src; // Die URL des Bildes
+    });
+    console.log(selectedImages);
+    return selectedImages;
+}
+
+function getAllSubtasks() {
+    const ul = document.getElementById('dropdownSubtaskList');
+    const subtasks = Array.from(ul.children).map(li => li.textContent);
+    console.log(subtasks); // Zeigt alle Subtasks in der Konsole an
+    return subtasks;
+}
+
+let tasks = [];
+
+async function saveTask() {
+    let toDoContainer = document.getElementById('toDoContainer');
+    let title = document.getElementById('titleInput').value;
+    let description = document.getElementById('description').value;
+    let date = document.getElementById('inputDate').value;
+    let category = document.getElementById('categoryInput').value;
 
 
 
+    if (!Array.isArray(tasks)) {
+        tasks = []; // Sicherstellen, dass tasks ein Array ist
+    }
+
+    tasks.push({        
+        title: title,
+        description: description,
+        date: date,
+        priority: getSelectedPriority(),
+        assigned: getSelectedContactNames(),
+        profileImage: getSelectedContactImages(),
+        category: category,
+        subtask: getAllSubtasks()
+    });
+
+    try {
+
+        await setItem('tasks', JSON.stringify(tasks));
+        console.log(tasks); // user meldung erfolgreich machen
+        displayTask(tasks);
+    } catch (e) {
+        console.error('Fehler beim speichern der Task');
+        return false;
+    }
+
+    return false;
+    
+}
+
+function displayTask(tasks) {
+    let toDoContainer = document.getElementById('toDoContainer');
+
+    toDoContainer.innerHTML = '';  // Klärt den Container vor dem Hinzufügen neuer Tasks
+
+    for (let i = 0; i < tasks.length; i++) {  // Korrigiere index zu i und i++
+        const task = tasks[i];
+
+        // Verwende Backticks für Template Literals
+        toDoContainer.innerHTML += `
+                <div class="taskCard" draggable="true">
+                    <div class="taskCardLabel">${task.category}</div>  
+                    <div class="taskCardbody">
+                        <div class="taskCardHeadline">${task.title}</div>  
+                        <div class="taskCardDescription">${task.description}</div>  
+                        <div class="taskCardProgress">
+                            <div class="taskCardProgressbar fill50"></div>  
+                            <div class="taskCardProgressbarLabel">Subtasks</div>
+                        </div>
+                        <div class="taskCardFooter">
+                            <div class="taskCardUser">${task.assignedTo}</div>  
+                            <div class="taskCardPriority">
+                                <img src="img/Prioritysymbols.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+    }
+}
 
 
+function setupDragAndDrop() {
+    const containers = document.querySelectorAll('.subTaskContainer');
+  
+    containers.forEach(container => {
+      container.addEventListener('drop', e => {
+        e.preventDefault();
+        const id = e.dataTransfer.getData('text/plain');
+        const draggable = document.getElementById(id);
+        if (container !== draggable.parentNode) {
+          container.appendChild(draggable); // Fügt das Element dem neuen Container hinzu
+          saveTaskPositions(); // Speichert die Positionen der Tasks nach jedem Drop
+        }
+      });
+    });
+  }
+
+
+  function setupDragAndDrop() {
+    const containers = document.querySelectorAll('.subTaskContainer');
+  
+    let draggedItem = null;  // Dies hält das gezogene Element.
+  
+    // Hinzufügen von Event Listeners für alle Container
+    containers.forEach(container => {
+      container.addEventListener('dragstart', e => {
+        if (e.target.className.includes('taskCard')) {
+          draggedItem = e.target;  // Speichert das gezogene Element.
+          setTimeout(() => {
+            e.target.style.display = 'none';  // Verbirgt das Element während des Ziehens.
+          }, 0);
+        }
+      });
+  
+      container.addEventListener('dragend', e => {
+        setTimeout(() => {
+          e.target.style.display = 'block';  // Stellt das Element nach dem Ziehen wieder dar.
+          draggedItem = null;  // Setzt das gezogene Element zurück.
+        }, 0);
+      });
+  
+      container.addEventListener('dragover', e => {
+        e.preventDefault();  // Erlaubt das Droppen von Elementen.
+      });
+  
+      container.addEventListener('dragenter', e => {
+        e.preventDefault();
+        if (container !== draggedItem.parentNode) {
+          container.style.backgroundColor = 'lightblue';  // Visualisiert das potenzielle Drop-Ziel.
+        }
+      });
+  
+      container.addEventListener('dragleave', e => {
+        container.style.backgroundColor = '';  // Setzt den Hintergrund zurück, wenn das Item das Element verlässt.
+      });
+  
+      container.addEventListener('drop', e => {
+        if (container !== draggedItem.parentNode) {
+          container.style.backgroundColor = '';  // Setzt den Hintergrund zurück.
+          container.appendChild(draggedItem);  // Fügt das gezogene Item zum Container hinzu.
+        }
+      });
+    });
+  }
+  
+  // Event Listener, der die Drag-and-Drop-Funktion beim Laden der Seite aufruft
+  document.addEventListener('DOMContentLoaded', setupDragAndDrop);
+  
+  
+  function saveTaskPositions() {
+    const containers = document.querySelectorAll('.subTaskContainer');
+    const tasksState = [];
+  
+    containers.forEach((container, index) => {
+      container.querySelectorAll('.taskCard').forEach(task => {
+        const taskId = task.getAttribute('data-task-id'); // Stelle sicher, dass jede Task eine eindeutige ID hat
+        tasksState.push({ taskId: taskId, containerId: container.id });
+      });
+    });
+  
+    localStorage.setItem('taskPositions', JSON.stringify(tasksState));
+  }
+  
+  
+  function restoreTaskPositions() {
+    const savedPositions = localStorage.getItem('taskPositions');
+    if (savedPositions) {
+      const tasksState = JSON.parse(savedPositions);
+      tasksState.forEach(taskState => {
+        const taskElement = document.querySelector(`[data-task-id="${taskState.taskId}"]`);
+        const containerElement = document.getElementById(taskState.containerId);
+        if (taskElement && containerElement) {
+          containerElement.appendChild(taskElement); // Verschiebt die Task in den gespeicherten Container
+        }
+      });
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    setupDragAndDrop();
+    restoreTaskPositions(); // Stellt die Positionen der Tasks beim Laden der Seite wieder her
+  });
+  
+  
 

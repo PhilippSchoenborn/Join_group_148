@@ -300,7 +300,6 @@
   width: 400px;
 }
 
-<<<<<<< HEAD
 .subtaskItem {
     position: relative;
     list-style: none; /* Listenpunkte entfernen */
@@ -328,14 +327,13 @@
 }
 
 .subtaskItem::after {
-    content: url('/img/delete.svg') url('/img/buttonIcons/vector.svg') url('/img/edit.svg');
+    content: url('/img/delete.svg') url('/img/buttonIcons/vector.svg') url('/img/edit.svg') url('/img/deleteHover.svg') url('/img/buttonIcons/vectorHover.svg') url('/img/editHover.svg');
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     right: 10px; /* Abstand zum rechten Rand */
     display: none; /* Standardmäßig ausblenden */
     height: 20px;
-    background-position: right 150px, right;
 }
 
 .subtaskItem:hover::after {
@@ -345,20 +343,51 @@
 .subtaskItem::after img {
     height: 24px; /* Höhe des Bildes */
     width: 24px; /* Breite des Bildes */
-=======
-.subtask-item {
-  position: relative;
->>>>>>> 1c036047f73424784905414ea639d2260c4965f0
 }
 
-.subtask-item:hover::before {
-  content: url("/img/edit.svg") url("/img/delete.svg");
-  position: absolute;
-  top: 100%;
-  left: 0;
-  display: flex;
+.addRemoveSubTask:hover{
+    background-color: rgba(69, 137, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-.subtask-item:hover::before img {
-  margin-right: 10px; /* Platz zwischen den Bildern */
+.toggleIcon {
+    display: flex;
+    align-items: center;
+}
+
+.removeIcon{
+    width: 13.15px;
+    height: 13.15px;
+    top: 0px !important;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.removeIcon:hover{
+    background-color: rgba(69, 137, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.addIcon{
+  width: 16px;
+  height: 13.15px;
+  top: 0px !important;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.addIcon:hover{
+  background-color: rgba(69, 137, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.deleteIcon:hover{
+  cursor: pointer !important;
+}
+
+.editIcon:hover{
+  cursor: pointer !important;
 }
