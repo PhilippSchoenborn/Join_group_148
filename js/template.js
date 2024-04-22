@@ -4,7 +4,8 @@ async function init() {
     setupDropdowns();  // Setup für alle Dropdown-bezogenen Funktionen
     setupButtons();
     setupInputFields();
-    loadToDos();     
+    await loadTask();
+    displayTask(tasks);    
     
 }
 

@@ -473,9 +473,119 @@ function clearSubtasks() {
     }
 }
 
+function getSelectedPriority() {
+    // Zuweisung der Button-IDs zu ihren Farbklassen
+    const priorities = {
+        btnPrioHigh: 'red',
+        btnPrioMedium: 'orange',
+        btnPrioLow: 'green'
+    };
+
+    // Durchgehe alle Buttons und prüfe die aktive Klasse
+    for (let id in priorities) {
+        const button = document.getElementById(id);
+        if (button && button.classList.contains(priorities[id])) { // Prüfe, ob der Button die entsprechende Farbklasse hat
+            return button.dataset.value;
+        }
+    }
+    return null; // Rückgabe von null, wenn keine Priorität ausgewählt ist
+}
+
+function getSelectedContactNames() {
+    const checkboxes = document.querySelectorAll('.checkboxContacts:checked');
+    const selectedNames = Array.from(checkboxes).map(checkbox => checkbox.value);
+    console.log(selectedNames);
+    return selectedNames;
+}
+
+function getSelectedContactImages() {
+    const checkboxes = document.querySelectorAll('.checkboxContacts:checked');
+    const selectedImages = Array.from(checkboxes).map(checkbox => {
+        const label = checkbox.closest('.dropdown-item').querySelector('label');
+        const img = label.querySelector('img');
+        return img.src; // Die URL des Bildes
+    });
+    console.log(selectedImages);
+    return selectedImages;
+}
+
+function getAllSubtasks() {
+    const ul = document.getElementById('dropdownSubtaskList');
+    const subtasks = Array.from(ul.children).map(li => li.textContent);
+    console.log(subtasks); // Zeigt alle Subtasks in der Konsole an
+    return subtasks;
+}
+
+let tasks = [];
+
+async function saveTask() {
+    let toDoContainer = document.getElementById('toDoContainer');
+    let title = document.getElementById('titleInput').value;
+    let description = document.getElementById('description').value;
+    let date = document.getElementById('inputDate').value;
+    let category = document.getElementById('categoryInput').value;
 
 
 
+    if (!Array.isArray(tasks)) {
+        tasks = []; // Sicherstellen, dass tasks ein Array ist
+    }
+
+    tasks.push({
+        title: title,
+        description: description,
+        date: date,
+        priority: getSelectedPriority(),
+        assigned: getSelectedContactNames(),
+        profileImage: getSelectedContactImages(),
+        category: category,
+        subtask: getAllSubtasks()
+    });
+
+    try {
+
+        await setItem('tasks', JSON.stringify(tasks));
+        console.log(tasks); // user meldung erfolgreich machen
+        displayTask(tasks);
+    } catch (e) {
+        console.error('Fehler beim speichern der Task');
+        return false;
+    }
+
+    return false;
+    
+}
+
+function displayTask(tasks) {
+    let toDoContainer = document.getElementById('toDoContainer');
+
+    toDoContainer.innerHTML = '';  // Klärt den Container vor dem Hinzufügen neuer Tasks
+
+    for (let i = 0; i < tasks.length; i++) {  // Korrigiere index zu i und i++
+        const task = tasks[i];
+
+        // Verwende Backticks für Template Literals
+        toDoContainer.innerHTML += `
+                <div class="taskCard" draggable="true">
+                    <div class="taskCardLabel">${task.category}</div>  
+                    <div class="taskCardbody">
+                        <div class="taskCardHeadline">${task.title}</div>  
+                        <div class="taskCardDescription">${task.description}</div>  
+                        <div class="taskCardProgress">
+                            <div class="taskCardProgressbar fill50"></div>  
+                            <div class="taskCardProgressbarLabel">Subtasks</div>
+                        </div>
+                        <div class="taskCardFooter">
+                            <div class="taskCardUser">${task.assignedTo}</div>  
+                            <div class="taskCardPriority">
+                                <img src="img/Prioritysymbols.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+    }
+}
 
 
 
+  
