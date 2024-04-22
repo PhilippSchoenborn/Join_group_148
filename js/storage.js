@@ -20,8 +20,7 @@ async function loadTask() {
         const storedTasks = await getItem('tasks');
         if (storedTasks) {
             tasks = JSON.parse(storedTasks);
-            toDoContainer.innerHTML = '';
-            toDoContainer.innerHTML = `<div class="noTaskCard">No To Do Today</div>`;
+            
         }
     } catch (e) {
         console.error('Fehler beim Laden der Aufgaben:', e);
