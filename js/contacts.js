@@ -268,11 +268,56 @@ function showeditContact(i) {
     document.getElementById('blurBackground').classList.remove('d-none');
     const contact = contacts[i];
     const color = contact['profileColor'];
+    document.getElementById('editSecondSectione').innerHTML = '';
+    document.getElementById('editSecondSectione').innerHTML = editContactHTML(i);
     document.getElementById('editName').value =`${contact.name}`;
     document.getElementById('editEmail').value =`${contact.email}`;
     document.getElementById('editPhone').value =`${contact.phone}`;
     document.getElementById('initialsEditContact').style = `background-color: ${color};`;
     document.getElementById('initialsText').innerHTML =`${contact.initialien}`;
+}
+
+function editContactHTML(i) {
+    return `<div id="contactInput" class="contactInput">
+    <div id="profilepicture">
+      <div id="whiteCircle">
+        <div id="initialsEditContact">
+          <h1 id="initialsText"></h1>
+        </div>
+      </div>
+    </div>
+    <div id="inputDiv" onclick="writeContact(event.stopPropagation())">
+      <div id="inputBox1" class="inputBox inputBox1"><input id="editName" required type="text" placeholder="Name"> <img
+          src="img/person.png" alt=""></div>
+      <div class="inputBox"><input type="text" id="editEmail" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
+      <div class="inputBox"><input type="text" id="editPhone" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
+    </div>
+    <div id="btnDiv">
+      <button onclick="cancelEditContact();deleteContact(${i}) " id="deleteButton">Delete</button>
+      <button onclick="editContactToArray(${i})" id="safeButton">Safe <img src="img/check_whitepng.png" alt=""></button>
+    </div>
+  </div>`;
+}
+
+function editContactToArray(i) {
+    let contact = contacts[i];
+    let name = document.getElementById('editName');
+    let email = document.getElementById('editEmail');
+    let phone = document.getElementById('editPhone');
+    const initial = extractInitials(name.value);
+    const newContact = {
+        "name": name.value,
+        "email": email.value,
+        "phone": phone.value,
+        "profileColor": contact.profileColor,
+        "initialien": initial
+    };
+    contacts.splice(i, 1, newContact);
+    contactClickHandler(newContact);
+    cancelEditContact();
+    createContactList();
+    save();
+    
 }
 
 
