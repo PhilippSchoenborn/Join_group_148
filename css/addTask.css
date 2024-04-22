@@ -327,7 +327,7 @@
 }
 
 .subtaskItem::after {
-    content: url('/img/delete.svg') url('/img/buttonIcons/vector.svg') url('/img/edit.svg');
+    content: url('/img/delete.svg') url('/img/buttonIcons/vector.svg') url('/img/edit.svg') url('/img/deleteHover.svg') url('/img/buttonIcons/vectorHover.svg') url('/img/editHover.svg');
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -356,7 +356,7 @@
     align-items: center;
 }
 
-.addRemove{
+.removeIcon{
     width: 13.15px;
     height: 13.15px;
     top: 0px !important;
@@ -364,9 +364,30 @@
     margin-right: 8px;
 }
 
-.addRemove:hover{
+.removeIcon:hover{
     background-color: rgba(69, 137, 255, 0.2);
     border-radius: 50%;
     cursor: pointer;
 }
 
+.addIcon{
+  width: 16px;
+  height: 13.15px;
+  top: 0px !important;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.addIcon:hover{
+  background-color: rgba(69, 137, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.deleteIcon:hover{
+  cursor: pointer !important;
+}
+
+.editIcon:hover{
+  cursor: pointer !important;
+}
