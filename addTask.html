@@ -128,21 +128,28 @@
               </div>
           </div>
 
-      <div class="labelInputContainer">
-          <label for="subtaskInput" class="label mt-24">Subtask</label>
-          <div class="custom-dropdown">
-              <input type="text" placeholder="Add a new subtask" id="subtaskInput" class="searchInput input" />
-              <span class="toggleIcon" onclick="addSubTask()"><img src="/img/buttonIcons/subtaskPlusIcon.svg" /></span>
+          <div class="labelInputContainer">
+            <label for="subtaskInput" class="label mt-24">Subtask</label>
+            <div class="custom-dropdown">
+              <input type="text" placeholder="Add a new subtask" id="subtaskInput" class="searchInput input"  onfocus="showIcons()"/>
+              <span class="toggleIcon">
+                <img src="/img/buttonIcons/subtaskPlusIcon.svg" id="subtaskIcon" class="addRemoveSubTask" />
+                <img src="/img/close.svg" id="closeIcon" class="removeIcon" style="display:none;" onclick="deleteSubTask()" />
+                <img src="/img/buttonIcons/vector.svg" id="vectorIcon" style="display:none;" />
+                <img src="/img/check.svg" id="checkIcon" class="addIcon" style="display:none;" onclick="addSubTask()">
+              </span>
           </div>
-          <ul id="dropdownSubtaskList"></ul>
-      </div>
+            <ul id="dropdownSubtaskList"></ul>
+        </div>
+        
   </form>
   <div class="btnContainer">
       <button class="btn-clearTask" id="clearTaskBtn" onclick="clearTaskInput()">Clear<img src="/img/cancel_black.png" class="btn-icon" /></button>
       <button class="btn-createTask" id="createTaskBtn">Create task<img src="/img/plusIcon.png" class="btn-icon" /></button>
   </div>
 
-
     <div w3-include-html="templates/menu.html"></div>
   </body>
   </html>
+
+  <!-- onblur="hideIcons()" -->
