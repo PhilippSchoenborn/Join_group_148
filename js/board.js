@@ -572,6 +572,23 @@ function displayTask(tasks) {
 function setupDragAndDrop() {
     const containers = document.querySelectorAll('.subTaskContainer');
   
+    containers.forEach(container => {
+      container.addEventListener('drop', e => {
+        e.preventDefault();
+        const id = e.dataTransfer.getData('text/plain');
+        const draggable = document.getElementById(id);
+        if (container !== draggable.parentNode) {
+          container.appendChild(draggable); // Fügt das Element dem neuen Container hinzu
+          saveTaskPositions(); // Speichert die Positionen der Tasks nach jedem Drop
+        }
+      });
+    });
+  }
+
+
+  function setupDragAndDrop() {
+    const containers = document.querySelectorAll('.subTaskContainer');
+  
     let draggedItem = null;  // Dies hält das gezogene Element.
   
     // Hinzufügen von Event Listeners für alle Container
@@ -620,3 +637,39 @@ function setupDragAndDrop() {
   document.addEventListener('DOMContentLoaded', setupDragAndDrop);
   
   
+  function saveTaskPositions() {
+    const containers = document.querySelectorAll('.subTaskContainer');
+    const tasksState = [];
+  
+    containers.forEach((container, index) => {
+      container.querySelectorAll('.taskCard').forEach(task => {
+        const taskId = task.getAttribute('data-task-id'); // Stelle sicher, dass jede Task eine eindeutige ID hat
+        tasksState.push({ taskId: taskId, containerId: container.id });
+      });
+    });
+  
+    localStorage.setItem('taskPositions', JSON.stringify(tasksState));
+  }
+  
+  
+  function restoreTaskPositions() {
+    const savedPositions = localStorage.getItem('taskPositions');
+    if (savedPositions) {
+      const tasksState = JSON.parse(savedPositions);
+      tasksState.forEach(taskState => {
+        const taskElement = document.querySelector(`[data-task-id="${taskState.taskId}"]`);
+        const containerElement = document.getElementById(taskState.containerId);
+        if (taskElement && containerElement) {
+          containerElement.appendChild(taskElement); // Verschiebt die Task in den gespeicherten Container
+        }
+      });
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    setupDragAndDrop();
+    restoreTaskPositions(); // Stellt die Positionen der Tasks beim Laden der Seite wieder her
+  });
+  
+  
+
