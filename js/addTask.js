@@ -240,21 +240,6 @@ function setupPriorityButtons() {
     });
 }
 
-function createSubtaskHTML(taskText) {
-    return `
-      <li class="subtaskItem">
-        ${taskText}
-        <div class="deleteIcon"></div>
-        <div class="vectorIcon"></div>
-        <div class="editIcon"></div>
-        <div class="deleteHoverIcon" style="display:none !important"></div>
-        <div class="vectorHoverIcon" style="display:none !important"></div>
-        <div class="editHoverIcon" style="display:none !important"></div>
-      </li>
-    `;
-}
-
-
 function addSubTask() {
     const input = document.getElementById('subtaskInput');
     const list = document.getElementById('dropdownSubtaskList');
@@ -262,9 +247,76 @@ function addSubTask() {
         const newSubtaskHTML = createSubtaskHTML(input.value.trim());
         list.innerHTML += newSubtaskHTML;
         input.value = '';
-        hideIcons();
+        setupSubtaskHoverListeners();
     }
 }
+
+function setupSubtaskHoverListeners() {
+    const subtaskItems = document.querySelectorAll('.subtaskItem');
+    subtaskItems.forEach(item => {
+        item.addEventListener('mouseover', function(event) {
+            const iconElements = this.querySelectorAll('.subTaskIcons > div');
+            iconElements.forEach(element => {
+                element.style.display = 'block';
+            });
+        });
+        item.addEventListener('mouseout', function() {
+            const iconElements = this.querySelectorAll('.subTaskIcons > div');
+            iconElements.forEach(element => {
+                element.style.display = 'none';
+            });
+        });
+    });
+}
+
+let subtaskItemsArray = [];
+
+function createSubtaskHTML(taskText) {
+    const id = `subtask_${subtaskItemsArray.length + 1}`;
+    const subtaskItem = { id: id, text: taskText };
+    subtaskItemsArray.push(subtaskItem);
+    const listItemHTML = `
+        <li id="${id}" class="subtaskItem">
+            ${taskText}
+            <div class="subTaskIcons">
+                <div class="deleteIcon" onclick="deleteListItem('${id}')"><img src="./img/delete.svg" alt=""></div>
+                <div class="vectorIcon"><img src="./img/buttonIcons/vector.svg" alt=""></div>
+                <div class="editIcon" onclick="changeListItem('${id}')"><img src="./img/edit.svg" alt=""></div>
+            </div>
+        </li>
+    `;
+    return listItemHTML;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupSubtaskHoverListeners();
+    setupPriorityButtons();
+});
+
+function deleteListItem(id) {
+    const listItemIndex = subtaskItemsArray.findIndex(item => item.id === id);
+    if (listItemIndex !== -1) {
+        document.getElementById(id).remove();
+        subtaskItemsArray.splice(listItemIndex, 1);
+    }
+    console.log('gelöscht')
+}
+
+function changeListItem(id) {
+    const listItem = subtaskItemsArray.find(item => item.id === id);
+    if (listItem) {
+        const newText = prompt("Enter new text:", listItem.text);
+        if (newText !== null) {
+            listItem.text = newText;
+            const listItemElement = document.getElementById(id);
+            listItemElement.textContent = newText;
+            console.log('ändern');
+            const updatedListItemHTML = createSubtaskHTML(newText);
+            listItemElement.outerHTML = updatedListItemHTML;
+        }
+    }
+}
+
 
 setupPriorityButtons();
 
@@ -322,3 +374,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const subtaskInput = document.getElementById('subtaskInput');
+    const subtaskIcon = document.getElementById('subtaskIcon');
+    const closeIcon = document.getElementById('closeIcon');
+    const vectorIcon = document.getElementById('vectorIcon');
+    const checkIcon = document.getElementById('checkIcon');
+    checkIcon.addEventListener('click', function () {
+        addSubTask();
+        hideIcons();
+        subtaskIcon.style.display = 'inline';
+    });
+});

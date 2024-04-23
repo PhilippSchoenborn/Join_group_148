@@ -387,22 +387,155 @@ function setupPriorityButtons() {
     });
 }
 
+// Subtask -->
+
 function addSubTask() {
-    let subtaskInput = document.getElementById('subtaskInput');
-    let subtaskValue = subtaskInput.value.trim();
-    if (subtaskValue !== '') {
-        let listItem = document.createElement('li');
-        listItem.textContent = subtaskValue;
-        listItem.classList.add('subtaskItem'); // Hier wird die Klasse hinzugefügt
-        let dropdownSubtaskList = document.getElementById('dropdownSubtaskList');
-        dropdownSubtaskList.appendChild(listItem);
-        subtaskInput.value = '';
+    const input = document.getElementById('subtaskInput');
+    const list = document.getElementById('dropdownSubtaskList');
+    if (input.value.trim() !== '') {
+        const newSubtaskHTML = createSubtaskHTML(input.value.trim());
+        list.innerHTML += newSubtaskHTML;
+        input.value = '';
+        setupSubtaskHoverListeners();
+    }
+}
+
+function setupSubtaskHoverListeners() {
+    const subtaskItems = document.querySelectorAll('.subtaskItem');
+    subtaskItems.forEach(item => {
+        item.addEventListener('mouseover', function(event) {
+            const iconElements = this.querySelectorAll('.subTaskIcons > div');
+            iconElements.forEach(element => {
+                element.style.display = 'block';
+            });
+        });
+        item.addEventListener('mouseout', function() {
+            const iconElements = this.querySelectorAll('.subTaskIcons > div');
+            iconElements.forEach(element => {
+                element.style.display = 'none';
+            });
+        });
+    });
+}
+
+let subtaskItemsArray = [];
+
+function createSubtaskHTML(taskText) {
+    const id = `subtask_${subtaskItemsArray.length + 1}`;
+    const subtaskItem = { id: id, text: taskText };
+    subtaskItemsArray.push(subtaskItem);
+    const listItemHTML = `
+        <li id="${id}" class="subtaskItem">
+            ${taskText}
+            <div class="subTaskIcons">
+                <div class="deleteIcon" onclick="deleteListItem('${id}')"><img src="./img/delete.svg" alt=""></div>
+                <div class="vectorIcon"><img src="./img/buttonIcons/vector.svg" alt=""></div>
+                <div class="editIcon" onclick="changeListItem('${id}')"><img src="./img/edit.svg" alt=""></div>
+            </div>
+        </li>
+    `;
+    return listItemHTML;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupSubtaskHoverListeners();
+    setupPriorityButtons();
+});
+
+function deleteListItem(id) {
+    const listItemIndex = subtaskItemsArray.findIndex(item => item.id === id);
+    if (listItemIndex !== -1) {
+        document.getElementById(id).remove();
+        subtaskItemsArray.splice(listItemIndex, 1);
+    }
+    console.log('gelöscht')
+}
+
+function changeListItem(id) {
+    const listItem = subtaskItemsArray.find(item => item.id === id);
+    if (listItem) {
+        const newText = prompt("Enter new text:", listItem.text);
+        if (newText !== null) {
+            listItem.text = newText;
+            const listItemElement = document.getElementById(id);
+            listItemElement.textContent = newText;
+            console.log('ändern');
+            const updatedListItemHTML = createSubtaskHTML(newText);
+            listItemElement.outerHTML = updatedListItemHTML;
+        }
     }
 }
 
 setupPriorityButtons();
 
 
+  
+function hideIcons() {
+    document.getElementById('closeIcon').style.display = 'none';
+    document.getElementById('vectorIcon').style.display = 'none';
+    document.getElementById('checkIcon').style.display = 'none';
+    document.getElementById('subtaskIcon').style.display = 'inline';
+}
+
+function showIcons() {
+    document.getElementById('closeIcon').style.display = 'inline';
+    document.getElementById('vectorIcon').style.display = 'inline';
+    document.getElementById('checkIcon').style.display = 'inline';
+    document.getElementById('subtaskIcon').style.display = 'none';
+}
+
+function deleteSubTask() {
+    const subtaskInput = document.getElementById('subtaskInput');
+    subtaskInput.value = '';
+    hideIcons();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const closeIcon = document.getElementById('closeIcon');
+    if (closeIcon) {
+        closeIcon.addEventListener('click', function () {
+            deleteSubTask();
+        });
+    } else {
+        console.error("Element mit der ID 'closeIcon' nicht gefunden.");
+    }
+    const checkIcon = document.getElementById('checkIcon');
+    if (checkIcon) {
+        checkIcon.addEventListener('click', function () {
+            addSubTask();
+        });
+    } else {
+        console.error("Element mit der ID 'checkIcon' nicht gefunden.");
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('subtaskIcon').addEventListener('click', function () {
+        addSubTask();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('subtaskIcon').addEventListener('click', function () {
+        if (document.getElementById('subtaskInput').value.trim() !== '') {
+            addSubTask();
+            hideIcons();
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const subtaskInput = document.getElementById('subtaskInput');
+    const subtaskIcon = document.getElementById('subtaskIcon');
+    const closeIcon = document.getElementById('closeIcon');
+    const vectorIcon = document.getElementById('vectorIcon');
+    const checkIcon = document.getElementById('checkIcon');
+    checkIcon.addEventListener('click', function () {
+        addSubTask();
+        hideIcons();
+        subtaskIcon.style.display = 'inline';
+    });
+});
 
 /* function handleKeyPress(event) {
     // Check if the key pressed is the Enter key
@@ -536,5 +669,5 @@ function setupDragAndDrop() {
     restoreTaskPositions(); // Stellt die Positionen der Tasks beim Laden der Seite wieder her
   });
   
-  
-  
+
+
