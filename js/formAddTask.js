@@ -253,20 +253,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let tasks = [];
 
-async function saveTask() {
-    let toDoContainer = document.getElementById('toDoContainer');
+async function saveTask() {    
     let title = document.getElementById('titleInput').value;
     let description = document.getElementById('description').value;
     let date = document.getElementById('inputDate').value;
     let category = document.getElementById('categoryInput').value;
 
-
-
     if (!Array.isArray(tasks)) {
         tasks = []; // Sicherstellen, dass tasks ein Array ist
     }
 
-    tasks.push({        
+    // Die aktuelle Länge des Arrays als ID verwenden
+    const newId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 0; // Generiere eine eindeutige ID
+
+    tasks.push({
+        id: newId, // Die ID hinzufügen
         title: title,
         description: description,
         date: date,
@@ -274,22 +275,22 @@ async function saveTask() {
         assigned: getSelectedContactNames(),
         profileImage: getSelectedContactImages(),
         category: category,
-        subtask: getAllSubtasks()
+        subtask: getAllSubtasks(),
+        status: 'open'
     });
 
     try {
-
         await setItem('tasks', JSON.stringify(tasks));
-        console.log(tasks); // user meldung erfolgreich machen
+        console.log(tasks); // Usermeldung, erfolgreich gespeichert
         displayTask(tasks);
     } catch (e) {
-        console.error('Fehler beim speichern der Task');
+        console.error('Fehler beim Speichern der Task');
         return false;
     }
 
     return false;
-    
 }
+
 
 function displayTask(tasks) {
     let toDoContainer = document.getElementById('toDoContainer');
@@ -304,19 +305,19 @@ function displayTask(tasks) {
     }
 }
 
-function createTaskCardHtml(task){
+function createTaskCardHtml(task) {
     return `
-    <div class="taskCard" draggable="true">
-        <div class="taskCardLabel">${task.category}</div>  
+    <div class="taskCard" draggable="true" ondragstart="startDragging(${task.id})" >
+        <div class="taskCardLabel">${task.category}</div>
         <div class="taskCardbody">
-            <div class="taskCardHeadline">${task.title}</div>  
-            <div class="taskCardDescription">${task.description}</div>  
+            <div class="taskCardHeadline">${task.title}</div>
+            <div class="taskCardDescription">${task.description}</div>
             <div class="taskCardProgress">
-                <div class="taskCardProgressbar fill50"></div>  
+                <div class="taskCardProgressbar fill50"></div>
                 <div class="taskCardProgressbarLabel">Subtasks</div>
             </div>
             <div class="taskCardFooter">
-                <div class="taskCardUser">${task.assignedTo}</div>  
+                <div class="taskCardUser">${task.assigned}</div>
                 <div class="taskCardPriority">
                     <img src="img/Prioritysymbols.png" />
                 </div>
@@ -324,6 +325,9 @@ function createTaskCardHtml(task){
         </div>
     </div>`;
 }
+
+
+
 
 
 // Event Listener für Prioritäts-Buttons
