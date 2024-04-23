@@ -4,7 +4,23 @@ function saveTask() {
     const dueDate = document.getElementById('inputDate').value.trim();
     const assignedTo = document.getElementById('searchInput').value.trim();
     const category = document.getElementById('categoryInput').value.trim();
-    const subTask = document.getElementById('subtaskInput').value.trim();
+    const subTaskElements = document.querySelectorAll('#dropdownSubtaskList .subtaskItem');
+    const subTasks = Array.from(subTaskElements).map(item => item.textContent.trim());
+
+    const taskData = {
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        assignedTo: assignedTo,
+        category: category,
+        subTasks: subTasks
+    };
+
+    // Convert to JSON
+    const jsonData = JSON.stringify(taskData);
+    
+    // Save to localStorage
+    localStorage.setItem('taskData', jsonData);
 }
 
 function clearTaskInput() {
@@ -30,6 +46,7 @@ function setupDropdowns() {
     setupDropdownBehavior();
     setupDropdownCloseOnClickOutside();
     setupCategoryDropdownCloseBehavior();
+    renderContactsInDropdown();
 }
 
 function setupInputFields(event) {
@@ -279,9 +296,9 @@ function createSubtaskHTML(taskText) {
         <li id="${id}" class="subtaskItem">
             ${taskText}
             <div class="subTaskIcons">
-                <div class="deleteIcon" onclick="deleteListItem('${id}')"><img src="./img/delete.svg" alt=""></div>
-                <div class="vectorIcon"><img src="./img/buttonIcons/vector.svg" alt=""></div>
                 <div class="editIcon" onclick="changeListItem('${id}')"><img src="./img/edit.svg" alt=""></div>
+                <div class="vectorIcon"><img src="./img/buttonIcons/vector.svg" alt=""></div>
+                <div class="deleteIcon" onclick="deleteListItem('${id}')"><img src="./img/delete.svg" alt=""></div>
             </div>
         </li>
     `;
@@ -316,7 +333,6 @@ function changeListItem(id) {
         }
     }
 }
-
 
 setupPriorityButtons();
 
@@ -386,3 +402,42 @@ document.addEventListener('DOMContentLoaded', function () {
         subtaskIcon.style.display = 'inline';
     });
 });
+
+
+function renderContactsInDropdown() {
+    const dropdownList = document.getElementById('dropdownContacts');
+    dropdownList.innerHTML = ''; // Leere die Dropdown-Liste, um sie neu zu füllen
+
+    // Schleife durch die Kontakte und erstelle für jeden Kontakt ein Listenelement
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+
+        // Erstelle das Listenelement für den Kontakt
+        const listItem = document.createElement('li');
+        listItem.classList.add('dropdown-item');
+
+        // Erstelle das Label mit dem Profilbild und dem Namen des Kontakts
+        const label = document.createElement('label');
+        label.setAttribute('for', contact.name.replace(/\s+/g, ''));
+        const img = document.createElement('img');
+        img.src = '/img/ProfileBadge.png'; // Standard-Profilbild
+        img.alt = 'Profile Picture';
+        label.appendChild(img);
+        label.appendChild(document.createTextNode(contact.name));
+
+        // Erstelle das Checkbox-Element
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = contact.name.replace(/\s+/g, '');
+        checkbox.name = 'assignedTo[]';
+        checkbox.value = contact.name;
+        checkbox.classList.add('checkboxContacts');
+
+        // Füge das Label und die Checkbox dem Listenelement hinzu
+        listItem.appendChild(label);
+        listItem.appendChild(checkbox);
+
+        // Füge das Listenelement der Dropdown-Liste hinzu
+        dropdownList.appendChild(listItem);
+    }
+}

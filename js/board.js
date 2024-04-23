@@ -428,9 +428,9 @@ function createSubtaskHTML(taskText) {
         <li id="${id}" class="subtaskItem">
             ${taskText}
             <div class="subTaskIcons">
-                <div class="deleteIcon" onclick="deleteListItem('${id}')"><img src="./img/delete.svg" alt=""></div>
-                <div class="vectorIcon"><img src="./img/buttonIcons/vector.svg" alt=""></div>
                 <div class="editIcon" onclick="changeListItem('${id}')"><img src="./img/edit.svg" alt=""></div>
+                <div class="vectorIcon"><img src="./img/buttonIcons/vector.svg" alt=""></div>
+                <div class="deleteIcon" onclick="deleteListItem('${id}')"><img src="./img/delete.svg" alt=""></div>
             </div>
         </li>
     `;

@@ -59,6 +59,7 @@ const beautifulColors = [
 function renderContacts() {
     load()
     createContactList();
+
 }
 
 // Funktion zum Erstellen der Kontaktliste
