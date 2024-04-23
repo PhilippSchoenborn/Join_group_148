@@ -563,8 +563,8 @@ function updateHtml() {
 }
 
 
-function startDragging(taskId) {
-    currentDraggedElement = tasks.findIndex(t => t.id === taskId);
+function startDragging() {
+    currentDraggedElement = task;
 }
 
 
