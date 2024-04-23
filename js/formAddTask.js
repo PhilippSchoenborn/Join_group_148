@@ -253,6 +253,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let tasks = [];
 
+
+
 async function saveTask() {    
     let title = document.getElementById('titleInput').value;
     let description = document.getElementById('description').value;
@@ -263,11 +265,9 @@ async function saveTask() {
         tasks = []; // Sicherstellen, dass tasks ein Array ist
     }
 
-    // Die aktuelle Länge des Arrays als ID verwenden
-    const newId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 0; // Generiere eine eindeutige ID
+    
 
-    tasks.push({
-        id: newId, // Die ID hinzufügen
+    tasks.push({        
         title: title,
         description: description,
         date: date,
@@ -307,7 +307,7 @@ function displayTask(tasks) {
 
 function createTaskCardHtml(task) {
     return `
-    <div class="taskCard" draggable="true" ondragstart="startDragging(${task.id})" >
+    <div class="taskCard" draggable="true" ondragstart="startDragging(${task})" >
         <div class="taskCardLabel">${task.category}</div>
         <div class="taskCardbody">
             <div class="taskCardHeadline">${task.title}</div>
