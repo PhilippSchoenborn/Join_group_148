@@ -487,17 +487,33 @@ input:-webkit-autofill:active {
     justify-content: center;
 }
 
+#initialsEditContact{
+    border-radius: 70px;
+    width: 112px;
+    height: 112px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #initials {
     border-radius: 70px;
     width: 112px;
     height: 112px;
-    background-color: orange;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #initials h1 {
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    text-align: center;
+    color: white;
+}
+
+#initialsText {
     font-size: 47px;
     font-weight: 500;
     line-height: 56.4px;

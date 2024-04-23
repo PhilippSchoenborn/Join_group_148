@@ -73,7 +73,7 @@ function createContactList() {
     extractInitials(name);
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        const initials = extractInitials(contact.name);
+        const initials = contact['initialien'];
         // Wenn der Anfangsbuchstabe des Kontakts neu ist, füge einen Buchstaben-Header hinzu
         const firstLetter = initials.charAt(0);
         if (firstLetter !== currentLetter) {
@@ -89,8 +89,7 @@ function createContactList() {
         contactItem.classList.add('contact');
 
         // Wähle eine Farbe aus der Liste beautifulColors basierend auf der Position des Kontakts
-        const colorIndex = i % beautifulColors.length;
-        const profileColor = beautifulColors[colorIndex];
+        const profileColor = contact['profileColor'];
 
         // Erstelle das Profilbild mit den Anfangsbuchstaben des Vor- und Nachnamens
         const profilePicture = document.createElement('div');
@@ -119,20 +118,21 @@ function createContactList() {
             // Stelle sicher, dass nur das geklickte Element behandelt wird
             if (event.target === contactItem || event.target.parentElement === contactDetails) {
                 // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
-                contactClickHandler(contact, initials, profileColor, i);
+                contactClickHandler(contact, i);
             }
         }
     }
 }
 
+
 // Funktion, die beim Klicken auf den Kontakt oder Kontaktinformationen aufgerufen wird
-function contactClickHandler(contact, initials, profileColor, i) {
+function contactClickHandler(contact, i) {
     let contactSection = document.getElementById('contacts');
     contactSection.innerHTML ='';
     contactSection.innerHTML = ` <div id="contactInfo">
     <div id="whiteCircle">
-      <div id="initials" style="background-color: ${profileColor}">
-        <h1>${initials}</h1>
+      <div id="initials" style="background-color: ${contact.profileColor}">
+        <h1>${contact.initialien}</h1>
       </div>
     </div>
     <div id="nameAndEditButton">
@@ -190,12 +190,18 @@ function getNewContact() {
         document.getElementById('addNewContactAlert').innerHTML = '';
         document.getElementById('addNewContactAlert').innerHTML = '<p>the fields must be filled</p>';
     } else {
+        const colorIndx = Math.floor(Math.random() * beautifulColors.length); // Zufälliger Index für Farbe
+        const color = beautifulColors[colorIndx];
+        const initial = extractInitials(name.value);
         const newContact = {
             name: name.value,
             email: email.value,
             phone: phone.value,
+            profileColor: color,
+            initialien : initial,
         };
         contacts.push(newContact);
+        contactClickHandler(newContact, contacts.length);
         save();
         createContactList();
         name.value = '';
@@ -203,13 +209,6 @@ function getNewContact() {
         phone.value = '';
         cancelAddContact();
         slideSuccessfully();
-
-        // Rufe contactClickHandler mit den Informationen des neu hinzugefügten Kontakts auf
-        const initials = extractInitials(newContact.name);
-        const colorIndex = (contacts.length - 1) % beautifulColors.length; // Index für die Farbe aus beautifulColors
-        const profileColor = beautifulColors[colorIndex];
-        const newIndex = contacts.length - 1; // Index des neu hinzugefügten Kontakts im Array
-        contactClickHandler(newContact, initials, profileColor, newIndex);
     }
 }
 
@@ -249,8 +248,6 @@ function load() {
 }
 
 
-
-
 // Schließt die Box 'Add new Contact'
 function cancelAddContact() {
     document.getElementById('addNewContact').classList.remove('addnewContactActive');
@@ -270,9 +267,58 @@ function showeditContact(i) {
     document.getElementById('editContact').classList.add('editContactActive');
     document.getElementById('blurBackground').classList.remove('d-none');
     const contact = contacts[i];
+    const color = contact['profileColor'];
+    document.getElementById('editSecondSectione').innerHTML = '';
+    document.getElementById('editSecondSectione').innerHTML = editContactHTML(i);
     document.getElementById('editName').value =`${contact.name}`;
     document.getElementById('editEmail').value =`${contact.email}`;
     document.getElementById('editPhone').value =`${contact.phone}`;
+    document.getElementById('initialsEditContact').style = `background-color: ${color};`;
+    document.getElementById('initialsText').innerHTML =`${contact.initialien}`;
+}
+
+function editContactHTML(i) {
+    return `<div id="contactInput" class="contactInput">
+    <div id="profilepicture">
+      <div id="whiteCircle">
+        <div id="initialsEditContact">
+          <h1 id="initialsText"></h1>
+        </div>
+      </div>
+    </div>
+    <div id="inputDiv" onclick="writeContact(event.stopPropagation())">
+      <div id="inputBox1" class="inputBox inputBox1"><input id="editName" required type="text" placeholder="Name"> <img
+          src="img/person.png" alt=""></div>
+      <div class="inputBox"><input type="text" id="editEmail" required placeholder="Email"> <img src="img/mail.png" alt=""></div>
+      <div class="inputBox"><input type="text" id="editPhone" required placeholder="Phone"> <img src="img/call.png" alt=""></div>
+    </div>
+    <div id="btnDiv">
+      <button onclick="cancelEditContact();deleteContact(${i}) " id="deleteButton">Delete</button>
+      <button onclick="editContactToArray(${i})" id="safeButton">Safe <img src="img/check_whitepng.png" alt=""></button>
+    </div>
+  </div>`;
+}
+
+function editContactToArray(i) {
+    let contact = contacts[i];
+    let name = document.getElementById('editName');
+    let email = document.getElementById('editEmail');
+    let phone = document.getElementById('editPhone');
+    const initial = extractInitials(name.value);
+    const newContact = {
+        "name": name.value,
+        "email": email.value,
+        "phone": phone.value,
+        "profileColor": contact.profileColor,
+        "initialien": initial
+    };
+    let contactlength = contacts.length;
+    contacts.splice(i, 1, newContact);
+    contactClickHandler(newContact, contactlength);
+    cancelEditContact();
+    createContactList();
+    save();
+    
 }
 
 
