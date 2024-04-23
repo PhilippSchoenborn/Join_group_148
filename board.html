@@ -61,16 +61,18 @@
 
     <div id="tasksContainer">
       <div id="toDoContainer" class="subTaskContainer" ondrop="moveTo('open')" ondragover="allowDrop(event)">
-        
       </div>
-      <div id="progressContainer" class="subTaskContainer"></div>
-      <div id="feedbackContainer" class="subTaskContainer"></div>
+      <div id="progressContainer" class="subTaskContainer" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
+      </div>
+      <div id="feedbackContainer" class="subTaskContainer" ondrop="moveTo('waitFeedback')" ondragover="allowDrop(event)">
+      </div>
       <div id="doneContainer" class="subTaskContainer" ondrop="moveTo('closed')" ondragover="allowDrop(event)">
-        <div id="completedTasksContainer" class="subTaskContainer">
-          <div class="noTaskCard">No task Done</div>
-        </div>
+          <div id="completedTasksContainer" class="subTaskContainer">
+              <div class="noTaskCard">No task Done</div>
+          </div>
       </div>
-    </div>
+  </div>
+  
 
     <div class="addTaskFloating" id="addTaskFloating">
       <div class="headlineContainer">

@@ -5,7 +5,7 @@ async function init() {
     setupInputFields();
     await loadTask();
     displayTask(tasks);
-    
+    loadTasks();
     
 }
 

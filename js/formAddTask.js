@@ -253,6 +253,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let tasks = [];
 
+async function deleteAllTasks() {
+    tasks = []; // Lokales Array leeren
+    try {
+        const response = await setItem('tasks', JSON.stringify(tasks)); // Verwende den Schlüssel 'tasks' oder einen anderen, je nachdem wie deine Daten organisiert sind
+        console.log('All tasks deleted:', response);
+    } catch (error) {
+        console.error('Error deleting tasks:', error);
+    }
+}
+
+
 
 
 async function saveTask() {    
@@ -267,7 +278,8 @@ async function saveTask() {
 
     
 
-    tasks.push({        
+    tasks.push({     
+        id: tasks.length + 1,   
         title: title,
         description: description,
         date: date,
@@ -282,7 +294,7 @@ async function saveTask() {
     try {
         await setItem('tasks', JSON.stringify(tasks));
         console.log(tasks); // Usermeldung, erfolgreich gespeichert
-        displayTask(tasks);
+        loadTasks();
     } catch (e) {
         console.error('Fehler beim Speichern der Task');
         return false;
@@ -307,7 +319,7 @@ function displayTask(tasks) {
 
 function createTaskCardHtml(task) {
     return `
-    <div class="taskCard" draggable="true" ondragstart="startDragging(${task})" >
+    <div class="taskCard" draggable="true" ondragstart="startDragging(${task.id})" >
         <div class="taskCardLabel">${task.category}</div>
         <div class="taskCardbody">
             <div class="taskCardHeadline">${task.title}</div>

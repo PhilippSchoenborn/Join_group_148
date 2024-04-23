@@ -545,27 +545,41 @@ let currentDraggedElement;
 
 function updateHtml() {
     let openTasksHtml = '';
+    let inProgressTasksHtml = '';
+    let waitFeedbackTasksHtml = '';
     let closedTasksHtml = '';
 
     let openTasks = tasks.filter(task => task.status === 'open');
+    let inProgressTasks = tasks.filter(task => task.status === 'inProgress');
+    let waitFeedbackTasks = tasks.filter(task => task.status === 'waitFeedback');
     let closedTasks = tasks.filter(task => task.status === 'closed');
 
-    openTasks.forEach((task, index) => {
-        openTasksHtml += createTaskCardHtml(task, index);
+    openTasks.forEach(task => {
+        openTasksHtml += createTaskCardHtml(task);
+    });
+    inProgressTasks.forEach(task => {
+        inProgressTasksHtml += createTaskCardHtml(task);
+    });
+    waitFeedbackTasks.forEach(task => {
+        waitFeedbackTasksHtml += createTaskCardHtml(task);
+    });
+    closedTasks.forEach(task => {
+        closedTasksHtml += createTaskCardHtml(task);
     });
 
-    closedTasks.forEach((task, index) => {
-        closedTasksHtml += createTaskCardHtml(task, index);
-    });
-
-    document.getElementById('toDoContainer').innerHTML = openTasksHtml;
+    document.getElementById('toDoContainer').innerHTML = openTasksHtml || '<div class="noTaskCard">No task Done</div>';;
+    document.getElementById('progressContainer').innerHTML = inProgressTasksHtml;
+    document.getElementById('feedbackContainer').innerHTML = waitFeedbackTasksHtml;
     document.getElementById('doneContainer').innerHTML = closedTasksHtml || '<div class="noTaskCard">No task Done</div>';
 }
 
 
-function startDragging() {
-    currentDraggedElement = task;
+
+function startDragging(taskId) {
+    console.log("Dragging task with ID:", taskId); // Sollte die ID loggen
+    currentDraggedElement = taskId;
 }
+
 
 
 function allowDrop(event) {
@@ -574,11 +588,40 @@ function allowDrop(event) {
 
 
 function moveTo(status) {
-    if (currentDraggedElement >= 0 && tasks[currentDraggedElement]) {
-        tasks[currentDraggedElement].status = status;
+    console.log("Moving task with ID:", currentDraggedElement);
+    const task = tasks.find(t => t.id === currentDraggedElement);
+    if (task) {
+        task.status = status;
         updateHtml();
+        saveTasks();  // Stelle sicher, dass diese Funktion aufgerufen wird
     } else {
-        console.error('Task does not exist');
+        console.error('Task not found with ID:', currentDraggedElement);
     }
 }
+
+async function saveTasks() {
+    try {
+        await setItem('tasks', JSON.stringify(tasks));
+        console.log('Tasks saved successfully');
+    } catch (e) {
+        console.error('Failed to save tasks', e);
+    }
+}
+
+async function loadTasks() {
+    try {
+        tasks = await getItem('tasks');
+        tasks = JSON.parse(tasks);  // Stelle sicher, dass die Aufgaben korrekt geparst werden
+        updateHtml();  // Aktualisiere die HTML-Ansicht, um die Aufgaben anzuzeigen
+    } catch (e) {
+        console.error('Failed to load tasks', e);
+    }
+}
+
+
+
+
+
+
+
 
