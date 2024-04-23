@@ -300,25 +300,97 @@ function displayTask(tasks) {
         const task = tasks[i];
 
         // Verwende Backticks für Template Literals
-        toDoContainer.innerHTML += `
-                <div class="taskCard" draggable="true">
-                    <div class="taskCardLabel">${task.category}</div>  
-                    <div class="taskCardbody">
-                        <div class="taskCardHeadline">${task.title}</div>  
-                        <div class="taskCardDescription">${task.description}</div>  
-                        <div class="taskCardProgress">
-                            <div class="taskCardProgressbar fill50"></div>  
-                            <div class="taskCardProgressbarLabel">Subtasks</div>
-                        </div>
-                        <div class="taskCardFooter">
-                            <div class="taskCardUser">${task.assignedTo}</div>  
-                            <div class="taskCardPriority">
-                                <img src="img/Prioritysymbols.png" />
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
+        toDoContainer.innerHTML += createTaskCardHtml(task);
     }
 }
 
+function createTaskCardHtml(task){
+    return `
+    <div class="taskCard" draggable="true">
+        <div class="taskCardLabel">${task.category}</div>  
+        <div class="taskCardbody">
+            <div class="taskCardHeadline">${task.title}</div>  
+            <div class="taskCardDescription">${task.description}</div>  
+            <div class="taskCardProgress">
+                <div class="taskCardProgressbar fill50"></div>  
+                <div class="taskCardProgressbarLabel">Subtasks</div>
+            </div>
+            <div class="taskCardFooter">
+                <div class="taskCardUser">${task.assignedTo}</div>  
+                <div class="taskCardPriority">
+                    <img src="img/Prioritysymbols.png" />
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
 
+
+// Event Listener für Prioritäts-Buttons
+document.querySelectorAll('.btnPrio').forEach(button => {
+    button.addEventListener('click', function () {
+        currentPriority = this.getAttribute('data-value');
+        console.log('Aktuelle Priorität:', currentPriority);
+    });
+});
+
+// Funktion zum Abrufen der Subtasks aus der UI
+function getSubtasks() {
+    const subtasks = [];
+    const subtaskItems = document.querySelectorAll('#dropdownSubtaskList li');
+
+    subtaskItems.forEach(item => {
+        subtasks.push(item.textContent);
+    });
+
+    return subtasks;
+}
+function clearSubtasks() {
+    const subtaskList = document.getElementById('dropdownSubtaskList');
+    while (subtaskList.firstChild) {
+        subtaskList.removeChild(subtaskList.firstChild);
+    }
+}
+
+function getSelectedPriority() {
+    // Zuweisung der Button-IDs zu ihren Farbklassen
+    const priorities = {
+        btnPrioHigh: 'red',
+        btnPrioMedium: 'orange',
+        btnPrioLow: 'green'
+    };
+
+    // Durchgehe alle Buttons und prüfe die aktive Klasse
+    for (let id in priorities) {
+        const button = document.getElementById(id);
+        if (button && button.classList.contains(priorities[id])) { // Prüfe, ob der Button die entsprechende Farbklasse hat
+            return button.dataset.value;
+        }
+    }
+    return null; // Rückgabe von null, wenn keine Priorität ausgewählt ist
+}
+
+function getSelectedContactNames() {
+    const checkboxes = document.querySelectorAll('.checkboxContacts:checked');
+    const selectedNames = Array.from(checkboxes).map(checkbox => checkbox.value);
+    console.log(selectedNames);
+    return selectedNames;
+}
+
+function getSelectedContactImages() {
+    const checkboxes = document.querySelectorAll('.checkboxContacts:checked');
+    const selectedImages = Array.from(checkboxes).map(checkbox => {
+        const label = checkbox.closest('.dropdown-item').querySelector('label');
+        const img = label.querySelector('img');
+        return img.src; // Die URL des Bildes
+    });
+    console.log(selectedImages);
+    return selectedImages;
+}
+
+function getAllSubtasks() {
+    const ul = document.getElementById('dropdownSubtaskList');
+    const subtasks = Array.from(ul.children).map(li => li.textContent);
+    console.log(subtasks); // Zeigt alle Subtasks in der Konsole an
+    return subtasks;
+}
