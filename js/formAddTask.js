@@ -307,12 +307,12 @@ async function saveTask() {
 function displayTask(tasks) {
     let toDoContainer = document.getElementById('toDoContainer');
 
-    toDoContainer.innerHTML = '';  // Klärt den Container vor dem Hinzufügen neuer Tasks
+    toDoContainer.innerHTML = '';  
 
-    for (let i = 0; i < tasks.length; i++) {  // Korrigiere index zu i und i++
+    for (let i = 0; i < tasks.length; i++) { 
         const task = tasks[i];
 
-        // Verwende Backticks für Template Literals
+        
         toDoContainer.innerHTML += createTaskCardHtml(task);
     }
 }
