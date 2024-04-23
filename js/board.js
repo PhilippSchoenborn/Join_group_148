@@ -500,9 +500,7 @@ function setupDragAndDrop() {
     });
   }
   
-  // Event Listener, der die Drag-and-Drop-Funktion beim Laden der Seite aufruft
-  document.addEventListener('DOMContentLoaded', setupDragAndDrop);
-  
+ 
   
   function saveTaskPositions() {
     const containers = document.querySelectorAll('.subTaskContainer');
@@ -539,4 +537,4 @@ function setupDragAndDrop() {
   });
   
   
-
+  
