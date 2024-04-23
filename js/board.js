@@ -22,7 +22,7 @@ function setupInputFields(event) {
     addSubTask();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     setupButtons();
 });
 
@@ -403,13 +403,13 @@ function addSubTask() {
 function setupSubtaskHoverListeners() {
     const subtaskItems = document.querySelectorAll('.subtaskItem');
     subtaskItems.forEach(item => {
-        item.addEventListener('mouseover', function(event) {
+        item.addEventListener('mouseover', function (event) {
             const iconElements = this.querySelectorAll('.subTaskIcons > div');
             iconElements.forEach(element => {
                 element.style.display = 'block';
             });
         });
-        item.addEventListener('mouseout', function() {
+        item.addEventListener('mouseout', function () {
             const iconElements = this.querySelectorAll('.subTaskIcons > div');
             iconElements.forEach(element => {
                 element.style.display = 'none';
@@ -437,7 +437,7 @@ function createSubtaskHTML(taskText) {
     return listItemHTML;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     setupSubtaskHoverListeners();
     setupPriorityButtons();
 });
@@ -469,7 +469,7 @@ function changeListItem(id) {
 setupPriorityButtons();
 
 
-  
+
 function hideIcons() {
     document.getElementById('closeIcon').style.display = 'none';
     document.getElementById('vectorIcon').style.display = 'none';
@@ -535,139 +535,50 @@ document.addEventListener('DOMContentLoaded', function () {
         hideIcons();
         subtaskIcon.style.display = 'inline';
     });
+    updateHtml();
 });
 
-/* function handleKeyPress(event) {
-    // Check if the key pressed is the Enter key
-    if (event.key === 'Enter') {
-        event.preventDefault();  // Prevent the default action to avoid submitting the form
-        addSubtask();  // Call the addSubtask function to add the subtask
+
+//drag and drop function
+
+let currentDraggedElement;
+
+function updateHtml() {
+    let openTasksHtml = '';
+    let closedTasksHtml = '';
+
+    let openTasks = tasks.filter(task => task.status === 'open');
+    let closedTasks = tasks.filter(task => task.status === 'closed');
+
+    openTasks.forEach((task, index) => {
+        openTasksHtml += createTaskCardHtml(task, index);
+    });
+
+    closedTasks.forEach((task, index) => {
+        closedTasksHtml += createTaskCardHtml(task, index);
+    });
+
+    document.getElementById('toDoContainer').innerHTML = openTasksHtml;
+    document.getElementById('doneContainer').innerHTML = closedTasksHtml || '<div class="noTaskCard">No task Done</div>';
+}
+
+
+function startDragging(taskId) {
+    currentDraggedElement = tasks.findIndex(t => t.id === taskId);
+}
+
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+
+function moveTo(status) {
+    if (currentDraggedElement >= 0 && tasks[currentDraggedElement]) {
+        tasks[currentDraggedElement].status = status;
+        updateHtml();
+    } else {
+        console.error('Task does not exist');
     }
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function setupDragAndDrop() {
-    const containers = document.querySelectorAll('.subTaskContainer');
-  
-    containers.forEach(container => {
-      container.addEventListener('drop', e => {
-        e.preventDefault();
-        const id = e.dataTransfer.getData('text/plain');
-        const draggable = document.getElementById(id);
-        if (container !== draggable.parentNode) {
-          container.appendChild(draggable); // Fügt das Element dem neuen Container hinzu
-          saveTaskPositions(); // Speichert die Positionen der Tasks nach jedem Drop
-        }
-      });
-    });
-  }
-
-
-  function setupDragAndDrop() {
-    const containers = document.querySelectorAll('.subTaskContainer');
-  
-    let draggedItem = null;  // Dies hält das gezogene Element.
-  
-    // Hinzufügen von Event Listeners für alle Container
-    containers.forEach(container => {
-      container.addEventListener('dragstart', e => {
-        if (e.target.className.includes('taskCard')) {
-          draggedItem = e.target;  // Speichert das gezogene Element.
-          setTimeout(() => {
-            e.target.style.display = 'none';  // Verbirgt das Element während des Ziehens.
-          }, 0);
-        }
-      });
-  
-      container.addEventListener('dragend', e => {
-        setTimeout(() => {
-          e.target.style.display = 'block';  // Stellt das Element nach dem Ziehen wieder dar.
-          draggedItem = null;  // Setzt das gezogene Element zurück.
-        }, 0);
-      });
-  
-      container.addEventListener('dragover', e => {
-        e.preventDefault();  // Erlaubt das Droppen von Elementen.
-      });
-  
-      container.addEventListener('dragenter', e => {
-        e.preventDefault();
-        if (container !== draggedItem.parentNode) {
-          container.style.backgroundColor = 'lightblue';  // Visualisiert das potenzielle Drop-Ziel.
-        }
-      });
-  
-      container.addEventListener('dragleave', e => {
-        container.style.backgroundColor = '';  // Setzt den Hintergrund zurück, wenn das Item das Element verlässt.
-      });
-  
-      container.addEventListener('drop', e => {
-        if (container !== draggedItem.parentNode) {
-          container.style.backgroundColor = '';  // Setzt den Hintergrund zurück.
-          container.appendChild(draggedItem);  // Fügt das gezogene Item zum Container hinzu.
-        }
-      });
-    });
-  }
-  
- 
-  
-  function saveTaskPositions() {
-    const containers = document.querySelectorAll('.subTaskContainer');
-    const tasksState = [];
-  
-    containers.forEach((container, index) => {
-      container.querySelectorAll('.taskCard').forEach(task => {
-        const taskId = task.getAttribute('data-task-id'); // Stelle sicher, dass jede Task eine eindeutige ID hat
-        tasksState.push({ taskId: taskId, containerId: container.id });
-      });
-    });
-  
-    localStorage.setItem('taskPositions', JSON.stringify(tasksState));
-  }
-  
-  
-  function restoreTaskPositions() {
-    const savedPositions = localStorage.getItem('taskPositions');
-    if (savedPositions) {
-      const tasksState = JSON.parse(savedPositions);
-      tasksState.forEach(taskState => {
-        const taskElement = document.querySelector(`[data-task-id="${taskState.taskId}"]`);
-        const containerElement = document.getElementById(taskState.containerId);
-        if (taskElement && containerElement) {
-          containerElement.appendChild(taskElement); // Verschiebt die Task in den gespeicherten Container
-        }
-      });
-    }
-  }
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    setupDragAndDrop();
-    restoreTaskPositions(); // Stellt die Positionen der Tasks beim Laden der Seite wieder her
-  });
-  
-
+}
 
