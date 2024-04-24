@@ -149,8 +149,7 @@ body {
   padding-bottom: 200px;
   overflow-y: auto;
   overflow-x: hidden;
-  row-gap: 16px;
-  box-sizing: content-box;
+  row-gap: 16px;  
 }
 
 .subTaskContainer::-webkit-scrollbar{
@@ -171,6 +170,7 @@ body {
   color: #a8a8a8;
   font-size: 16px;
   font-weight: 400;
+  box-sizing: border-box;
 }
 
 .taskCardLabel {
@@ -209,14 +209,15 @@ body {
 .taskCard {
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 246px;
   border-radius: 24px;
   padding: 16px;
   gap: 10px;
   background-color: #fff;
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .taskCardProgressbar {
