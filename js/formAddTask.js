@@ -265,67 +265,6 @@ async function deleteAllTasks() {
 
 
 
-function getSelectedPriority() {
-    // Mapping von Prioritätsstufen zu Bildpfaden
-    const priorityLevels = {
-        high: "/img/buttonIcons/prioHigh.svg",
-        medium: "/img/buttonIcons/prioMedium.svg",
-        low: "/img/buttonIcons/prioLow.svg"
-    };
-    
-    const prioritySelect = document.getElementById('priorityInput'); // Angenommen, du hast ein <select> Element mit der ID 'priorityInput'
-    if (prioritySelect) {
-        const selectedPriority = prioritySelect.value; // 'high', 'medium' oder 'low'
-        return {
-            level: selectedPriority,
-            imagePath: priorityLevels[selectedPriority] // Pfad zum Bild, basierend auf der ausgewählten Priorität
-        };
-    } else {
-        console.error('Priority select element not found');
-        return { level: undefined, imagePath: undefined };
-    }
-}
-
-
-
-async function saveTask() {
-    let title = document.getElementById('titleInput').value;
-    let description = document.getElementById('description').value;
-    let date = document.getElementById('inputDate').value;
-    let category = document.getElementById('categoryInput').value;
-
-    const priorityData = getSelectedPriority(); // Holt das Prioritätslevel und den Bildpfad
-
-    if (!Array.isArray(tasks)) {
-        tasks = [];
-    }
-
-    tasks.push({
-        id: tasks.length + 1,
-        title: title,
-        description: description,
-        date: date,
-        priority: priorityData.level,
-        priorityImage: priorityData.imagePath, // Speichert den Pfad zum Bild
-        assigned: getSelectedContactNames(),
-        profileImage: getSelectedContactImages(),
-        category: category,
-        subtask: getAllSubtasks(),
-        status: 'open'
-    });
-
-    try {
-        await setItem('tasks', JSON.stringify(tasks));
-        console.log(tasks); // Usermeldung, erfolgreich gespeichert
-        loadTasks();
-    } catch (e) {
-        console.error('Fehler beim Speichern der Task');
-        return false;
-    }
-
-    return false;
-}
-
 
 
 function displayTask(tasks) {
@@ -339,6 +278,90 @@ function displayTask(tasks) {
         
         toDoContainer.innerHTML += createTaskCardHtml(task);
     }
+}
+
+let currentPriority = {
+    value: null,
+    activeImage: null,
+    originalImage: null
+};
+
+function setupPriorityButtons() {
+    const buttons = document.querySelectorAll('.btnPrio');
+    let activePriority = null;  // Store the current active priority
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            const img = this.querySelector('img');
+
+            // Wenn bereits eine aktive Priorität existiert und ein anderer Button geklickt wird
+            if (activePriority && activePriority.button !== this && activePriority.button) {
+                activePriority.button.classList.remove('red', 'orange', 'green');
+                if (activePriority.originalImage) {
+                    activePriority.button.querySelector('img').src = activePriority.originalImage;
+                }
+            }
+
+            // Überprüfe, ob der gleiche Button erneut geklickt wurde
+            if (activePriority && activePriority.button === this) {
+                // Deaktiviere, wenn der gleiche Button erneut geklickt wird
+                this.classList.remove('red', 'orange', 'green');
+                img.src = currentPriority.originalImage; // Setze das Bild zurück
+                currentPriority = { value: null, activeImage: null, originalImage: null };
+            } else {
+                // Setze neuen aktiven Button und füge entsprechende Farbe hinzu
+                this.classList.add(this.id === 'btnPrioHigh' ? 'red' : this.id === 'btnPrioMedium' ? 'orange' : 'green');
+                if (!img.getAttribute('data-original')) {
+                    img.setAttribute('data-original', img.src);  // Speichere das Originalbild nur einmal
+                }
+                img.src = img.getAttribute('data-active');
+
+                // Aktualisiere currentPriority mit neuen Werten
+                currentPriority = {
+                    value: this.getAttribute('data-value'),
+                    activeImage: img.getAttribute('data-active'),
+                    originalImage: img.getAttribute('data-original'),
+                    button: this
+                };
+            }
+        });
+    });
+}
+
+
+async function saveTask() {
+    let title = document.getElementById('titleInput').value;
+    let description = document.getElementById('description').value;
+    let date = document.getElementById('inputDate').value;
+    let category = document.getElementById('categoryInput').value;
+    
+    if (!Array.isArray(tasks)) {
+        tasks = [];
+    }
+
+    tasks.push({
+        id: tasks.length + 1,
+        title: title,
+        description: description,
+        date: date,
+        category: category,        
+        priority: currentPriority.value,
+        priorityImage: currentPriority.originalImage,
+        assigned: getSelectedContactNames(),
+        profileImage: getSelectedContactImages(),
+        subtask: getAllSubtasks(),
+        status: 'open'
+    });
+
+    try {
+        await setItem('tasks', JSON.stringify(tasks));
+        console.log('Task saved:', tasks);
+        loadTasks();
+    } catch (e) {
+        console.error('Fehler beim Speichern der Task:', e);
+        return false;
+    }
+
+    return false;
 }
 
 function createTaskCardHtml(task) {
@@ -382,13 +405,12 @@ function createTaskCardHtml(task) {
 
 
 
-// Event Listener für Prioritäts-Buttons
-document.querySelectorAll('.btnPrio').forEach(button => {
-    button.addEventListener('click', function () {
-        currentPriority = this.getAttribute('data-value');
-        console.log('Aktuelle Priorität:', currentPriority);
-    });
-});
+
+
+
+
+
+
 
 // Funktion zum Abrufen der Subtasks aus der UI
 function getSubtasks() {
