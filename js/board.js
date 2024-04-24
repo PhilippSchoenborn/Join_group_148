@@ -342,50 +342,7 @@ function setupCategoryDropdown() {
 
 setupCategoryDropdown();
 
-function setupPriorityButtons() {
-    document.addEventListener('DOMContentLoaded', function () {
-        // Select all priority buttons
-        const buttons = document.querySelectorAll('.btnPrio');
-        let activePriority = null;  // Store the current active priority
 
-        buttons.forEach(button => {
-            button.addEventListener('click', function () {
-                const img = this.querySelector('img');
-                // Clear the current active priority if one exists
-                if (activePriority) {
-                    activePriority.button.classList.remove('red', 'orange', 'green');
-                    const activeImg = activePriority.button.querySelector('img');
-                    activeImg.src = activeImg.getAttribute('data-original') || activeImg.src;  // Use the original src if previously set
-                }
-
-                // Check if the same button was clicked
-                if (activePriority && activePriority.button === this) {
-                    // Deactivate if the same button is clicked again
-                    activePriority = null;
-                } else {
-                    // Set new active button and add appropriate color
-                    activePriority = { button: this, value: this.getAttribute('data-value') };
-                    switch (this.id) {
-                        case 'btnPrioHigh':
-                            this.classList.add('red');
-                            break;
-                        case 'btnPrioMedium':
-                            this.classList.add('orange');
-                            break;
-                        case 'btnPrioLow':
-                            this.classList.add('green');
-                            break;
-                    }
-                    // Update the image to active and store the original src if not already stored
-                    if (!img.getAttribute('data-original')) {
-                        img.setAttribute('data-original', img.src);  // Store the original src only once
-                    }
-                    img.src = img.getAttribute('data-active');
-                }
-            });
-        });
-    });
-}
 
 // Subtask -->
 
@@ -465,8 +422,6 @@ function changeListItem(id) {
         }
     }
 }
-
-setupPriorityButtons();
 
 
 
