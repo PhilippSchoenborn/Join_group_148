@@ -6,7 +6,8 @@ async function init() {
     await loadTask();
     displayTask(tasks);
     loadTasks();
-    
+    setupPriorityButtons();
+       
 }
 
 
