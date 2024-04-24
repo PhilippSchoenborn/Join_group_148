@@ -265,25 +265,48 @@ async function deleteAllTasks() {
 
 
 
+function getSelectedPriority() {
+    // Mapping von Prioritätsstufen zu Bildpfaden
+    const priorityLevels = {
+        high: "/img/buttonIcons/prioHigh.svg",
+        medium: "/img/buttonIcons/prioMedium.svg",
+        low: "/img/buttonIcons/prioLow.svg"
+    };
+    
+    const prioritySelect = document.getElementById('priorityInput'); // Angenommen, du hast ein <select> Element mit der ID 'priorityInput'
+    if (prioritySelect) {
+        const selectedPriority = prioritySelect.value; // 'high', 'medium' oder 'low'
+        return {
+            level: selectedPriority,
+            imagePath: priorityLevels[selectedPriority] // Pfad zum Bild, basierend auf der ausgewählten Priorität
+        };
+    } else {
+        console.error('Priority select element not found');
+        return { level: undefined, imagePath: undefined };
+    }
+}
 
-async function saveTask() {    
+
+
+async function saveTask() {
     let title = document.getElementById('titleInput').value;
     let description = document.getElementById('description').value;
     let date = document.getElementById('inputDate').value;
     let category = document.getElementById('categoryInput').value;
 
+    const priorityData = getSelectedPriority(); // Holt das Prioritätslevel und den Bildpfad
+
     if (!Array.isArray(tasks)) {
-        tasks = []; // Sicherstellen, dass tasks ein Array ist
+        tasks = [];
     }
 
-    
-
-    tasks.push({     
-        id: tasks.length + 1,   
+    tasks.push({
+        id: tasks.length + 1,
         title: title,
         description: description,
         date: date,
-        priority: getSelectedPriority(),
+        priority: priorityData.level,
+        priorityImage: priorityData.imagePath, // Speichert den Pfad zum Bild
         assigned: getSelectedContactNames(),
         profileImage: getSelectedContactImages(),
         category: category,
@@ -304,6 +327,7 @@ async function saveTask() {
 }
 
 
+
 function displayTask(tasks) {
     let toDoContainer = document.getElementById('toDoContainer');
 
@@ -318,25 +342,41 @@ function displayTask(tasks) {
 }
 
 function createTaskCardHtml(task) {
+    // Bedingte HTML-Elemente erstellen, falls die entsprechenden Daten vorhanden sind
+    const categoryHtml = task.category ? `<div class="taskCardLabel">${task.category}</div>` : '';
+    const titleHtml = task.title ? `<div class="taskCardHeadline">${task.title}</div>` : '';
+    const descriptionHtml = task.description ? `<div class="taskCardDescription">${task.description}</div>` : '';
+    const assignedUserHtml = task.assigned ? `<div class="taskCardUser">${task.assigned}</div>` : '';
+    const priorityImageHtml = task.priorityImage ? `<div class="taskCardPriority"><img src="${task.priorityImage}" /></div>` : '';
+    const subtasksHtml = (task.subtask && task.subtask.length > 0) ? 
+        `<div class="taskCardProgress">
+            <div class="taskCardProgressbar fill50"></div>
+            <div class="taskCardProgressbarLabel">Subtasks</div>
+        </div>` : '';
+
+    // Überprüfe, ob überhaupt Inhalt für den body der Karte vorhanden ist
+    const hasBodyContent = titleHtml || descriptionHtml || subtasksHtml;
+
+    // Erstelle das HTML für die Task-Karte
     return `
-    <div class="taskCard" draggable="true" ondragstart="startDragging(${task.id})" >
-        <div class="taskCardLabel">${task.category}</div>
-        <div class="taskCardbody">
-            <div class="taskCardHeadline">${task.title}</div>
-            <div class="taskCardDescription">${task.description}</div>
-            <div class="taskCardProgress">
-                <div class="taskCardProgressbar fill50"></div>
-                <div class="taskCardProgressbarLabel">Subtasks</div>
-            </div>
+    <div class="taskCard" draggable="true" ondragstart="startDragging(${task.id})">
+        ${categoryHtml}
+        ${hasBodyContent ? `<div class="taskCardbody">
+            ${titleHtml}
+            ${descriptionHtml}
+            ${subtasksHtml}
             <div class="taskCardFooter">
-                <div class="taskCardUser">${task.assigned}</div>
-                <div class="taskCardPriority">
-                    <img src="img/Prioritysymbols.png" />
-                </div>
+                ${assignedUserHtml}
+                ${priorityImageHtml}
             </div>
-        </div>
+        </div>` : `<div class="taskCardbody">No details provided.</div>`}
     </div>`;
 }
+
+
+
+
+
 
 
 
