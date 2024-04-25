@@ -7,7 +7,7 @@ async function init() {
     displayTask(tasks);
     loadTasks();
     setupPriorityButtons();
-       
+    renderContactsInDropdown();   
 }
 
 
