@@ -56,6 +56,8 @@ const beautifulColors = [
     'rgb(42, 115, 224)', 'rgb(139, 42, 224)', 'rgb(218, 42, 224)', 'rgb(232, 58, 133)', 'rgb(232, 58, 58)',
 ];
 
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
 function renderContacts() {
     load()
     createContactList();
@@ -64,62 +66,67 @@ function renderContacts() {
 
 // Funktion zum Erstellen der Kontaktliste
 function createContactList() {
-    // Sortiere die Kontakte nach Namen
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
-
     // Element, in dem die Kontaktliste eingefügt wird
     const contactList = document.getElementById('contact-list');
     contactList.innerHTML = '';
     let currentLetter = null;
-    extractInitials(name);
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        const initials = contact['initialien'];
-        // Wenn der Anfangsbuchstabe des Kontakts neu ist, füge einen Buchstaben-Header hinzu
-        const firstLetter = initials.charAt(0);
-        if (firstLetter !== currentLetter) {
-            currentLetter = firstLetter;
-            const letterHeading = document.createElement('div');
-            letterHeading.textContent = currentLetter;
-            letterHeading.classList.add('letter-heading');
-            contactList.appendChild(letterHeading);
-        }
 
-        // Erstelle ein Div-Element für den Kontakt
-        const contactItem = document.createElement('div');
-        contactItem.classList.add('contact');
+    // Durchlaufe das Alphabet
+    for (let j = 0; j < alphabet.length; j++) {
+        const letter = alphabet[j];
 
-        // Wähle eine Farbe aus der Liste beautifulColors basierend auf der Position des Kontakts
-        const profileColor = contact['profileColor'];
+        // Durchlaufe die Kontakte und füge diejenigen hinzu, die mit dem aktuellen Buchstaben beginnen
+        for (let i = 0; i < contacts.length; i++) {
+            const contact = contacts[i];
+            const initials = contact.initialien;
+            const firstLetter = initials.charAt(0).toUpperCase();
 
-        // Erstelle das Profilbild mit den Anfangsbuchstaben des Vor- und Nachnamens
-        const profilePicture = document.createElement('div');
-        profilePicture.classList.add('profile-picture');
-        profilePicture.style.backgroundColor = profileColor;
-        profilePicture.textContent = initials;
-        contactItem.appendChild(profilePicture);
-        
+            // Überprüfe, ob der Anfangsbuchstabe des Kontakts mit dem aktuellen Buchstaben übereinstimmt
+            if (firstLetter === letter) {
+                // Wenn der Anfangsbuchstabe neu ist, füge einen Buchstaben-Header hinzu
+                if (firstLetter !== currentLetter) {
+                    currentLetter = firstLetter;
+                    const letterHeading = document.createElement('div');
+                    letterHeading.textContent = currentLetter;
+                    letterHeading.classList.add('letter-heading');
+                    contactList.appendChild(letterHeading);
+                }
 
-        // Füge den Namen und die E-Mail-Adresse des Kontakts hinzu
-        const contactDetails = document.createElement('div');
-        contactDetails.classList.add('oneContact');
-        contactDetails.innerHTML = `
-        <h2>${contact.name}</h2>
-        <p class="blueColor" >${contact.email}</p>
+                // Erstelle ein Div-Element für den Kontakt
+                const contactItem = document.createElement('div');
+                contactItem.classList.add('contact');
 
-        `;
-        contactItem.appendChild(contactDetails);
+                // Wähle eine Farbe aus der Liste beautifulColors basierend auf der Position des Kontakts
+                const profileColor = contact['profileColor'];
 
-        // Füge den Kontakt zur Kontaktliste hinzu
-        contactList.appendChild(contactItem);
+                // Erstelle das Profilbild mit den Anfangsbuchstaben des Vor- und Nachnamens
+                const profilePicture = document.createElement('div');
+                profilePicture.classList.add('profile-picture');
+                profilePicture.style.backgroundColor = profileColor;
+                profilePicture.textContent = initials;
+                contactItem.appendChild(profilePicture);
 
-        // Füge dem Kontakt und den Kontaktinformationen einen Click-Event-Listener hinzu
-        contactItem.addEventListener('click', handleClick);
-        function handleClick(event) {
-            // Stelle sicher, dass nur das geklickte Element behandelt wird
-            if (event.target === contactItem || event.target.parentElement === contactDetails) {
-                // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
-                contactClickHandler(contact, i);
+                // Füge den Namen und die E-Mail-Adresse des Kontakts hinzu
+                const contactDetails = document.createElement('div');
+                contactDetails.classList.add('oneContact');
+                contactDetails.innerHTML = `
+                    <h2>${contact.name}</h2>
+                    <p class="blueColor">${contact.email}</p>
+                `;
+                contactItem.appendChild(contactDetails);
+
+                // Füge den Kontakt zur Kontaktliste hinzu
+                contactList.appendChild(contactItem);
+
+                // Füge dem Kontakt und den Kontaktinformationen einen Click-Event-Listener hinzu
+                contactItem.addEventListener('click', handleClick);
+                function handleClick(event) {
+                    // Stelle sicher, dass nur das geklickte Element behandelt wird
+                    if (event.target === contactItem || event.target.parentElement === contactDetails) {
+                        // Rufe die Kontaktinformationen mit dem aktuellen Kontakt ab
+                        contactClickHandler(contact, i);
+                    }
+                }
             }
         }
     }
@@ -202,8 +209,9 @@ function getNewContact() {
             initialien : initial,
         };
         contacts.push(newContact);
-        contactClickHandler(newContact, contacts.length);
         save();
+        load();
+        contactClickHandler(newContact, contacts.length -1);
         createContactList();
         name.value = '';
         email.value = '';
@@ -217,22 +225,13 @@ function getNewContact() {
 function slideSuccessfully() {
     let container = document.getElementById('successfullyContainer');
     let successfully = document.getElementById('successfully');
-
-    // Stellen Sie sicher, dass der Container sichtbar ist, um die Animation zu zeigen
     container.style.display = 'flex';
-
-    // Fügen Sie die Klasse für die Animation hinzu
     successfully.classList.add('slide-in-bottom');
-
-    // Setzen Sie eine Verzögerung, um der Animation Zeit zum Abspielen zu geben
     setTimeout(() => {
-        // Entfernen Sie die Animation, nachdem sie abgespielt wurde
         successfully.classList.remove('slide-in-bottom');
-
-        // Verstecken Sie den Container wieder
         container.style.display = 'none';
     
-    }, 1000); // Warten Sie z.B. 1000 Millisekunden (1 Sekunde)
+    }, 1000);
 }
 
 function save() {
@@ -314,10 +313,11 @@ function editContactToArray(i) {
         "initialien": initial
     };
     contacts.splice(i, 1, newContact);
+    save();
+    load();
     contactClickHandler(newContact, contacts.length);
     cancelEditContact();
     createContactList();
-    save();
     
 }
 
