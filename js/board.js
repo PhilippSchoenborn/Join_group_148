@@ -493,6 +493,44 @@ document.addEventListener('DOMContentLoaded', function () {
     updateHtml();
 });
 
+function renderContactsInDropdown() {
+    const dropdownList = document.getElementById('dropdownContacts');
+    dropdownList.innerHTML = ''; // Leere die Dropdown-Liste, um sie neu zu füllen
+
+    // Schleife durch die Kontakte und erstelle für jeden Kontakt ein Listenelement
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+
+        // Erstelle das Listenelement für den Kontakt
+        const listItem = document.createElement('li');
+        listItem.classList.add('dropdown-item');
+
+        // Erstelle das Label mit dem Profilbild und dem Namen des Kontakts
+        const label = document.createElement('label');
+        label.setAttribute('for', contact.name.replace(/\s+/g, ''));
+        const img = document.createElement('img');
+        img.src = '/img/ProfileBadge.png'; // Standard-Profilbild
+        img.alt = 'Profile Picture';
+        label.appendChild(img);
+        label.appendChild(document.createTextNode(contact.name));
+
+        // Erstelle das Checkbox-Element
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = contact.name.replace(/\s+/g, '');
+        checkbox.name = 'assignedTo[]';
+        checkbox.value = contact.name;
+        checkbox.classList.add('checkboxContacts');
+
+        // Füge das Label und die Checkbox dem Listenelement hinzu
+        listItem.appendChild(label);
+        listItem.appendChild(checkbox);
+
+        // Füge das Listenelement der Dropdown-Liste hinzu
+        dropdownList.appendChild(listItem);
+    }
+}
+
 
 //drag and drop function
 
