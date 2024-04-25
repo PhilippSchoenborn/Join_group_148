@@ -158,49 +158,20 @@
           </div>
 
           <div class="labelInputContainer">
-            <label for="assignedTo" class="label mt-24"
-              >Assigned to (optional):</label
-            >
+            <label for="assignedTo" class="label mt-24">Assigned to (optional):</label>
             <div class="custom-dropdown">
-              <input
-                type="text"                
-                class="searchInput input"
-                id="searchInput"
-              />
-              <span class="toggleIcon rotate-icon"
-                ><img src="/img/arrow_drop_down.svg"
-              /></span>
-              <ul class="dropdown-list" id="dropdownContacts">
-                <li class="dropdown-item">
-                  <label for="sofiaMuller">
-                    <img src="/img/ProfileBadge.png" alt="Profile Picture" />
-                    Sofia Müller
-                  </label>
-                  <input
-                    type="checkbox"
-                    id="sofiaMuller"
-                    name="assignedTo[]"
-                    value="Sofia Müller"
-                    class="checkboxContacts"
-                  />
-                </li>
-
-                <li class="dropdown-item">
-                  <label for="johnEgger">
-                    <img src="/img/ProfileBadge.png" alt="Profile Picture" />
-                    John Egger
-                  </label>
-                  <input
-                    type="checkbox"
-                    id="johnEgger"
-                    name="assignedTo[]"
-                    value="John Egger"
-                    class="checkboxContacts"
-                  />
-                </li>
-              </ul>
+                <input
+                    type="text"
+                    placeholder="Select contacts to assign"
+                    class="searchInput input"
+                    id="searchInput"
+                />
+                <span class="toggleIcon rotate-icon"><img src="/img/arrow_drop_down.svg" /></span>
+                <ul class="dropdown-list" id="dropdownContacts">
+                </ul>
             </div>
             <div id="profileAssigned"></div>
+        </div>
             
             <div class="labelInputContainer">
               <label for="categoryInput" class="label mt-24">Category</label>
@@ -247,6 +218,7 @@
     </div>
     <script src="js/template.js"></script>
     <script src="js/storage.js"></script>
+    <script src="js/contacts.js"></script>
     <script src="js/formAddTask.js"></script>
     <script src="/js/board.js"></script>
   </body>
